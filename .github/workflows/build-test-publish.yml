@@ -11,6 +11,14 @@ on:
         type: boolean
         description: Whether to run the job.
         default: true
+      should-publish-gh-page:
+        type: boolean
+        description: Whether to publish the WASM application to gh-pages.
+        default: false
+      gh-page-destination-directory:
+        type: string
+        description: The destination directory for the WASM application.
+        default: 
 
 jobs:
   build-test-publish:
@@ -38,7 +46,7 @@ jobs:
   
       - name: 📦 package the application
         if: inputs.should-package
-        run: dotnet pack src/Spillgebees.Blazor.RichTextEditor/Spillgebees.Blazor.RichTextEditor.csproj --configuration Release --no-build --output .
+        run: dotnet pack src/Spillgebees.Blazor.RichTextEditor/Spillgebees.Blazor.RichTextEditor.csproj --configuration Release --no-build --output package
 
       - name: 🔃 upload artifacts
         if: inputs.should-package
@@ -47,4 +55,17 @@ jobs:
           name: artifacts
           if-no-files-found: error
           retention-days: 1
-          path: ./*.nupkg
+          path: package/*.nupkg
+
+      - name: 📦 publish WASM application
+        if: inputs.should-publish-gh-page
+        run: dotnet publish src/Spillgebees.Blazor.RichTextEditor.Samples/Spillgebees.Blazor.RichTextEditor.Wasm/Spillgebees.Blazor.RichTextEditorWasm.csproj --configuration Release --no-build --output wasm-application
+
+      - name: 🚀 deploy gh pages
+        if: inputs.should-publish-gh-page
+        uses: peaceiris/actions-gh-pages@v3.9.3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./wasm-application
+          destination_dir: ${{ inputs.gh-page-destination-directory }}
+          enable_jekyll: false
