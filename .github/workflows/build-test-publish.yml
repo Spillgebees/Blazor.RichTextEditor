@@ -73,7 +73,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./wasm-application/net7.0
-          destination_dir: ${{ inputs.gh-page-destination-directory }}
+          destination_dir: ${{ inputs.gh-page-destination-directory }}/net7.0
           enable_jekyll: false
 
       - name: 🚀 deploy .NET 8.0 gh page
@@ -82,5 +82,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./wasm-application/net8.0
-          destination_dir: ${{ inputs.gh-page-destination-directory }}
+          destination_dir: ${{ inputs.gh-page-destination-directory }}/net8.0
           enable_jekyll: false
