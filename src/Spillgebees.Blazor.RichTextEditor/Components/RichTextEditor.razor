@@ -1,6 +1,6 @@
 @inject IJSRuntime _jsRuntime
 
-<div class="@ContainerClass">
+<div class="@_containerClass">
     <div id="@ToolbarOptions.ToolbarContainerHtmlId"
          @ref="@_toolbarReference">
         <CascadingValue Value="ToolbarOptions">
@@ -60,6 +60,7 @@
     [Parameter]
     public QuillTheme Theme { get; set; } = QuillTheme.Snow;
 
+    private string _containerClass => $"rich-text-editor-container {ContainerClass}";
     [Parameter]
     public string ContainerClass { get; set; } = string.Empty;
 
