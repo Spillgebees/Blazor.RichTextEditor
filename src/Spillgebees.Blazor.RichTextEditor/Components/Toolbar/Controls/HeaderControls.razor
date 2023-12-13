@@ -1,0 +1,10 @@
+﻿@if (_toolbarOptions.ShowHeaderControls)
+{
+    <button class="ql-header" value="1"></button>
+    <button class="ql-header" value="2"></button>
+}
+
+@code {
+    [CascadingParameter]
+    private ToolbarOptions _toolbarOptions { get; set; } = null!;
+}

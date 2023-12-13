@@ -1,0 +1,10 @@
+﻿@if (_toolbarOptions.ShowIndentationControls)
+{
+    <button class="ql-indent" value="-1"></button>
+    <button class="ql-indent" value="+1"></button>
+}
+
+@code {
+    [CascadingParameter]
+    private ToolbarOptions _toolbarOptions { get; set; } = null!;
+}

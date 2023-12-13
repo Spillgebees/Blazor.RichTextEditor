@@ -1,0 +1,50 @@
+name: Build, test, & publish
+
+on:
+  workflow_call:
+    inputs:
+      should-package:
+        type: boolean
+        description: Whether to package project and upload as artifact.
+        default: false
+      should-run:
+        type: boolean
+        description: Whether to run the job.
+        default: true
+
+jobs:
+  build-test-publish:
+    name: build-test-publish
+    if: inputs.should-run
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: 📦 setup .NET
+        uses: actions/setup-dotnet@v3
+
+      - name: ⚙️ restore workloads
+        run: dotnet workload restore Spillgebees.Blazor.RichTextEditor.sln
+
+      - name: 📦 restore packages
+        run: dotnet restore Spillgebees.Blazor.RichTextEditor.sln
+
+      - name: 👷 build project
+        run: dotnet build --configuration Release --no-restore Spillgebees.Blazor.RichTextEditor.sln
+    
+      - name: ✅ test project
+        run: dotnet test --configuration Release --no-build --verbosity normal Spillgebees.Blazor.RichTextEditor.sln
+  
+      - name: 📦 package the application
+        if: inputs.should-package
+        run: dotnet pack src/Spillgebees.Blazor.RichTextEditor/Spillgebees.Blazor.RichTextEditor.csproj --configuration Release --no-build --output .
+
+      - name: 🔃 upload artifacts
+        if: inputs.should-package
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifacts
+          if-no-files-found: error
+          retention-days: 1
+          path: ./*.nupkg

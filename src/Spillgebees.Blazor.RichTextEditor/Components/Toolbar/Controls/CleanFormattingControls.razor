@@ -1,0 +1,9 @@
+﻿@if (_toolbarOptions.ShowCleanFormattingControls)
+{
+    <button class="ql-clean"></button>
+}
+
+@code {
+    [CascadingParameter]
+    private ToolbarOptions _toolbarOptions { get; set; } = null!;
+}

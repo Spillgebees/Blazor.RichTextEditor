@@ -1,0 +1,12 @@
+﻿@page "/"
+
+@using Spillgebees.Blazor.RichTextEditor.Components
+@using Spillgebees.Blazor.RichTextEditor.Components.Toolbar
+
+<RichTextEditor />
+
+<RichTextEditor Placeholder="This is epic" Theme="QuillTheme.Bubble" EditorHtmlId="test-container-id" />
+
+<RichTextEditor IsEditorEnabled="@false" />
+
+<RichTextEditor ToolbarOptions="ToolbarOptions.FullToolbarOptions" />

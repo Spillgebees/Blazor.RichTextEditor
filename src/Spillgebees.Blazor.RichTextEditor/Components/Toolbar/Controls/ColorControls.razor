@@ -1,0 +1,10 @@
+﻿@if (_toolbarOptions.ShowColorControls)
+{
+    <select class="ql-color"></select>
+    <select class="ql-background"></select>
+}
+
+@code {
+    [CascadingParameter]
+    private ToolbarOptions _toolbarOptions { get; set; } = null!;
+}

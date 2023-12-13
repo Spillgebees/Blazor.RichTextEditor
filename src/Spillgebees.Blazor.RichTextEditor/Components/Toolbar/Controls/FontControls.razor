@@ -1,0 +1,27 @@
+@if (_toolbarOptions.ShowFontControls)
+{
+    <select class="ql-font">
+        @for (var i = 0; i < _toolbarOptions.Fonts.Count; i++)
+        {
+            var localIndex = i;
+            if (localIndex == 0)
+            {
+                <option value="@_toolbarOptions.Fonts[localIndex]"
+                        selected>
+                    @_toolbarOptions.Fonts[localIndex]
+                </option>
+            }
+            else
+            {
+                <option value="@_toolbarOptions.Fonts[localIndex]">
+                    @_toolbarOptions.Fonts[localIndex]
+                </option>
+            }
+        }
+    </select>
+}
+
+@code {
+    [CascadingParameter]
+    private ToolbarOptions _toolbarOptions { get; set; } = null!;
+}

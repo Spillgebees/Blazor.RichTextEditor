@@ -1,0 +1,11 @@
+﻿@if (_toolbarOptions.ShowMathControls)
+{
+    <button class="ql-formula"></button>
+    <button class="ql-script" value="sub"></button>
+    <button class="ql-script" value="super"></button>
+}
+
+@code {
+    [CascadingParameter]
+    private ToolbarOptions _toolbarOptions { get; set; } = null!;
+}

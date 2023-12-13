@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1FD17608-7462-4D4E-A3CB-D3A27C85AEB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spillgebees.Blazor.RichTextEditor", "src\Spillgebees.Blazor.RichTextEditor\Spillgebees.Blazor.RichTextEditor.csproj", "{59E50D98-769B-4E4C-85DB-2CB48C7294D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spillgebees.Blazor.RichTextEditor.Tests", "src\Spillgebees.Blazor.RichTextEditor.Tests\Spillgebees.Blazor.RichTextEditor.Tests.csproj", "{B59FE7D3-19D1-4086-AC16-3F7204125FBF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Spillgebees.Blazor.RichTextEditor.Samples", "Spillgebees.Blazor.RichTextEditor.Samples", "{DD94C47D-8A48-4767-BF95-1E140B2F4A5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spillgebees.Blazor.RichTextEditor.Server", "src\Spillgebees.Blazor.RichTextEditor.Samples\Spillgebees.Blazor.RichTextEditor.Server\Spillgebees.Blazor.RichTextEditor.Server.csproj", "{C681B187-3467-4D8A-BC0C-0A5BF06C2032}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spillgebees.Blazor.RichTextEditor.Wasm", "src\Spillgebees.Blazor.RichTextEditor.Samples\Spillgebees.Blazor.RichTextEditor.Wasm\Spillgebees.Blazor.RichTextEditor.Wasm.csproj", "{CF6BE7F3-F7BB-41BF-A699-47468082334A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{59E50D98-769B-4E4C-85DB-2CB48C7294D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59E50D98-769B-4E4C-85DB-2CB48C7294D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59E50D98-769B-4E4C-85DB-2CB48C7294D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59E50D98-769B-4E4C-85DB-2CB48C7294D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B59FE7D3-19D1-4086-AC16-3F7204125FBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B59FE7D3-19D1-4086-AC16-3F7204125FBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B59FE7D3-19D1-4086-AC16-3F7204125FBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B59FE7D3-19D1-4086-AC16-3F7204125FBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C681B187-3467-4D8A-BC0C-0A5BF06C2032}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C681B187-3467-4D8A-BC0C-0A5BF06C2032}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C681B187-3467-4D8A-BC0C-0A5BF06C2032}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C681B187-3467-4D8A-BC0C-0A5BF06C2032}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF6BE7F3-F7BB-41BF-A699-47468082334A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF6BE7F3-F7BB-41BF-A699-47468082334A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF6BE7F3-F7BB-41BF-A699-47468082334A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF6BE7F3-F7BB-41BF-A699-47468082334A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{59E50D98-769B-4E4C-85DB-2CB48C7294D4} = {1FD17608-7462-4D4E-A3CB-D3A27C85AEB6}
+		{B59FE7D3-19D1-4086-AC16-3F7204125FBF} = {1FD17608-7462-4D4E-A3CB-D3A27C85AEB6}
+		{DD94C47D-8A48-4767-BF95-1E140B2F4A5F} = {1FD17608-7462-4D4E-A3CB-D3A27C85AEB6}
+		{C681B187-3467-4D8A-BC0C-0A5BF06C2032} = {DD94C47D-8A48-4767-BF95-1E140B2F4A5F}
+		{CF6BE7F3-F7BB-41BF-A699-47468082334A} = {DD94C47D-8A48-4767-BF95-1E140B2F4A5F}
+	EndGlobalSection
+EndGlobal

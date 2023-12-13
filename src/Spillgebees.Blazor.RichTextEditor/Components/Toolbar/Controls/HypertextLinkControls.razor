@@ -1,0 +1,9 @@
+﻿@if (_toolbarOptions.ShowHypertextLinkControls)
+{
+    <button class="ql-link"></button>
+}
+
+@code {
+    [CascadingParameter]
+    private ToolbarOptions _toolbarOptions { get; set; } = null!;
+}

@@ -1,0 +1,36 @@
+name: Build & test
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+
+    outputs:
+      changed: ${{ steps.filter.outputs.changed }}
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: 🔎 checking for changes
+        uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            changed:
+              - 'src/Spillgebees.Blazor.RichTextEditor/**'
+              - 'src/Spillgebees.Blazor.RichTextEditor.Samples/**'
+              - 'src/Spillgebees.Blazor.RichTextEditor.Tests/**'
+
+  build-and-test:
+    name: build-and-test
+    needs: changes
+    uses: ./.github/workflows/build-test-publish.yml
+    with:
+      should-run: ${{ needs.changes.outputs.changed == 'true' }}

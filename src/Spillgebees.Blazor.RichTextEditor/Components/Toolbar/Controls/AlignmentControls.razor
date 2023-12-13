@@ -1,0 +1,14 @@
+﻿@if (_toolbarOptions.ShowAlignmentControls)
+{
+    <select class="ql-align">
+        <option selected=""></option>
+        <option value="center"></option>
+        <option value="right"></option>
+        <option value="justify"></option>
+    </select>
+}
+
+@code {
+    [CascadingParameter]
+    private ToolbarOptions _toolbarOptions { get; set; } = null!;
+}
