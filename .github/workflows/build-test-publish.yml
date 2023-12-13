@@ -57,15 +57,28 @@ jobs:
           retention-days: 1
           path: package/*.nupkg
 
-      - name: 📦 publish WASM application
+      - name: 📦 publish WASM application as with .NET 7.0
         if: inputs.should-publish-gh-page
-        run: dotnet publish src/Spillgebees.Blazor.RichTextEditor.Samples/Spillgebees.Blazor.RichTextEditor.Wasm/Spillgebees.Blazor.RichTextEditor.Wasm.csproj --configuration Release --no-build --output wasm-application
+        run: dotnet publish src/Spillgebees.Blazor.RichTextEditor.Samples/Spillgebees.Blazor.RichTextEditor.Wasm/Spillgebees.Blazor.RichTextEditor.Wasm.csproj --configuration Release --no-build --output wasm-application/net7.0 --framework net7.0
 
-      - name: 🚀 deploy gh pages
+      - name: 📦 publish WASM application as with .NET 8.0
+        if: inputs.should-publish-gh-page
+        run: dotnet publish src/Spillgebees.Blazor.RichTextEditor.Samples/Spillgebees.Blazor.RichTextEditor.Wasm/Spillgebees.Blazor.RichTextEditor.Wasm.csproj --configuration Release --no-build --output wasm-application/net8.0 --framework net8.0
+
+      - name: 🚀 deploy .NET 7.0 gh page
         if: inputs.should-publish-gh-page
         uses: peaceiris/actions-gh-pages@v3.9.3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./wasm-application
+          publish_dir: ./wasm-application/net7.0
+          destination_dir: ${{ inputs.gh-page-destination-directory }}
+          enable_jekyll: false
+
+      - name: 🚀 deploy .NET 8.0 gh page
+        if: inputs.should-publish-gh-page
+        uses: peaceiris/actions-gh-pages@v3.9.3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./wasm-application/net8.0
           destination_dir: ${{ inputs.gh-page-destination-directory }}
           enable_jekyll: false
