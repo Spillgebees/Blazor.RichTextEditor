@@ -34,3 +34,5 @@ jobs:
     uses: ./.github/workflows/build-test-publish.yml
     with:
       should-run: ${{ needs.changes.outputs.changed == 'true' }}
+      should-publish-gh-page: ${{ needs.changes.outputs.changed == 'true' }}
+      gh-page-destination-directory: main
