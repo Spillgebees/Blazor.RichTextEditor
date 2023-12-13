@@ -17,6 +17,8 @@ jobs:
     name: publish
     needs: [ build-and-test ]
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     
     steps:
       - name: 🔃 download artifacts 

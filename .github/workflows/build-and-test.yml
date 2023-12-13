@@ -30,6 +30,8 @@ jobs:
 
   build-and-test:
     name: build-and-test
+    permissions:
+      contents: write
     needs: changes
     uses: ./.github/workflows/build-test-publish.yml
     with:
