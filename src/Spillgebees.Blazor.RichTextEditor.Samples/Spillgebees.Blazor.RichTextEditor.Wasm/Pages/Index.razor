@@ -4,32 +4,43 @@
 @using Spillgebees.Blazor.RichTextEditor.Components.Toolbar
 @using Spillgebees.Blazor.RichTextEditor.Components.Toolbar.Controls
 
-<RichTextEditor />
 
-<RichTextEditor Placeholder="This is epic"
-                Theme="QuillTheme.Bubble"
-                EditorContainerHtmlId="test-container-id" />
+<div class="container">
+    <RichTextEditor />
 
-<RichTextEditor IsEditorEnabled="@false" />
+    <RichTextEditor Placeholder="This is epic"
+                    Theme="QuillTheme.Bubble"
+                    EditorContainerHtmlId="test-container-id" />
 
-<RichTextEditor ToolbarOptions="ToolbarOptions.FullToolbarOptions" />
+    <RichTextEditor IsEditorEnabled="@false" />
 
-<RichTextEditor ToolbarOptions="@(ToolbarOptions.FullToolbarOptions with { Fonts = new List<string> { "Sans Serif", "RobotoMono" } })" >
-    <ToolbarContent>
-        <div style="float: left;">
-            <FontControls />
-            <SizeControls />
-            <ColorControls />
-        </div>
-        <div style="float: right;">
-            <InsertImageControls />
-            <EmbedVideoControls />
-        </div>
-    </ToolbarContent>
-</RichTextEditor>
+    <RichTextEditor ToolbarOptions="ToolbarOptions.FullToolbarOptions" />
 
+    <RichTextEditor ToolbarOptions="@(ToolbarOptions.FullToolbarOptions with { Fonts = new List<string> { "Sans Serif", "RobotoMono" } })" >
+        <ToolbarContent>
+            <div style="float: left;">
+                <FontControls />
+                <SizeControls />
+                <ColorControls />
+            </div>
+            <div style="float: right;">
+                <InsertImageControls />
+                <EmbedVideoControls />
+            </div>
+        </ToolbarContent>
+    </RichTextEditor>
+</div>
+
+
+<!--suppress CssUnusedSymbol -->
 <style>
+    .container {
+        display:  flex;
+        flex-direction: column;
+        gap:  50px;
+    }
+
     .ql-font-RobotoMono {
-            font-family: 'Roboto Mono', monospace;
-        }
+        font-family: 'Roboto Mono', monospace;
+    }
 </style>
