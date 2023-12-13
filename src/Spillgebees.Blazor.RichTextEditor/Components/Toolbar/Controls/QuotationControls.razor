@@ -1,0 +1,9 @@
+﻿@if (_toolbarOptions.ShowQuotationControls)
+{
+    <button class="ql-blockquote"></button>
+}
+
+@code {
+    [CascadingParameter]
+    private ToolbarOptions _toolbarOptions { get; set; } = null!;
+}

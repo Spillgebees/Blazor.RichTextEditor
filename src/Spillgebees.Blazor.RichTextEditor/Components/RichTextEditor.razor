@@ -1,0 +1,105 @@
+@inject IJSRuntime _jsRuntime
+
+<div id="@ToolbarOptions.ToolbarContainerHtmlId"
+     @ref="@_toolbarReference">
+    <CascadingValue Value="ToolbarOptions">
+        @if (ToolbarContent is null)
+        {
+            <Toolbar />
+        }
+
+        @ToolbarContent
+    </CascadingValue>
+</div>
+
+<div id="@EditorContainerHtmlId"
+     @ref="@_quillReference">
+    @EditorContent
+</div>
+
+@code {
+    /// <summary>
+    /// <para>
+    /// Uses <see cref="ToolbarOptions.BasicToolbarOptions"/> by default.
+    /// You can also supply <see cref="ToolbarOptions.FullToolbarOptions"/> to enable all features, or create your own <see cref="ToolbarOptions"/>.
+    /// </para>
+    /// <para>
+    /// If you want to completely customise the toolbar, use <see cref="ToolbarContent"/>.
+    /// All <see cref="ToolbarOptions"/> still apply as long as you use the controls defined
+    /// in the <see cref="Spillgebees.Blazor.RichTextEditor.Components.Toolbar.Controls"/> namespace.
+    /// </para>
+    /// <para>
+    /// Note: Fonts <b>must</b> be defined in <see cref="ToolbarOptions"/>, otherwise they will not be available in the toolbar.
+    /// </para>
+    /// </summary>
+    [Parameter]
+    public ToolbarOptions ToolbarOptions { get; set; } = ToolbarOptions.BasicToolbarOptions;
+
+    [Parameter]
+    public RenderFragment? EditorContent { get; set; }
+
+    [Parameter]
+    public string EditorContainerHtmlId { get; set; } = $"rich-text-editor-editor-container-{Guid.NewGuid()}";
+
+    /// <summary>
+    /// <para>
+    /// Use this is you want to completely customise the toolbar. See <see cref="ToolbarOptions"/> for more information.
+    /// </para>
+    /// </summary>
+    [Parameter]
+    public RenderFragment? ToolbarContent { get; set; }
+
+    [Parameter]
+    public bool IsEditorEnabled { get; set; } = true;
+
+    [Parameter]
+    public string Placeholder { get; set; } = "Compose an epic...";
+
+    [Parameter]
+    public QuillTheme Theme { get; set; } = QuillTheme.Snow;
+
+    [Parameter]
+    public QuillDebugLevel DebugLevel { get; set; } = QuillDebugLevel.Error;
+
+    private ElementReference _quillReference;
+    private ElementReference _toolbarReference;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender)
+        {
+            return;
+        }
+
+        await RichTextEditorJs.CreateEditor(
+                _jsRuntime,
+                _quillReference,
+                _toolbarReference,
+                IsEditorEnabled,
+                Placeholder,
+                Theme.ToString().ToLower(),
+                DebugLevel.ToString().ToLower(),
+                ToolbarOptions.Fonts);
+    }
+
+    public async Task<string> GetContent()
+        => await RichTextEditorJs.GetContent(_jsRuntime, _quillReference);
+
+    public async Task SetContent(string content)
+        => await RichTextEditorJs.SetContent(_jsRuntime, _quillReference, content);
+
+    public async Task<string> GetHtml()
+        => await RichTextEditorJs.GetHtml(_jsRuntime, _quillReference);
+
+    public async Task SetHtml(string html)
+        => await RichTextEditorJs.SetHtml(_jsRuntime, _quillReference, html);
+
+    public async Task<string> GetText()
+        => await RichTextEditorJs.GetText(_jsRuntime, _quillReference);
+
+    public async Task InsertImage(string imageSource)
+        => await RichTextEditorJs.InsertImage(_jsRuntime, _quillReference, imageSource);
+
+    public async Task SetEnableEditorState(bool isEditorEnabled)
+        => await RichTextEditorJs.SetIsEditorEnabled(_jsRuntime, _quillReference, isEditorEnabled);
+}

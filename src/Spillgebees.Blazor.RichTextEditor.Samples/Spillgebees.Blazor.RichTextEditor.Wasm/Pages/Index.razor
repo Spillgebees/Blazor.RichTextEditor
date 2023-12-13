@@ -1,0 +1,35 @@
+﻿@page "/"
+
+@using Spillgebees.Blazor.RichTextEditor.Components
+@using Spillgebees.Blazor.RichTextEditor.Components.Toolbar
+@using Spillgebees.Blazor.RichTextEditor.Components.Toolbar.Controls
+
+<RichTextEditor />
+
+<RichTextEditor Placeholder="This is epic"
+                Theme="QuillTheme.Bubble"
+                EditorContainerHtmlId="test-container-id" />
+
+<RichTextEditor IsEditorEnabled="@false" />
+
+<RichTextEditor ToolbarOptions="ToolbarOptions.FullToolbarOptions" />
+
+<RichTextEditor ToolbarOptions="@(ToolbarOptions.FullToolbarOptions with { Fonts = new List<string> { "Sans Serif", "RobotoMono" } })" >
+    <ToolbarContent>
+        <div style="float: left;">
+            <FontControls />
+            <SizeControls />
+            <ColorControls />
+        </div>
+        <div style="float: right;">
+            <InsertImageControls />
+            <EmbedVideoControls />
+        </div>
+    </ToolbarContent>
+</RichTextEditor>
+
+<style>
+    .ql-font-RobotoMono {
+            font-family: 'Roboto Mono', monospace;
+        }
+</style>

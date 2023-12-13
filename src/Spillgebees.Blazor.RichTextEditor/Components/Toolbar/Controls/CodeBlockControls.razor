@@ -1,0 +1,9 @@
+﻿@if (_toolbarOptions.ShowCodeBlockControls)
+{
+    <button class="ql-code-block"></button>
+}
+
+@code {
+    [CascadingParameter]
+    private ToolbarOptions _toolbarOptions { get; set; } = null!;
+}

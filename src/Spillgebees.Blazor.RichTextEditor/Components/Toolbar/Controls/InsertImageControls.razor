@@ -1,0 +1,9 @@
+﻿@if (_toolbarOptions.ShowInsertImageControls)
+{
+    <button class="ql-image"></button>
+}
+
+@code {
+    [CascadingParameter]
+    private ToolbarOptions _toolbarOptions { get; set; } = null!;
+}

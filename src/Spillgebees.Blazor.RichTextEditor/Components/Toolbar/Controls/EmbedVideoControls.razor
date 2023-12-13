@@ -1,0 +1,9 @@
+﻿@if (_toolbarOptions.ShowEmbedVideoControls)
+{
+    <button class="ql-video"></button>
+}
+
+@code {
+    [CascadingParameter]
+    private ToolbarOptions _toolbarOptions { get; set; } = null!;
+}

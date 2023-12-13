@@ -1,0 +1,10 @@
+﻿@if (_toolbarOptions.ShowListControls)
+{
+    <button class="ql-list" value="ordered"></button>
+    <button class="ql-list" value="bullet"></button>
+}
+
+@code {
+    [CascadingParameter]
+    private ToolbarOptions _toolbarOptions { get; set; } = null!;
+}

@@ -1,0 +1,30 @@
+name: Publish nuget package
+
+on:
+  release:
+    types: [ published ]
+
+jobs:
+  build-and-test:
+    name: build-and-test
+    uses: ./.github/workflows/build-test-publish.yml
+    with:
+      should-package: true
+  
+  publish: 
+    name: publish
+    needs: [ build-and-test ]
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 🔃 download artifacts 
+        uses: actions/download-artifact@v3
+        with:
+          name: artifacts
+          path: .
+
+      - name: 📦 setup .NET
+        uses: actions/setup-dotnet@v3
+
+      - name: 🚀 publish nuget packages
+        run: dotnet nuget push "*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json

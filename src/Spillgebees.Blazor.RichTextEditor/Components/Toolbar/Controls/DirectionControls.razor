@@ -1,0 +1,9 @@
+﻿@if (_toolbarOptions.ShowDirectionControls)
+{
+    <button class="ql-direction" value="rtl" type="button"></button>
+}
+
+@code {
+    [CascadingParameter]
+    private ToolbarOptions _toolbarOptions { get; set; } = null!;
+}
