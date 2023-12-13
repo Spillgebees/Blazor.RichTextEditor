@@ -59,7 +59,7 @@ jobs:
 
       - name: 📦 publish WASM application
         if: inputs.should-publish-gh-page
-        run: dotnet publish src/Spillgebees.Blazor.RichTextEditor.Samples/Spillgebees.Blazor.RichTextEditor.Wasm/Spillgebees.Blazor.RichTextEditorWasm.csproj --configuration Release --no-build --output wasm-application
+        run: dotnet publish src/Spillgebees.Blazor.RichTextEditor.Samples/Spillgebees.Blazor.RichTextEditor.Wasm/Spillgebees.Blazor.RichTextEditor.Wasm.csproj --configuration Release --no-build --output wasm-application
 
       - name: 🚀 deploy gh pages
         if: inputs.should-publish-gh-page
