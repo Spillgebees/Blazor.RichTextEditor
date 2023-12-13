@@ -25,16 +25,16 @@ jobs:
         uses: actions/setup-dotnet@v3
 
       - name: ⚙️ restore workloads
-        run: dotnet workload restore src/Spillgebees.Blazor.RichTextEditor.sln
+        run: dotnet workload restore Spillgebees.Blazor.RichTextEditor.sln
 
       - name: 📦 restore packages
-        run: dotnet restore src/Spillgebees.Blazor.RichTextEditor.sln
+        run: dotnet restore Spillgebees.Blazor.RichTextEditor.sln
 
       - name: 👷 build project
-        run: dotnet build --configuration Release --no-restore src/RichTextEditor.sln
+        run: dotnet build --configuration Release --no-restore Spillgebees.Blazor.RichTextEditor.sln
     
       - name: ✅ test project
-        run: dotnet test --configuration Release --no-build --verbosity normal src/RichTextEditor.sln
+        run: dotnet test --configuration Release --no-build --verbosity normal Spillgebees.Blazor.RichTextEditor.sln
   
       - name: 📦 package the application
         if: inputs.should-package
