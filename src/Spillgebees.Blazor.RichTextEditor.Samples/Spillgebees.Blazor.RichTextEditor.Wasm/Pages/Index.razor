@@ -4,7 +4,6 @@
 @using Spillgebees.Blazor.RichTextEditor.Components.Toolbar
 @using Spillgebees.Blazor.RichTextEditor.Components.Toolbar.Controls
 
-
 <div class="container">
     <RichTextEditor />
 
@@ -16,7 +15,7 @@
 
     <RichTextEditor ToolbarOptions="ToolbarOptions.FullToolbarOptions" />
 
-    <RichTextEditor ToolbarOptions="@(ToolbarOptions.FullToolbarOptions with { Fonts = new List<string> { "Sans Serif", "RobotoMono" } })" >
+    <RichTextEditor ToolbarOptions="@(ToolbarOptions.FullToolbarOptions with { Fonts = new List<string> { "Sans Serif", "RobotoMono" } })">
         <ToolbarContent>
             <div style="float: left;">
                 <FontControls />
@@ -31,13 +30,12 @@
     </RichTextEditor>
 </div>
 
-
 <!--suppress CssUnusedSymbol -->
 <style>
     .container {
-        display:  flex;
+        display: flex;
         flex-direction: column;
-        gap:  50px;
+        gap: 50px;
     }
 
     .ql-font-RobotoMono {
