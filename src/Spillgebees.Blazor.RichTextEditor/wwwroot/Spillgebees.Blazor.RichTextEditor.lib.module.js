@@ -1,12 +1,52 @@
-// noinspection JSUnresolvedReference
+// TODO: replace with an implementation of this instead https://github.com/microsoft/fluentui-blazor/pull/1051
+// Note: importing the scripts directly instead of appending them to the head
+//       ensures that the scripts are loaded before the Blazor application starts
+import "./quill-blot-formatter.min.js";
+import "./quill.min.js";
+
+let hasBeforeStartBeenCalled = false;
+
+// applies to Blazor Web App applications
+// noinspection JSUnusedGlobalSymbols
+export function beforeWebStart() {
+    beforeStart();
+}
+
+// applies to Blazor Server, Blazor WebAssembly and Blazor Hybrid applications
+// noinspection JSUnusedGlobalSymbols
+export function beforeStart() {
+    if (hasBeforeStartBeenCalled) {
+        return;
+    }
+
+    hasBeforeStartBeenCalled = true;
+    bootstrapSpillgebeesRichTextEditor();
+}
+
+const bootstrapSpillgebeesRichTextEditor = () => {
+    // register the rich text editor functions to the global namespace
+    window.Spillgebees = window.Spillgebees || {};
+    window.Spillgebees.Fonts = window.Spillgebees.Fonts || new Set();
+    window.Spillgebees.EditorFunctions = window.Spillgebees.EditorFunctions || {
+        createEditor: createEditor,
+        setEditorEnabledState: setEditorEnabledState,
+        getContents: getContents,
+        setContents: setContents,
+        getHtml: getHtml,
+        setHtml: setHtml,
+        getText: getText,
+        insertImage: insertImage
+    };
+};
 
 const createEditor = (quillReference, toolbar, isEditorEnabled, placeholder, theme, debugLevel, fonts) => {
     Quill.register('modules/blotFormatter', QuillBlotFormatter.default);
 
     if (fonts.length > 0)
     {
-        window.Spillgebees.Fonts= [...window.Spillgebees.Fonts, ...fonts];
+        window.Spillgebees.Fonts = [...window.Spillgebees.Fonts, ...fonts];
 
+        // noinspection JSUnresolvedFunction
         let fontAttributor = Quill.import('formats/font');
         fontAttributor.whitelist = window.Spillgebees.Fonts;
         Quill.register(fontAttributor, true);
@@ -36,6 +76,7 @@ const setContents = (quillReference, content) => quillReference.__quill.setConte
 const getText = quillReference => quillReference.__quill.getText();
 
 const insertImage = (quillReference, imageUrl) => {
+    // noinspection JSUnresolvedReference
     const Delta = Quill.import('delta');
     let editorIndex = 0;
 
@@ -43,6 +84,7 @@ const insertImage = (quillReference, imageUrl) => {
         editorIndex = quillReference.__quill.getSelection().index;
     }
 
+    // noinspection JSUnresolvedReference
     return quillReference.__quill.updateContents(
         new Delta()
             .retain(editorIndex)
@@ -51,19 +93,3 @@ const insertImage = (quillReference, imageUrl) => {
                 {alt: imageUrl}
             ));
 };
-
-// register the rich text editor functions to the global namespace
-(function () {
-    window.Spillgebees = window.Spillgebees || {};
-    window.Spillgebees.Fonts = window.Spillgebees.Fonts || new Set();
-    window.Spillgebees.EditorFunctions = window.Spillgebees.EditorFunctions || {
-        createEditor: createEditor,
-        setEditorEnabledState: setEditorEnabledState,
-        getContents: getContents,
-        setContents: setContents,
-        getHtml: getHtml,
-        setHtml: setHtml,
-        getText: getText,
-        insertImage: insertImage
-    };
-})();

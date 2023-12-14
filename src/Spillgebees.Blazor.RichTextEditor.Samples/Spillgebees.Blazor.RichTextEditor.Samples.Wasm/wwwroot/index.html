@@ -16,7 +16,7 @@
               integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV"
               crossorigin="anonymous">
 
-        <!-- optional: used to show off a custom font import for the font controls -->
+        <!-- used to show off a custom font import for the font controls -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
@@ -26,7 +26,13 @@
     </head>
 
     <body>
-        <div id="app">Loading...</div>
+        <div id="app">
+            <svg class="loading-progress">
+                <circle r="40%" cx="50%" cy="50%" />
+                <circle r="40%" cx="50%" cy="50%" />
+            </svg>
+            <div class="loading-progress-text"></div>
+        </div>
 
         <div id="blazor-error-ui">
             An unhandled error has occurred.
@@ -39,11 +45,6 @@
         <!-- highlighting for code samples -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
         <script type="text/javascript" src="https://unpkg.com/highlightjs-cshtml-razor/dist/cshtml-razor.min.js"></script>
-
-        <!-- required -->
-        <script src="_content/Spillgebees.Blazor.RichTextEditor/rich-text-editor.js"></script>
-        <script src="_content/Spillgebees.Blazor.RichTextEditor/quill-blot-formatter.min.js"></script>
-        <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
 
         <!-- optional: required if you want to use the math/formula feature -->
         <script defer

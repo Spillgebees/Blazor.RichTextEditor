@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Spillgebees.Blazor.RichTextEditor\Spillgebees.Blazor.RichTextEditor.csproj" />
     <ProjectReference Include="..\Spillgebees.Blazor.RichTextEditor.Samples.Shared\Spillgebees.Blazor.RichTextEditor.Samples.Shared.csproj" />
   </ItemGroup>
 

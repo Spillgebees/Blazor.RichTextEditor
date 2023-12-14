@@ -13,11 +13,10 @@ This component is based on a mix of the following repos:
 - [vixys' fork of `Blazored.TextEditor`](https://github.com/Vixys/TextEditor), mainly the `OnTextChanged` implementation logic.
 - [somegenericdev's `WYSIWYGTextEditor`](https://github.com/somegenericdev/WYSIWYGTextEditor), mainly the more convenient usage/component structure.
 
-
 ## TODO
 
 - [ ] Usage
-    - [ ] recommend using JS initializer to users
+  - [ ] recommend using JS initializer to users
 - [ ] JS tests
 - [ ] bUnit tests
 - [ ] Publish to NuGet
@@ -28,4 +27,6 @@ This component is based on a mix of the following repos:
 - [ ] Bindable properties (html/content)
 - [ ] IsTouched property
 - [ ] Ensure .net 7 & 8 compatibility
-- [ ] Use JS initializer for loading script references and initializing our own JS stuff
+- [x] Use JS initializer for loading script references and initializing our own JS stuff
+- [ ] Provide a way to load KaTex by with some configuration flag?
+- [ ] Replace the current JS initializer implementation with an npm/typescript module that generates the JS initializer for us, this should bundle all js files and css styles in one
