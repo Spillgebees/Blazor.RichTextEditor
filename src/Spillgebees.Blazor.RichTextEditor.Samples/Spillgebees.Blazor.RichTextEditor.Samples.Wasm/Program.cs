@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Spillgebees.Blazor.RichTextEditor.Wasm;
+using Spillgebees.Blazor.RichTextEditor.Samples.Wasm;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");

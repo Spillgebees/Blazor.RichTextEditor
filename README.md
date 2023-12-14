@@ -17,13 +17,15 @@ This component is based on a mix of the following repos:
 ## TODO
 
 - [ ] Usage
+    - [ ] recommend using JS initializer to users
 - [ ] JS tests
 - [ ] bUnit tests
 - [ ] Publish to NuGet
 - [ ] Potential firefox bug (quill blot formatter not showing up on iframes)
 - [ ] Unit tests
-- [ ] Cleaning up samples
+- [x] Cleaning up samples
 - [ ] Advanced usage scenarios
 - [ ] Bindable properties (html/content)
 - [ ] IsTouched property
 - [ ] Ensure .net 7 & 8 compatibility
+- [ ] Use JS initializer for loading script references and initializing our own JS stuff
