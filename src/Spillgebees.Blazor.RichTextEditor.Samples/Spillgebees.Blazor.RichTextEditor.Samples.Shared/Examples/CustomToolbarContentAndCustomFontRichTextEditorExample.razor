@@ -1,0 +1,40 @@
+﻿
+<div>
+    <h3>Defining the toolbar content manually and providing a custom font (<code class="hljs">Roboto Mono</code>)</h3>
+    <CodeSnippet Code="@Code">
+        <Component>
+            <RichTextEditor ToolbarOptions="@(ToolbarOptions.FullToolbarOptions with { Fonts = new List<string> { "Sans Serif", "RobotoMono" } })">
+                <ToolbarContent>
+                    <div style="float: left;">
+                        <FontControls />
+                        <SizeControls />
+                        <ColorControls />
+                    </div>
+                    <div style="float: right;">
+                        <InsertImageControls />
+                        <EmbedVideoControls />
+                    </div>
+                </ToolbarContent>
+            </RichTextEditor>
+        </Component>
+    </CodeSnippet>
+</div>
+
+
+@code {
+    private const string Code = """"
+                                <RichTextEditor ToolbarOptions="@(ToolbarOptions.FullToolbarOptions with { Fonts = new List<string> { "Sans Serif", "RobotoMono" } })">
+                                    <ToolbarContent>
+                                        <div style="float: left;">
+                                            <FontControls />
+                                            <SizeControls />
+                                            <ColorControls />
+                                        </div>
+                                        <div style="float: right;">
+                                            <InsertImageControls />
+                                            <EmbedVideoControls />
+                                        </div>
+                                    </ToolbarContent>
+                                </RichTextEditor>
+                                """";
+}

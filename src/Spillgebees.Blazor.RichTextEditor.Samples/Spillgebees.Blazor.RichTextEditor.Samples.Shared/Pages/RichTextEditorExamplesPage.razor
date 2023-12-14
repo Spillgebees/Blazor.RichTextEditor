@@ -1,0 +1,78 @@
+﻿@using Spillgebees.Blazor.RichTextEditor.Samples.Shared.Examples
+@using Microsoft.JSInterop
+
+<article class="article">
+    <h1>@Title</h1>
+
+    <div class="container">
+        <DefaultRichTextEditorExample />
+
+        <BubbleThemeAndCustomEditorContainerIdRichTextEditorExample />
+
+        <DisabledRichTextEditorExample />
+
+        <FullToolbarOptionsRichTextEditorExample />
+
+        <CustomToolbarContentAndCustomFontRichTextEditorExample />
+    </div>
+</article>
+
+<!--suppress CssUnusedSymbol -->
+<style>
+    h1, h3 {
+        font-family: 'Roboto Mono', monospace;
+    }
+
+    h3 {
+        margin-bottom: 0;
+    }
+
+    code {
+        border-radius: 5px;
+        padding: 5px;
+    }
+
+    code.lang-razor {
+        display: block;
+        width:  100%;
+    }
+
+    .article {
+        height: 100vh;
+        padding: 0 10px;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .rich-text-editor-container {
+        margin-top: 5px;
+    }
+
+    .ql-font-RobotoMono {
+        font-family: 'Roboto Mono', monospace;
+    }
+</style>
+
+@code {
+    [Inject]
+    private IJSRuntime _jsRuntime { get; set; } = null!;
+
+    [Parameter, EditorRequired]
+    public string Title { get; set; } = "Spillgebees.Blazor.RichTextEditor";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender is false)
+        {
+            return;
+        }
+
+        await _jsRuntime.InvokeVoidAsync("hljs.highlightAll");
+    }
+}

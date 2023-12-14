@@ -1,0 +1,22 @@
+﻿@using Microsoft.JSInterop
+
+<div>
+    @Component
+
+    <details style="margin-top: 5px;">
+        <summary>Show code</summary>
+        <pre>
+            <code class="lang-razor">
+                @Code
+            </code>
+        </pre>
+    </details>
+</div>
+
+@code {
+    [Parameter, EditorRequired]
+    public RenderFragment Component { get; set; } = null!;
+
+    [Parameter, EditorRequired]
+    public string Code { get; set; } = null!;
+}

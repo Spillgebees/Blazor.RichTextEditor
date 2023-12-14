@@ -11,9 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spillgebees.Blazor.RichText
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Spillgebees.Blazor.RichTextEditor.Samples", "Spillgebees.Blazor.RichTextEditor.Samples", "{DD94C47D-8A48-4767-BF95-1E140B2F4A5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spillgebees.Blazor.RichTextEditor.Server", "src\Spillgebees.Blazor.RichTextEditor.Samples\Spillgebees.Blazor.RichTextEditor.Server\Spillgebees.Blazor.RichTextEditor.Server.csproj", "{C681B187-3467-4D8A-BC0C-0A5BF06C2032}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spillgebees.Blazor.RichTextEditor.Samples.Server", "src\Spillgebees.Blazor.RichTextEditor.Samples\Spillgebees.Blazor.RichTextEditor.Samples.Server\Spillgebees.Blazor.RichTextEditor.Samples.Server.csproj", "{C681B187-3467-4D8A-BC0C-0A5BF06C2032}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spillgebees.Blazor.RichTextEditor.Wasm", "src\Spillgebees.Blazor.RichTextEditor.Samples\Spillgebees.Blazor.RichTextEditor.Wasm\Spillgebees.Blazor.RichTextEditor.Wasm.csproj", "{CF6BE7F3-F7BB-41BF-A699-47468082334A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spillgebees.Blazor.RichTextEditor.Samples.Wasm", "src\Spillgebees.Blazor.RichTextEditor.Samples\Spillgebees.Blazor.RichTextEditor.Samples.Wasm\Spillgebees.Blazor.RichTextEditor.Samples.Wasm.csproj", "{CF6BE7F3-F7BB-41BF-A699-47468082334A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spillgebees.Blazor.RichTextEditor.Samples.Shared", "src\Spillgebees.Blazor.RichTextEditor.Samples\Spillgebees.Blazor.RichTextEditor.Samples.Shared\Spillgebees.Blazor.RichTextEditor.Samples.Shared.csproj", "{900273ED-17E7-4FDC-B190-66164F2A2045}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +42,10 @@ Global
 		{CF6BE7F3-F7BB-41BF-A699-47468082334A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF6BE7F3-F7BB-41BF-A699-47468082334A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF6BE7F3-F7BB-41BF-A699-47468082334A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{900273ED-17E7-4FDC-B190-66164F2A2045}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{900273ED-17E7-4FDC-B190-66164F2A2045}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{900273ED-17E7-4FDC-B190-66164F2A2045}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{900273ED-17E7-4FDC-B190-66164F2A2045}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{59E50D98-769B-4E4C-85DB-2CB48C7294D4} = {1FD17608-7462-4D4E-A3CB-D3A27C85AEB6}
@@ -47,5 +53,6 @@ Global
 		{DD94C47D-8A48-4767-BF95-1E140B2F4A5F} = {1FD17608-7462-4D4E-A3CB-D3A27C85AEB6}
 		{C681B187-3467-4D8A-BC0C-0A5BF06C2032} = {DD94C47D-8A48-4767-BF95-1E140B2F4A5F}
 		{CF6BE7F3-F7BB-41BF-A699-47468082334A} = {DD94C47D-8A48-4767-BF95-1E140B2F4A5F}
+		{900273ED-17E7-4FDC-B190-66164F2A2045} = {DD94C47D-8A48-4767-BF95-1E140B2F4A5F}
 	EndGlobalSection
 EndGlobal
