@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
-
   <PropertyGroup>
     <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
     <Nullable>enable</Nullable>
