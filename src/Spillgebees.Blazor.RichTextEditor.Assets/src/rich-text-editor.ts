@@ -31,7 +31,7 @@ const createEditor = (
 
     if (fonts.length > 0)
     {
-        window.Spillgebees.fonts = fonts;
+        window.Spillgebees.fonts = [...window.Spillgebees.fonts, ...fonts];
         let fontAttributor = Quill.import('formats/font');
         fontAttributor.whitelist = window.Spillgebees.fonts;
         Quill.register(fontAttributor, true);
