@@ -1,0 +1,36 @@
+{
+  "private": true,
+  "name": "spillgebees.blazor.richtexteditor.assets",
+  "source": "src/index.ts",
+  "main": "dist/Spillgebees.Blazor.RichTextEditor.lib.module.js",
+  "scripts": {
+    "build": "node ./esbuild.config.mjs",
+    "clean": "rimraf ./dist"
+  },
+  "keywords": [],
+  "author": "Jason Rebelo Neves (igotinfected)",
+  "license": "MIT",
+  "type": "module",
+  "devDependencies": {
+    "@types/quill": "^2.0.14",
+    "esbuild": "0.19.5",
+    "eslint": "^8.53.0",
+    "rimraf": "5.0.5",
+    "typescript": "^5.3.3"
+  },
+  "version": "0.1.0",
+  "description": "TypeScript module housing assets related to the Spillgebees.Blazor.RichTextEditor NuGet package.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Spillgebees/Blazor.RichTextEditor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Spillgebees/Blazor.RichTextEditor/issues"
+  },
+  "homepage": "https://github.com/Spillgebees/Blazor.RichTextEditor#readme",
+  "dependencies": {
+    "quill": "^1.3.7",
+    "quill-blot-resizer": "^1.0.1",
+    "quill-delta": "^5.1.0"
+  }
+}

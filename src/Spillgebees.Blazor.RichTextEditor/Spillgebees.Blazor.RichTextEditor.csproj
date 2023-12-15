@@ -44,4 +44,7 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Spillgebees.Blazor.RichTextEditor.Assets\Spillgebees.Blazor.RichTextEditor.Assets.esproj" PrivateAssets="All" />
+  </ItemGroup>
 </Project>

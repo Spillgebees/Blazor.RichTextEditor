@@ -744,3 +744,4 @@ fabric.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/csharp,visualstudio,rider,jetbrains
 
+dist
