@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spillgebees.Blazor.RichText
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spillgebees.Blazor.RichTextEditor.Samples.WebApp", "src\Spillgebees.Blazor.RichTextEditor.Samples\Spillgebees.Blazor.RichTextEditor.Samples.WebApp\Spillgebees.Blazor.RichTextEditor.Samples.WebApp.csproj", "{CC2DFE8C-5B51-47C1-BA48-8771D54AF5EB}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Spillgebees.Blazor.RichTextEditor.Assets", "src\Spillgebees.Blazor.RichTextEditor.Assets\Spillgebees.Blazor.RichTextEditor.Assets.esproj", "{AD24D672-77D9-42FB-9ABA-05ACCF4EB2CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,10 @@ Global
 		{CC2DFE8C-5B51-47C1-BA48-8771D54AF5EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC2DFE8C-5B51-47C1-BA48-8771D54AF5EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC2DFE8C-5B51-47C1-BA48-8771D54AF5EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD24D672-77D9-42FB-9ABA-05ACCF4EB2CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD24D672-77D9-42FB-9ABA-05ACCF4EB2CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD24D672-77D9-42FB-9ABA-05ACCF4EB2CC}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD24D672-77D9-42FB-9ABA-05ACCF4EB2CC}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{59E50D98-769B-4E4C-85DB-2CB48C7294D4} = {1FD17608-7462-4D4E-A3CB-D3A27C85AEB6}
@@ -61,5 +67,6 @@ Global
 		{CF6BE7F3-F7BB-41BF-A699-47468082334A} = {DD94C47D-8A48-4767-BF95-1E140B2F4A5F}
 		{900273ED-17E7-4FDC-B190-66164F2A2045} = {DD94C47D-8A48-4767-BF95-1E140B2F4A5F}
 		{CC2DFE8C-5B51-47C1-BA48-8771D54AF5EB} = {DD94C47D-8A48-4767-BF95-1E140B2F4A5F}
+		{AD24D672-77D9-42FB-9ABA-05ACCF4EB2CC} = {1FD17608-7462-4D4E-A3CB-D3A27C85AEB6}
 	EndGlobalSection
 EndGlobal

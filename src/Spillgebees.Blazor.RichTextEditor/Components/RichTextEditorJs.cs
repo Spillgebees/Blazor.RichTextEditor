@@ -5,7 +5,7 @@ namespace Spillgebees.Blazor.RichTextEditor.Components;
 
 internal static class RichTextEditorJs
 {
-    private const string JsNamespace = "Spillgebees.EditorFunctions";
+    private const string JsNamespace = "Spillgebees.editorFunctions";
 
     internal static ValueTask<object> CreateEditor(
         IJSRuntime jsRuntime,
