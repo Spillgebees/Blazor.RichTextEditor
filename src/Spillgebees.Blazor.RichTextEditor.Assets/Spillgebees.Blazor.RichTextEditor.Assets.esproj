@@ -7,4 +7,5 @@
   </PropertyGroup>
 
   <Target Name="Pack" />
+  <Target Name="_GetRequiredWorkloads" />
 </Project>
