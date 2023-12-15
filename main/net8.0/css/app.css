@@ -1,3 +1,5 @@
+@import "../_content/Spillgebees.Blazor.RichTextEditor/Spillgebees.Blazor.RichTextEditor.lib.module.css";
+
 h1:focus {
     outline: none;
 }
