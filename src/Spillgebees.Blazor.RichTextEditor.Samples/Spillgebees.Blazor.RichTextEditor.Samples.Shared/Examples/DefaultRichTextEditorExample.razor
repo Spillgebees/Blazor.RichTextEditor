@@ -2,11 +2,18 @@
     <h3>Base component</h3>
     <CodeSnippet Code="@Code">
         <Component>
-            <RichTextEditor />
+            <CodeSnippet Code="@_content"
+                         CodeFormat="CodeFormat.Html"
+                         Summary="Show HTML">
+                <Component>
+                    <RichTextEditor @bind-Content="@_content" />
+                </Component>
+            </CodeSnippet>
         </Component>
     </CodeSnippet>
 </div>
 
 @code {
-    private const string Code = "<RichTextEditor />";
+    private const string Code = """<RichTextEditor @bind-Content="@_content" />""";
+    private string _content = "<b>Hello! \ud83d\udc4b</b>";
 }

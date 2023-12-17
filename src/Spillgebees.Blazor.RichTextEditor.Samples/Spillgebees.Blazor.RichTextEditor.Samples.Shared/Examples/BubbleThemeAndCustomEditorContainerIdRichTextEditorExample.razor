@@ -2,18 +2,26 @@
     <h3>Bubble theme + custom editor container Id</h3>
     <CodeSnippet Code="@Code">
         <Component>
-            <RichTextEditor Placeholder="This is epic"
-                            Theme="QuillTheme.Bubble"
-                            EditorContainerHtmlId="test-container-id" />
+            <CodeSnippet Code="@_content"
+                         CodeFormat="CodeFormat.Html"
+                         Summary="Show HTML">
+                <Component>
+                    <RichTextEditor @bind-Content="@_content"
+                                    Placeholder="This is epic"
+                                    Theme="QuillTheme.Bubble"
+                                    EditorContainerHtmlId="test-container-id" />
+                </Component>
+            </CodeSnippet>
         </Component>
     </CodeSnippet>
 </div>
 
 @code {
-    private const string Code = """"
-                                <RichTextEditor Placeholder="This is epic"
-                                                Theme="QuillTheme.Bubble"
-                                                EditorContainerHtmlId="test-container-id" />
-                                """";
+    private const string Code =
+@"<RichTextEditor @bind-Content=""@_content""
+                Placeholder=""This is epic""
+                Theme=""QuillTheme.Bubble""
+                EditorContainerHtmlId=""test-container-id"" />";
 
+    private string _content = "<b>Hello! \ud83d\udc4b</b>";
 }

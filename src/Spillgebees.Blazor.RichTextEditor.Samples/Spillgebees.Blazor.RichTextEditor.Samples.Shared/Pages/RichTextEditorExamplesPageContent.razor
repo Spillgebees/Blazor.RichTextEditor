@@ -1,0 +1,71 @@
+﻿@using Spillgebees.Blazor.RichTextEditor.Samples.Shared.Examples
+@using Microsoft.JSInterop
+
+<article class="article">
+    <div class="flex justify-center items-center">
+        <div class="bg-white my-8 p-8 border-2 border-gray-300 rounded-lg shadow-lg">
+            <h1 class="mb-4">
+                @Title
+            </h1>
+
+            <div class="container">
+                <DefaultRichTextEditorExample />
+
+                <BubbleThemeAndCustomEditorContainerIdRichTextEditorExample />
+
+                <DisabledRichTextEditorExample />
+
+                <FullToolbarOptionsRichTextEditorExample />
+
+                <CustomToolbarContentAndCustomFontRichTextEditorExample />
+
+                <PassiveRichTextEditorExample />
+            </div>
+
+            <a href="other"
+               class="fixed bottom-0 right-0 mb-4 mr-4 bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 text-center font-semibold rounded-full shadow-md">
+                Go to blank page to reset state
+            </a>
+        </div>
+    </div>
+</article>
+
+<!--suppress CssUnusedSymbol -->
+<style>
+    h1 {
+        font-size:  2.5rem;
+        font-weight:  bold;
+    }
+
+    h1, h3 {
+        font-family: 'Roboto Mono', monospace;
+    }
+
+    h3 {
+        margin-bottom: 0;
+    }
+
+    .article {
+        height: 100vh;
+        padding: 0 10px;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .rich-text-editor-container {
+        margin-top: 5px;
+    }
+
+    .ql-font-RobotoMono {
+        font-family: 'Roboto Mono', monospace;
+    }
+</style>
+
+@code {
+    [Parameter, EditorRequired]
+    public string Title { get; set; } = "Spillgebees.Blazor.RichTextEditor";
+}

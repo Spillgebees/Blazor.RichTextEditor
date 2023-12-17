@@ -2,11 +2,22 @@
     <h3>Disabled editor</h3>
     <CodeSnippet Code="@Code">
         <Component>
-            <RichTextEditor IsEditorEnabled="@false" />
+            <CodeSnippet Code="@_content"
+                         CodeFormat="CodeFormat.Html"
+                         Summary="Show HTML">
+                <Component>
+                    <RichTextEditor @bind-Content="@_content"
+                                    IsEditorEnabled="@false" />
+                </Component>
+            </CodeSnippet>
         </Component>
     </CodeSnippet>
 </div>
 
 @code {
-    private const string Code = """<RichTextEditor IsEditorEnabled="@false" />""";
+    private const string Code =
+@"<RichTextEditor @bind-Content=""@_content""
+                IsEditorEnabled=""@false"" />";
+
+    private string _content = "<b>Hello! \ud83d\udc4b</b>";
 }

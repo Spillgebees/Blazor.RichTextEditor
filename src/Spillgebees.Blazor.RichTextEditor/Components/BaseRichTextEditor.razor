@@ -1,0 +1,21 @@
+﻿@code {
+    protected virtual RenderFragment Render
+        => @<div class="@InternalContainerClass">
+                <div id="@ToolbarOptions.ToolbarContainerHtmlId"
+                     @ref="@ToolbarReference">
+                    <CascadingValue Value="ToolbarOptions">
+                        @if (ToolbarContent is null)
+                        {
+                            <Toolbar />
+                        }
+
+                        @ToolbarContent
+                    </CascadingValue>
+                </div>
+
+                <div id="@EditorContainerHtmlId"
+                     @ref="@QuillReference">
+                    @EditorContent
+                </div>
+            </div>;
+}

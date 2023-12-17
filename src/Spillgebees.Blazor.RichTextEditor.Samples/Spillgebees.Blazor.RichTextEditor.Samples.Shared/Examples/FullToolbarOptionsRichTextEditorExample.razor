@@ -2,11 +2,22 @@
     <h3>Using <code class="hljs">ToolbarOptions.FullToolbarOptions</code></h3>
     <CodeSnippet Code="@Code">
         <Component>
-            <RichTextEditor ToolbarOptions="ToolbarOptions.FullToolbarOptions" />
+            <CodeSnippet Code="@_content"
+                         CodeFormat="CodeFormat.Html"
+                         Summary="Show HTML">
+                <Component>
+                    <RichTextEditor @bind-Content="@_content"
+                                    ToolbarOptions="ToolbarOptions.FullToolbarOptions" />
+                </Component>
+            </CodeSnippet>
         </Component>
     </CodeSnippet>
 </div>
 
 @code {
-    private const string Code = """<RichTextEditor ToolbarOptions="ToolbarOptions.FullToolbarOptions" />""";
+    private const string Code =
+@"<RichTextEditor @bind-Content=""@_content""
+                ToolbarOptions=""ToolbarOptions.FullToolbarOptions"" />";
+
+    private string _content = "<b>Hello! \ud83d\udc4b</b>";
 }

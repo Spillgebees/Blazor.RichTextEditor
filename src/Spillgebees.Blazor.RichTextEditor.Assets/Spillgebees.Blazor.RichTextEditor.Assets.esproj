@@ -5,6 +5,9 @@
     <StaticWebAssetSourceId>Spillgebees.Blazor.RichTextEditor</StaticWebAssetSourceId>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
+  <ItemGroup>
+    <Script Include="tsconfig.json" />
+  </ItemGroup>
 
   <Target Name="Pack" />
   <Target Name="_GetRequiredWorkloads" />

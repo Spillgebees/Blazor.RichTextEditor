@@ -20,4 +20,8 @@
     <ItemGroup>
       <ProjectReference Include="..\..\Spillgebees.Blazor.RichTextEditor\Spillgebees.Blazor.RichTextEditor.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AngleSharp" Version="1.0.7" />
+    </ItemGroup>
 </Project>
