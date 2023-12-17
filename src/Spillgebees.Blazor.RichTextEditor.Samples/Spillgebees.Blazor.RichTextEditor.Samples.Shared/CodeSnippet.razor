@@ -1,22 +1,91 @@
-﻿@using Microsoft.JSInterop
+﻿@using AngleSharp
+@using AngleSharp.Css
+@using AngleSharp.Html
+@using AngleSharp.Html.Dom
+@using AngleSharp.Html.Parser
+@using Microsoft.JSInterop
 
 <div>
     @Component
 
-    <details style="margin-top: 5px;">
-        <summary>Show code</summary>
-        <pre>
-            <code class="lang-razor">
-                @Code
-            </code>
-        </pre>
-    </details>
+    <div class="container mx-auto">
+        <details class="cursor-pointer border-2 border-dashed border-stone-500 p-4 mt-2 [&_svg]:open:-rotate-180">
+            <summary class="flex justify-center items-center  gap-4">
+                <svg class="rotate-0 transform transition-all duration-100" fill="none" height="20" width="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+
+                @Summary
+            </summary>
+            <pre class="mt-2">
+                <code class="@CodeFormat.ToLanguageClass()"
+                      @ref="_codeRef">
+                    @_code
+                </code>
+            </pre>
+        </details>
+    </div>
 </div>
 
+<!--suppress CssUnusedSymbol -->
+<style>
+    code {
+        border-radius: 5px;
+        padding: 5px;
+        overflow-y:  auto;
+    }
+
+    code[class^="lang-"] {
+        display: block;
+        font-weight: bold;
+        width:  100%;
+    }
+</style>
+
 @code {
+    [Inject]
+    private IJSRuntime _jsRuntime { get; set; } = null!;
+
     [Parameter, EditorRequired]
     public RenderFragment Component { get; set; } = null!;
 
     [Parameter, EditorRequired]
     public string Code { get; set; } = null!;
+
+    [Parameter]
+    public string Summary { get; set; } = "Show code";
+
+    [Parameter]
+    public CodeFormat CodeFormat { get; set; } = CodeFormat.Razor;
+
+    private string _code = string.Empty;
+    private ElementReference _codeRef;
+    private HtmlParser _htmlParser = new();
+    private StringWriter _writer = new();
+    private PrettyMarkupFormatter _formatter = new();
+
+    protected override void OnParametersSet()
+    {
+        if (_code == Code)
+        {
+            return;
+        }
+
+        if (CodeFormat == CodeFormat.Razor)
+        {
+            _code = Code;
+            return;
+        }
+
+        var doc = _htmlParser.ParseDocument(Code);
+        _writer.GetStringBuilder().Clear();
+        doc.Body?.ToHtml(_writer, new PrettyMarkupFormatter());
+        _code = _writer.ToString();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await _jsRuntime.InvokeVoidAsync("Samples.Shared.highlightElement", _code, _codeRef);
+        await base.OnAfterRenderAsync(firstRender);
+    }
 }

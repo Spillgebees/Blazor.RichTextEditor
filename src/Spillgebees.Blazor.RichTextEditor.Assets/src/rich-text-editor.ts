@@ -1,7 +1,10 @@
-import Quill from "quill";
+import Quill, { RangeStatic, SelectionChangeHandler, Sources, TextChangeHandler } from "quill";
 import BlotFormatter from "quill-blot-resizer";
-import { QuillReference } from "./interfaces/quill-reference";
 import Delta from "quill-delta";
+import { QuillReference } from "./interfaces/quill-reference";
+import { QuillEvent, SelectionChangedEvent, TextChangedEvent } from "./interfaces/quill-events";
+import { DotNet } from "@microsoft/dotnet-js-interop";
+import DotNetObject = DotNet.DotNetObject;
 
 export function bootstrap() {
     window.Spillgebees = window.Spillgebees || {};
@@ -9,23 +12,30 @@ export function bootstrap() {
     window.Spillgebees.editorFunctions = window.Spillgebees.editorFunctions || {
         createEditor: createEditor,
         setEditorEnabledState: setEditorEnabledState,
-        getContents: getContents,
-        setContents: setContents,
-        getHtml: getHtml,
-        setHtml: setHtml,
+        getContent: getContent,
+        setContent: setContent,
+        getSelection: getSelection,
+        setSelection: setSelection,
         getText: getText,
-        insertImage: insertImage
+        insertImage: insertImage,
+        disposeEditor: disposeEditor,
+        registerQuillEventCallback: registerQuillEventCallback,
+        deregisterQuillEventCallback: deregisterQuillEventCallback
     };
+    window.Spillgebees.eventMap = window.Spillgebees.eventMap
+        || new Map<Quill, Map<"text-change" | "selection-change", (...args : any[]) => Promise<QuillEvent>>>();
 }
 
-const createEditor = (
+const createEditor = async (
+    dotNetHelper: DotNetObject,
     quillContainer: Element,
     toolbar: any,
-    isEditorEnabled?: boolean,
+    isEditorEnabled: boolean,
+    shouldRegisterEventCallbacks: boolean,
     placeholder?: string | undefined,
     theme?: string | undefined,
     debugLevel?: string | boolean | undefined,
-    fonts: string[] = new Array<string>): void => {
+    fonts: string[] = new Array<string>): Promise<void> => {
 
     Quill.register('modules/blotFormatter', BlotFormatter);
 
@@ -48,24 +58,28 @@ const createEditor = (
         debug: debugLevel,
     };
 
-    new Quill(quillContainer, quillOptions);
+    let quill = new Quill(quillContainer, quillOptions);
+    window.Spillgebees.eventMap.set(quill, new Map<"text-change" | "selection-change", (delta: Delta, oldContents: Delta, source: Sources) => Promise<QuillEvent>>());
+
+    if (shouldRegisterEventCallbacks)
+    {
+        await registerQuillEventCallback(quill, "OnContentChangedAsync", "text-change", dotNetHelper);
+        await registerQuillEventCallback(quill, "OnSelectionChangedAsync", "selection-change", dotNetHelper);
+    }
 };
 
-const setEditorEnabledState = (quillReference: QuillReference, isEditorEnabled: boolean): void => quillReference.__quill.enable(isEditorEnabled);
+const getContent = (quillReference: QuillReference): string | undefined => quillReference.__quill?.root.innerHTML;
+// @ts-ignore
+const setContent = (quillReference: QuillReference, content: string) => quillReference.__quill.setContents(quillReference.__quill.clipboard.convert(content), 'api');
 
-const getHtml = (quillReference: QuillReference): string => quillReference.__quill.root.innerHTML;
+const getSelection = (quillReference: QuillReference): RangeStatic | null | undefined => quillReference.__quill?.getSelection();
+const setSelection = (quillReference: QuillReference, range: RangeStatic) => quillReference.__quill?.setSelection(range);
 
-const setHtml = (quillReference: QuillReference, htmlContent: string): string => quillReference.__quill.root.innerHTML = htmlContent;
-
-const getContents = (quillReference: QuillReference): string => JSON.stringify(quillReference.__quill.getContents());
-
-const setContents = (quillReference: QuillReference, content: string) => quillReference.__quill.setContents(JSON.parse(content), 'api');
-
-const getText = (quillReference: QuillReference): string => quillReference.__quill.getText();
+const getText = (quillReference: QuillReference): string | undefined => quillReference.__quill?.getText();
 
 const insertImage = (quillReference: QuillReference, imageUrl: string) => {
-    let editorIndex = quillReference.__quill.getSelection()?.index ?? 0;
-    return quillReference.__quill.updateContents(
+    let editorIndex = quillReference.__quill?.getSelection()?.index ?? 0;
+    return quillReference.__quill?.updateContents(
         new Delta()
             .retain(editorIndex)
             .insert(
@@ -73,3 +87,67 @@ const insertImage = (quillReference: QuillReference, imageUrl: string) => {
                 {alt: imageUrl}
             ));
 };
+
+const setEditorEnabledState = (quillReference: QuillReference, isEditorEnabled: boolean): void => quillReference.__quill?.enable(isEditorEnabled);
+
+const disposeEditor = async (quillReference: QuillReference): Promise<void> => {
+    await deregisterQuillEventCallback(quillReference, "text-change");
+    await deregisterQuillEventCallback(quillReference, "selection-change");
+}
+
+const registerQuillEventCallback = async (
+    quill: Quill,
+    invokableDotNetMethodName:  string,
+    eventName: "text-change" | "selection-change",
+    dotNetHelper: DotNetObject) => {
+    if (window.Spillgebees.eventMap.has(quill) && window.Spillgebees.eventMap.get(quill)?.has(eventName)) {
+        throw new Error(`Event already registered: ${eventName}`);
+    }
+
+    if (eventName === "text-change") {
+        let handler = async (
+            _delta: Delta,
+            _oldContents: Delta,
+            source: Sources): Promise<QuillEvent> => await dotNetHelper.invokeMethodAsync(invokableDotNetMethodName, new TextChangedEvent(source));
+        window.Spillgebees.eventMap.get(quill)?.set(eventName, handler);
+        quill.on("text-change", handler);
+    }
+    else if (eventName === "selection-change") {
+        let handler = async (
+            range: RangeStatic,
+            oldRange: RangeStatic,
+            source: Sources): Promise<QuillEvent> => await dotNetHelper.invokeMethodAsync(invokableDotNetMethodName, new SelectionChangedEvent(oldRange, range, source));
+        window.Spillgebees.eventMap.get(quill)?.set(eventName, handler);
+        quill.on("selection-change", handler);
+    }
+    else {
+        throw new Error(`Invalid eventName: ${eventName}`);
+    }
+}
+
+
+const deregisterQuillEventCallback = async (
+    quillReference: QuillReference | null,
+    eventName: "text-change" | "selection-change") => {
+    if (quillReference === null || quillReference.__quill === null || !window.Spillgebees.eventMap.has(quillReference.__quill)) {
+        return;
+    }
+
+    if (!window.Spillgebees.eventMap.has(quillReference.__quill) || !window.Spillgebees.eventMap.get(quillReference.__quill)?.has(eventName)) {
+        return;
+    }
+
+    if (eventName === "text-change") {
+        let handler = window.Spillgebees.eventMap.get(quillReference.__quill)!.get(eventName);
+        window.Spillgebees.eventMap.get(quillReference.__quill)?.delete(eventName);
+        quillReference.__quill.off("text-change", handler as TextChangeHandler);
+    }
+    else if (eventName === "selection-change") {
+        let handler = window.Spillgebees.eventMap.get(quillReference.__quill)!.get(eventName);
+        window.Spillgebees.eventMap.get(quillReference.__quill)?.delete(eventName);
+        quillReference.__quill.off("selection-change", handler as SelectionChangeHandler);
+    }
+    else {
+        throw new Error(`Invalid eventName: ${eventName}`);
+    }
+}

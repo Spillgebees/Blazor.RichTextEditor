@@ -12,6 +12,7 @@
   "license": "MIT",
   "type": "module",
   "devDependencies": {
+    "@microsoft/dotnet-js-interop": "^8.0.0",
     "@types/quill": "^2.0.14",
     "esbuild": "0.19.5",
     "eslint": "^8.53.0",

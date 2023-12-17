@@ -1,7 +1,7 @@
 import { Quill } from "quill";
 
 interface QuillReference {
-    __quill: Quill;
+    __quill: Quill | null;
 }
 
 export { QuillReference };
