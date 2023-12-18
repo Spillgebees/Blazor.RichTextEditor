@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 using Spillgebees.Blazor.RichTextEditor.Components.Toolbar;
 
@@ -8,6 +9,10 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
 {
     [Inject]
     protected IJSRuntime JsRuntime { get; set; } = default!;
+
+    [Inject]
+    private ILoggerFactory _loggerFactory { get; set; } = null!;
+    protected Lazy<ILogger> Logger => new(() => _loggerFactory.CreateLogger(GetType()));
 
     /// <summary>
     /// <para>
@@ -44,6 +49,28 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
 
     [Parameter]
     public EventCallback<Range?> SelectionChanged { get; set; }
+
+    /// <summary>
+    /// <para>
+    /// Applies to <see cref="ContentChanged"/>, <see cref="TextChanged"/>, and <see cref="SelectionChanged"/>.
+    /// </para>
+    /// <para>
+    /// Can only be set once. Defaults to <b>500</b> milliseconds.
+    /// </para>
+    /// <para>
+    /// This throttles events on the JavaScript side to keep interop calls to a minimum.
+    /// </para>
+    /// </summary>
+    [Parameter]
+    public int DebounceIntervalInMilliseconds { get; set; } = 500;
+
+    /// <summary>
+    /// <para>
+    /// Indicates whether the component has been touched, more specifically if the editor content has changed.
+    /// </para>
+    /// </summary>
+    [Parameter]
+    public bool IsTouched { get; set; }
 
     /// <summary>
     /// <para>
@@ -109,51 +136,51 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
             return;
         }
 
-        await RichTextEditorJs.DisposeEditorAsync(JsRuntime, QuillReference);
+        await RichTextEditorJs.DisposeEditorAsync(JsRuntime, Logger.Value, QuillReference);
         DotNetObjectReference?.Dispose();
         IsDisposed = true;
         GC.SuppressFinalize(this);
     }
 
     [JSInvokable]
-    public virtual async Task OnContentChangedAsync(TextChangeEvent args)
+    public virtual Task OnContentChangedAsync(TextChangeEvent args)
     {
-        InternalContent = await GetContentAsync();
-        InternalText = await GetTextAsync();
+        if (args.Source == EventSource.User)
+        {
+            IsTouched = true;
+        }
+        return Task.CompletedTask;
     }
 
     [JSInvokable]
     public virtual Task OnSelectionChangedAsync(SelectionChangeEvent args)
-    {
-        InternalSelection = args.NewRange;
-        return Task.CompletedTask;
-    }
+        => Task.CompletedTask;
 
     public async Task<string> GetContentAsync()
-        => await RichTextEditorJs.GetContentAsync(JsRuntime, QuillReference);
+        => await RichTextEditorJs.GetContentAsync(JsRuntime, Logger.Value, QuillReference);
 
     public async Task<Range?> GetSelectionAsync()
-        => await RichTextEditorJs.GetSelectionAsync(JsRuntime, QuillReference);
+        => await RichTextEditorJs.GetSelectionAsync(JsRuntime, Logger.Value, QuillReference);
 
     public async Task<string> GetTextAsync()
-        => await RichTextEditorJs.GetTextAsync(JsRuntime, QuillReference);
+        => await RichTextEditorJs.GetTextAsync(JsRuntime, Logger.Value, QuillReference);
 
     public async Task UpdateContentAsync()
     {
         InternalContent = await GetContentAsync();
-        await ContentChanged.InvokeAsync(InternalContent);
+        ContentChanged.InvokeAsync(InternalContent).AndForget(Logger.Value);
     }
 
     public async Task UpdateTextAsync()
     {
         InternalText = await GetTextAsync();
-        await TextChanged.InvokeAsync(InternalText);
+        TextChanged.InvokeAsync(InternalText).AndForget(Logger.Value);
     }
 
     public async Task UpdateSelectionAsync()
     {
         InternalSelection = await GetSelectionAsync();
-        await SelectionChanged.InvokeAsync(InternalSelection);
+        SelectionChanged.InvokeAsync(InternalSelection).AndForget(Logger.Value);
     }
 
     protected override void OnInitialized()
@@ -188,16 +215,17 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
     {
         await RichTextEditorJs.CreateEditorAsync(
             JsRuntime,
-
+            Logger.Value,
             DotNetObjectReference,
             QuillReference,
             ToolbarReference,
             IsEditorEnabled,
-            shouldRegisterCallbacks: false,
+            shouldRegisterCallbacks: true,
             placeholder: Placeholder,
             theme: Theme.ToString().ToLower(),
             debugLevel: DebugLevel.ToString().ToLower(),
-            fonts: ToolbarOptions.Fonts);
+            fonts: ToolbarOptions.Fonts,
+            DebounceIntervalInMilliseconds);
 
         IsInitialized = true;
         InternalContent = Content;
@@ -205,14 +233,14 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
     }
 
     protected async Task SetContentAsync(string content)
-        => await RichTextEditorJs.SetContentAsync(JsRuntime, QuillReference, content);
+        => await RichTextEditorJs.SetContentAsync(JsRuntime, Logger.Value, QuillReference, content);
 
     protected async Task SetSelectionAsync(Range? range)
-        => await RichTextEditorJs.SetSelectionAsync(JsRuntime, QuillReference, range);
+        => await RichTextEditorJs.SetSelectionAsync(JsRuntime, Logger.Value, QuillReference, range);
 
     protected async Task InsertImageAsync(string imageSource)
-        => await RichTextEditorJs.InsertImageAsync(JsRuntime, QuillReference, imageSource);
+        => await RichTextEditorJs.InsertImageAsync(JsRuntime, Logger.Value, QuillReference, imageSource);
 
     protected async Task SetEnableEditorStateAsync(bool isEditorEnabled)
-        => await RichTextEditorJs.SetIsEditorEnabledAsync(JsRuntime, QuillReference, isEditorEnabled);
+        => await RichTextEditorJs.SetIsEditorEnabledAsync(JsRuntime, Logger.Value, QuillReference, isEditorEnabled);
 }
