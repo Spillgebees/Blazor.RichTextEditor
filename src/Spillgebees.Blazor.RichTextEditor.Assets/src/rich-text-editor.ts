@@ -1,10 +1,13 @@
 import Quill, { RangeStatic, SelectionChangeHandler, Sources, TextChangeHandler } from "quill";
 import BlotFormatter from "quill-blot-resizer";
 import Delta from "quill-delta";
-import { QuillReference } from "./interfaces/quill-reference";
-import { QuillEvent, SelectionChangedEvent, TextChangedEvent } from "./interfaces/quill-events";
+
 import { DotNet } from "@microsoft/dotnet-js-interop";
 import DotNetObject = DotNet.DotNetObject;
+
+import { QuillReference } from "./interfaces/quill-reference";
+import { QuillEvent, SelectionChangedEvent, TextChangedEvent } from "./interfaces/quill-events";
+import { debounce } from "./debouncer";
 
 export function bootstrap() {
     window.Spillgebees = window.Spillgebees || {};
@@ -35,7 +38,8 @@ const createEditor = async (
     placeholder?: string | undefined,
     theme?: string | undefined,
     debugLevel?: string | boolean | undefined,
-    fonts: string[] = new Array<string>): Promise<void> => {
+    fonts: string[] = new Array<string>,
+    eventDebounceIntervalInMilliseconds: number = 500): Promise<void> => {
 
     Quill.register('modules/blotFormatter', BlotFormatter);
 
@@ -63,8 +67,18 @@ const createEditor = async (
 
     if (shouldRegisterEventCallbacks)
     {
-        await registerQuillEventCallback(quill, "OnContentChangedAsync", "text-change", dotNetHelper);
-        await registerQuillEventCallback(quill, "OnSelectionChangedAsync", "selection-change", dotNetHelper);
+        await registerQuillEventCallback(
+            quill,
+            "OnContentChangedAsync",
+            "text-change",
+            dotNetHelper,
+            eventDebounceIntervalInMilliseconds);
+        await registerQuillEventCallback(
+            quill,
+            "OnSelectionChangedAsync",
+            "selection-change",
+            dotNetHelper,
+            eventDebounceIntervalInMilliseconds);
     }
 };
 
@@ -99,7 +113,8 @@ const registerQuillEventCallback = async (
     quill: Quill,
     invokableDotNetMethodName:  string,
     eventName: "text-change" | "selection-change",
-    dotNetHelper: DotNetObject) => {
+    dotNetHelper: DotNetObject,
+    debounceIntervalInMilliseconds: number) => {
     if (window.Spillgebees.eventMap.has(quill) && window.Spillgebees.eventMap.get(quill)?.has(eventName)) {
         throw new Error(`Event already registered: ${eventName}`);
     }
@@ -109,16 +124,20 @@ const registerQuillEventCallback = async (
             _delta: Delta,
             _oldContents: Delta,
             source: Sources): Promise<QuillEvent> => await dotNetHelper.invokeMethodAsync(invokableDotNetMethodName, new TextChangedEvent(source));
-        window.Spillgebees.eventMap.get(quill)?.set(eventName, handler);
-        quill.on("text-change", handler);
+        let debouncedHandler = debounce(handler, debounceIntervalInMilliseconds);
+
+        window.Spillgebees.eventMap.get(quill)?.set(eventName, debouncedHandler);
+        quill.on("text-change", debouncedHandler);
     }
     else if (eventName === "selection-change") {
         let handler = async (
             range: RangeStatic,
             oldRange: RangeStatic,
             source: Sources): Promise<QuillEvent> => await dotNetHelper.invokeMethodAsync(invokableDotNetMethodName, new SelectionChangedEvent(oldRange, range, source));
-        window.Spillgebees.eventMap.get(quill)?.set(eventName, handler);
-        quill.on("selection-change", handler);
+
+        let debouncedHandler = debounce(handler, debounceIntervalInMilliseconds);
+        window.Spillgebees.eventMap.get(quill)?.set(eventName, debouncedHandler);
+        quill.on("selection-change", debouncedHandler);
     }
     else {
         throw new Error(`Invalid eventName: ${eventName}`);

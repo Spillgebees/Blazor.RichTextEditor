@@ -20,8 +20,7 @@ This component is based on a mix of the following repos:
 - [ ] bUnit tests
 - [ ] Publish to NuGet
 - [ ] Unit tests
-- [ ] IsTouched property
 - [ ] Ensure .net 7 & 8 compatibility
 - [ ] Consider porting quill-blot-formatter-mobile to ESM like quill-blot-resize did
 - [ ] Propose implementing hub streaming for blazor server / blazor web app
-- [ ] Throttle change events triggered by resizing an image
+- [ ] Fix main `.csproj` before deploying to nuget

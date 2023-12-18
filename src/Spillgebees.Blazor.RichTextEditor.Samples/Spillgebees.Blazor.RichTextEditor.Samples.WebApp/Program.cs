@@ -8,6 +8,11 @@ builder.Services
     .AddInteractiveServerComponents()
     .AddCircuitOptions(options => options.DetailedErrors = true);
 
+builder.Services.AddLogging(logging => {
+    logging.AddConsole();
+    logging.AddDebug();
+});
+
 builder.Services.AddSignalR(e => {
     e.MaximumReceiveMessageSize = 102400000;
     e.EnableDetailedErrors = true;

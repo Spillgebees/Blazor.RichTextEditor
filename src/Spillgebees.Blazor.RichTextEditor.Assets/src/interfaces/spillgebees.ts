@@ -1,7 +1,7 @@
 import { Quill, RangeStatic } from "quill";
 import { QuillEvent } from "./quill-events";
 import { DotNet } from "@microsoft/dotnet-js-interop";
-import {QuillReference} from "./quill-reference";
+import { QuillReference } from "./quill-reference";
 
 interface Spillgebees {
     fonts: Array<string>;
@@ -18,7 +18,8 @@ interface EditorFunctions {
         placeholder: string,
         theme: string,
         debugLevel: string,
-        fonts: string[]): Promise<void>;
+        fonts: string[],
+        eventDebounceIntervalInMilliseconds: number): Promise<void>;
     setEditorEnabledState(quillReference: QuillReference, isEditorEnabled: boolean): void;
     getContent(quillReference: QuillReference): string;
     setContent(quillReference: QuillReference, content: string): void;
