@@ -1,4 +1,6 @@
-# (WIP) Blazor.RichTextEditor
+# Spillgebees.Blazor.RichTextEditor
+
+![Alt text](./assets/header.png)
 
 <p align="center">
     <a href="https://www.nuget.org/packages/Spillgebees.Blazor.RichTextEditor"><img alt="Nuget (with prereleases)" src="https://img.shields.io/nuget/vpre/Spillgebees.Blazor.RichTextEditor?logo=nuget&style=for-the-badge"></a>
@@ -13,14 +15,7 @@ This component is based on a mix of the following repos:
 - [vixys' fork of `Blazored.TextEditor`](https://github.com/Vixys/TextEditor), mainly the `OnTextChanged` implementation logic.
 - [somegenericdev's `WYSIWYGTextEditor`](https://github.com/somegenericdev/WYSIWYGTextEditor), mainly the more convenient usage/component structure.
 
-## TODO
 
-- [ ] Usage
-- [ ] JS tests
-- [ ] bUnit tests
-- [ ] Publish to NuGet
-- [ ] Unit tests
-- [ ] Ensure .net 7 & 8 compatibility
-- [ ] Consider porting quill-blot-formatter-mobile to ESM like quill-blot-resize did
-- [ ] Propose implementing hub streaming for blazor server / blazor web app
-- [ ] Fix main `.csproj` before deploying to nuget
+More details in the [documentation](./src/Spillgebees.Blazor.RichTextEditor/README.md).
+
+Live demo: [net7.0](https://spillgebees.github.io/Blazor.RichTextEditor/main/net7.0/), [net8.0](https://spillgebees.github.io/Blazor.RichTextEditor/main/net8.0/)

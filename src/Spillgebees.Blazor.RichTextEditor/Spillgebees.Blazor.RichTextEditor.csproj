@@ -1,25 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
+  <Import Project="../General.targets" />
 
   <PropertyGroup>
     <Authors>Jason Rebelo Neves (igotinfected)</Authors>
-    <Description>MatomoProvider is a Blazor component that registers and enables the Matomo Analytics tracking code for you.code for you.</Description>
+    <Company>Spillgebees</Company>
+    <Description>Spillgebees.Blazor.RichTextEditor is a WYSIWYG Blazor component enabling rich text content editing. It is powered by Quill.</Description>
     <PackageTags>blazor, blazor-wasm, blazor-server, quill, quilljs, rich-text-editor, wysiwyg</PackageTags>
-  </PropertyGroup>
-
-  <PropertyGroup>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-  </PropertyGroup>
-
-  <PropertyGroup>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
-
-  <PropertyGroup>
-    <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
-
 
   <ItemGroup>
     <SupportedPlatform Include="browser" />
@@ -31,17 +20,6 @@
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net8.0' ">
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="DotNet.ReproducibleBuilds" Version="1.1.1">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="MinVer" Version="4.3.0">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>

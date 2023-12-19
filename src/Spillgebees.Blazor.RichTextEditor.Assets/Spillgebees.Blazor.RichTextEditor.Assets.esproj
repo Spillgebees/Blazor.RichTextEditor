@@ -1,13 +1,19 @@
-<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/0.5.58794-alpha">
+<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/0.5.239112-alpha">
   <PropertyGroup>
     <DefaultProjectTypeGuid Condition="'$(BuildingInsideVisualStudio)' == 'false'">FAE04EC0-301F-11D3-BF4B-00C04F79EFBC</DefaultProjectTypeGuid>
 	  <DebugAssetsDirectory>dist\</DebugAssetsDirectory>
     <StaticWebAssetSourceId>Spillgebees.Blazor.RichTextEditor</StaticWebAssetSourceId>
     <IsPackable>false</IsPackable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
-  <ItemGroup>
-    <Script Include="tsconfig.json" />
-  </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <BuildCommand>npm run build:dev</BuildCommand>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <BuildCommand>npm run build:prod</BuildCommand>
+  </PropertyGroup>
 
   <Target Name="Pack" />
   <Target Name="_GetRequiredWorkloads" />

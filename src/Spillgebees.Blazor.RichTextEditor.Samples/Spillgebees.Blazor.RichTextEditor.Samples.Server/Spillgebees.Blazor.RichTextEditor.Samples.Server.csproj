@@ -1,13 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
-  <PropertyGroup>
-    <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+  <Import Project="../../General.targets" />
 
   <ItemGroup>
     <ProjectReference Include="..\Spillgebees.Blazor.RichTextEditor.Samples.Shared\Spillgebees.Blazor.RichTextEditor.Samples.Shared.csproj" />
   </ItemGroup>
-
 </Project>
