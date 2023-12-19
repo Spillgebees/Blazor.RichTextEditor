@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html class="dark"
+      lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Spillgebees.Blazor.RichTextEditor.Samples.Wasm</title>
+        <base href="/Blazor.RichTextEditor/main/net8.0/" />
+        <link href="favicon.ico" rel="icon" type="image/x-icon" />
+
+        <link href="css/app.css" rel="stylesheet" />
+        <!-- optional: required if you want to use the math/formula feature -->
+        <link rel="stylesheet"
+              href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+              integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV"
+              crossorigin="anonymous">
+
+        <!-- for presentation purposes only -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/@catppuccin/highlightjs@0.1.4/css/catppuccin-mocha.css">
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+
+    <body>
+        <div id="app">
+            <svg class="loading-progress">
+                <circle r="40%" cx="50%" cy="50%" />
+                <circle r="40%" cx="50%" cy="50%" />
+            </svg>
+            <div class="loading-progress-text"></div>
+        </div>
+
+        <div id="blazor-error-ui">
+            An unhandled error has occurred.
+            <a href="" class="reload">Reload</a>
+            <a class="dismiss">🗙</a>
+        </div>
+
+        <script src="_framework/blazor.webassembly.js"></script>
+
+        <!-- optional: required if you want to use the math/formula feature -->
+        <script defer
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+                integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8"
+                crossorigin="anonymous"></script>
+
+        <!-- for presentation purposes only -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/highlightjs-cshtml-razor/dist/cshtml-razor.min.js"></script>
+    </body>
+</html>
