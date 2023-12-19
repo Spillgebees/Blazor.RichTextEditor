@@ -8,6 +8,8 @@ jobs:
   build-and-test:
     name: build-and-test
     uses: ./.github/workflows/build-test-publish.yml
+    permissions:
+      contents: write
     with:
       should-package: true
       should-publish-gh-page: true
@@ -17,8 +19,6 @@ jobs:
     name: publish
     needs: [ build-and-test ]
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     
     steps:
       - name: 🔃 download artifacts 
