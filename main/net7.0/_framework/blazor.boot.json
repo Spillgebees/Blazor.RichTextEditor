@@ -1,7 +1,7 @@
 {
   "entryAssembly": "Spillgebees.Blazor.RichTextEditor.Samples.Wasm",
   "resources": {
-    "hash": "sha256-PDKw5zuThqXy3HiJNNE2aHy5PDyCR+Dok8RwMdXr+0g=",
+    "hash": "sha256-7l02sIJWtps0EojtBTWJ5RItGQCzUqp/1Ug3QurooL8=",
     "runtime": {
       "dotnet.7.0.14.mikshhdjmu.js": "sha256-YWGUknGRzP/fgO6YjvCJKPVQNZAPEd6ll+rHfQEIW+I=",
       "dotnet.timezones.blat": "sha256-t5xviiOQTfAsF0UDhmcyalKiaehUmf/sqJl97tmPM0M=",
@@ -12,6 +12,7 @@
     },
     "assembly": {
       "AngleSharp.dll": "sha256-xlHlqVvfLankUOZse8OIQ3OhKGFefDMRXCOIYcj9VwE=",
+      "BlazorComponentUtilities.dll": "sha256-eDp5c3t6atzlthDvZL2SpINQcSYs7gBnbOHNS/1MkUU=",
       "Microsoft.AspNetCore.Components.dll": "sha256-pUJhXAOlH6I6dhcLymKGfIT53H4rVwdT5pLSslD4RCQ=",
       "Microsoft.AspNetCore.Components.Web.dll": "sha256-l+XLEPYbpxkHxdUHcMl92bYpQ5J14AWMf7MBbQIh8vw=",
       "Microsoft.AspNetCore.Components.WebAssembly.dll": "sha256-UdRrriqOtFQDdJObt5ayauryJVsDYR3c30KpM82q3z8=",
@@ -26,9 +27,10 @@
       "Microsoft.Extensions.Primitives.dll": "sha256-eXvGx2jcjpTPEJoAHBsW/VuMPbNyyU+AsuhPmkzSSRY=",
       "Microsoft.JSInterop.dll": "sha256-mN9NRjCix+WoB4T5gP2gNXLioxZJp+0st1wi6zcIABc=",
       "Microsoft.JSInterop.WebAssembly.dll": "sha256-LIeei4/JFd3TBbtpEc1rneu+zOw4UNmSksghADw1m1I=",
-      "Spillgebees.Blazor.RichTextEditor.dll": "sha256-M4ar6EPQLaygXdixpfMqdqWp5mTZB49KjTp0CHUklLw=",
-      "Spillgebees.Blazor.RichTextEditor.Samples.Shared.dll": "sha256-bvhb0e5Rcf6TRKFeVIRj+inwXugin6QMWG7BwUHDKZk=",
-      "Spillgebees.Blazor.RichTextEditor.Samples.Wasm.dll": "sha256-QnHgYgegpU3y/Yf5jzYxF8EScmVDs4CZQYYkcWEzk9A=",
+      "netstandard.dll": "sha256-hDxWka61DFgMUZEiM1dzJSgDW0dtIXObIUt3fFm3U1U=",
+      "Spillgebees.Blazor.RichTextEditor.dll": "sha256-joVNPoUsj42UXf+dlp4QLp+2IjN3Mlhi09CGeWroijI=",
+      "Spillgebees.Blazor.RichTextEditor.Samples.Shared.dll": "sha256-n4l6H6cN8aaNbgW8lwjanutGDZd+tcSyVUCdbQQqc1k=",
+      "Spillgebees.Blazor.RichTextEditor.Samples.Wasm.dll": "sha256-i0hzx6tdrvUEAmRf6vKNPiBlAaXa+Mz2o/3hljF+EzU=",
       "System.Collections.Concurrent.dll": "sha256-G1mRlpJlMCbHNC6InTCARrApNxVEI8c2Qe0rwWeUtPQ=",
       "System.Collections.dll": "sha256-UvYdbB9BKChQyxe6UHnUTSh87zCdRaNAhAEWrE1Sw1k=",
       "System.Collections.NonGeneric.dll": "sha256-5q032SRTX9vL2bAreUvXg/wZcIOG4yMITdsn+bya9gg=",
@@ -54,7 +56,7 @@
     },
     "libraryInitializers": {
       "_content/Spillgebees.Blazor.RichTextEditor.Samples.Shared/Spillgebees.Blazor.RichTextEditor.Samples.Shared.lib.module.js": "sha256-mtPaN+L8v9EKl15dLbRJ8IfhQiEn7ipiULgxD1kYfuQ=",
-      "_content/Spillgebees.Blazor.RichTextEditor/Spillgebees.Blazor.RichTextEditor.lib.module.js": "sha256-+0rWywTt2LMhijnd7y6ZLOJopGL5MiAzwyiEr7q6g4Q="
+      "_content/Spillgebees.Blazor.RichTextEditor/Spillgebees.Blazor.RichTextEditor.lib.module.js": "sha256-5pEHI07YA+sLIXHRwKLaRW7sg7x/465CVjh637VE0Lc="
     },
     "runtimeAssets": {
       "dotnet.wasm": {
