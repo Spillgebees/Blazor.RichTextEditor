@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "Spillgebees.Blazor.RichTextEditor.Samples.Wasm",
   "resources": {
-    "hash": "sha256-NYwACoRfTD8SLUcyMTIG3x1GJk59bnQT1ybrdljxOto=",
+    "hash": "sha256-yCu2KHEsId9Rtehvl2YY/EAAEGUkVhX2UHmH+6fHlcw=",
     "jsModuleNative": {
       "dotnet.native.8.0.0.45ykigla5r.js": "sha256-LjLDIz9+J7uuiwMlQ4HbNx2BnSpphOtO2MwkoI28vdI="
     },
@@ -19,7 +19,7 @@
     "assembly": {
       "AngleSharp.wasm": "sha256-OWdQxeSHO8PSGDuYa559tdWbBzwWGvmQm1aA0oMFhCE=",
       "BlazorComponentUtilities.wasm": "sha256-3TgvS/HUtEk/6K33ycKciSd5J6RBnSq8vEqA5ZhHjj0=",
-      "Microsoft.AspNetCore.Components.wasm": "sha256-kaOUiuTHhp6Z3rTEEG97yUcNYO3O+ToglTXPAcRRUlI=",
+      "Microsoft.AspNetCore.Components.wasm": "sha256-7NirjmO3XC+gJtcHA89N5BBHzfG6W6yCXc1PNoA97DY=",
       "Microsoft.AspNetCore.Components.Web.wasm": "sha256-RNAqR0ff+baVaIhI+uEcLo9eT+pxGnBEvkCzqD+3roM=",
       "Microsoft.AspNetCore.Components.WebAssembly.wasm": "sha256-Ws5szf6fWPAXna+XyWsAhavx+WDFcA/91DQ7iPRPCMs=",
       "Microsoft.Extensions.Configuration.Abstractions.wasm": "sha256-87sn2TYqgdZ95sXmavjKEzoEfMgHnYQ9LOvnMX+aZcI=",
@@ -34,9 +34,9 @@
       "Microsoft.JSInterop.wasm": "sha256-lXwhdv0Is9FMH/j0+WH3zoNWAGLbVaONtGucJ/4URQ0=",
       "Microsoft.JSInterop.WebAssembly.wasm": "sha256-CQVLCKiSxLN5ghyJZG3mhnMGRROdqrbNUjtAXB0nWb8=",
       "netstandard.wasm": "sha256-lp6oR1lEBtWPzea+86v2PwX02/RkkCBmUE3dqEtZN8k=",
-      "Spillgebees.Blazor.RichTextEditor.Samples.Shared.wasm": "sha256-bvUKgxMgM3Pg+HTUXBghilaSOuOAEW30Lb/VL7mAFm8=",
-      "Spillgebees.Blazor.RichTextEditor.Samples.Wasm.wasm": "sha256-/SwV1QtHbYfbVjKnU0JOhLhtIXpbxsUDdWw5awItDEo=",
-      "Spillgebees.Blazor.RichTextEditor.wasm": "sha256-cqAFPQIEdi5r8gGy/dJbUSpjH/5rVkwRp0smkNfpwBw=",
+      "Spillgebees.Blazor.RichTextEditor.Samples.Shared.wasm": "sha256-tX20ccVg5YBcY6p89hMS32pauamCPrH7aAcm+9EDLMQ=",
+      "Spillgebees.Blazor.RichTextEditor.Samples.Wasm.wasm": "sha256-jauXAkvtvqrTz4LNr4S8aC010qck4/Z/VANIDx5HxSk=",
+      "Spillgebees.Blazor.RichTextEditor.wasm": "sha256-wFQcXa+g5ga/DXDcs4vtlnJFBTtibDocjwj1ieOv4ys=",
       "System.Collections.Concurrent.wasm": "sha256-o6LKQhtpEFBPpDzp7p/3InSCyQ3xCprbYtNZ+wMhKjI=",
       "System.Collections.NonGeneric.wasm": "sha256-d5mQ88eoLPhlshN2tFUy3qQ11ohZA6HS3T7E51Oq6vk=",
       "System.Collections.Specialized.wasm": "sha256-tBHDlPZxAmnUlPGLAUYPGMa7wbAKA7orP6Lvbg8kqFc=",
