@@ -1,0 +1,31 @@
+﻿<div>
+    <h3>
+        <code class="hljs">IsTouched</code> event callback example
+    </h3>
+    <CodeSnippet Code="@Code">
+        <Component>
+            <CodeSnippet Code="@_content"
+                         CodeFormat="CodeFormat.Html"
+                         Summary="Show HTML">
+                <Component>
+                    <RichTextEditor @bind-Content="@_content"
+                                    IsTouchedChanged="(value => _isTouched = value)" />
+
+                    <div class="container items-center border-2 border-dashed border-stone-500 p-4 mt-2">
+                        @((MarkupString)_isTouchedContent)
+                    </div>
+                </Component>
+            </CodeSnippet>
+        </Component>
+    </CodeSnippet>
+</div>
+
+@code {
+    private const string Code =
+@"<RichTextEditor @bind-Content=""@_content""
+                IsTouchedChanged=""@(value => _isTouched = value)"" />";
+    private string _content = "<b>Have I been touched? \ud83d\ude48</b>";
+
+    private bool _isTouched;
+    private string _isTouchedContent => $"<p>Have I been touched? <strong>{_isTouched}</strong></p>";
+}

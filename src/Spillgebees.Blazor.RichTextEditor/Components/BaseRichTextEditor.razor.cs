@@ -73,6 +73,9 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
     [Parameter]
     public bool IsTouched { get; set; }
 
+    [Parameter]
+    public EventCallback<bool> IsTouchedChanged { get; set; }
+
     /// <summary>
     /// <para>
     /// Uses <see cref="Spillgebees.Blazor.RichTextEditor.Components.Toolbar.ToolbarOptions.BasicToolbarOptions"/> by default.
@@ -158,6 +161,7 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
         if (args.Source == EventSource.User)
         {
             IsTouched = true;
+            IsTouchedChanged.InvokeAsync(IsTouched).AndForget(Logger.Value);
         }
         return Task.CompletedTask;
     }
