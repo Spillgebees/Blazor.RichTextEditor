@@ -18,7 +18,9 @@ public record ToolbarOptions(
     bool ShowMathControls = false,
     bool ShowCleanFormattingControls = false,
     string? ToolbarContainerHtmlId = null,
-    List<string>? Fonts = null)
+    List<string>? Fonts = null,
+    ToolbarPosition ToolbarPosition = ToolbarPosition.Top,
+    string ToolbarContainerClass = "")
 {
     private static readonly List<string> _defaultFonts = new()
     {

@@ -1,3 +1,4 @@
+using BlazorComponentUtilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
@@ -122,7 +123,16 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
     protected string? InternalText;
     protected Range? InternalSelection;
 
-    protected string InternalContainerClass => $"rich-text-editor-container {ContainerClass}";
+    protected string InternalContainerClass => new CssBuilder("rich-text-editor-container")
+        .AddClass(ContainerClass)
+        .Build();
+    protected string InternalToolbarContainerClass => new CssBuilder()
+        .AddClass("rich-text-editor-toolbar-container")
+        .AddClass("rich-text-editor-toolbar-container-top", ToolbarOptions.ToolbarPosition is ToolbarPosition.Top)
+        .AddClass("rich-text-editor-toolbar-container-bottom", ToolbarOptions.ToolbarPosition is ToolbarPosition.Bottom)
+        .AddClass(ToolbarOptions.ToolbarContainerClass)
+        .Build();
+
     protected ElementReference QuillReference;
     protected ElementReference ToolbarReference;
     protected DotNetObjectReference<BaseRichTextEditor>? DotNetObjectReference;
