@@ -1,20 +1,31 @@
 ﻿@code {
     protected virtual RenderFragment Render
         => @<div class="@InternalContainerClass">
-                <div id="@ToolbarOptions.ToolbarContainerHtmlId"
-                     @ref="@ToolbarReference">
-                    <CascadingValue Value="ToolbarOptions">
-                        @if (ToolbarContent is null)
-                        {
-                            <Toolbar />
-                        }
-
-                        @ToolbarContent
-                    </CascadingValue>
-                </div>
+                @if (ToolbarOptions.ToolbarPosition is ToolbarPosition.Top)
+                {
+                    @Toolbar
+                }
                 <div id="@EditorContainerHtmlId"
                      @ref="@QuillReference">
                     @EditorContent
                 </div>
+                @if (ToolbarOptions.ToolbarPosition is ToolbarPosition.Bottom)
+                {
+                    @Toolbar
+                }
+            </div>;
+
+    protected virtual RenderFragment Toolbar
+        => @<div id="@ToolbarOptions.ToolbarContainerHtmlId"
+                 @ref="@ToolbarReference"
+                 class="@InternalToolbarContainerClass">
+                <CascadingValue Value="ToolbarOptions">
+                    @if (ToolbarContent is null)
+                    {
+                        <Toolbar />
+                    }
+
+                    @ToolbarContent
+                </CascadingValue>
             </div>;
 }

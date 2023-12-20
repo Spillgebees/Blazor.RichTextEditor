@@ -1,0 +1,28 @@
+﻿<div>
+    <h3>
+        Toolbar can be positioned
+        <code class="hljs">Top</code> or
+        <code class="hljs">Bottom</code> via
+        <code class="hljs">ToolbarOptions</code>
+    </h3>
+    <CodeSnippet Code="@Code">
+        <Component>
+            <CodeSnippet Code="@_content"
+                         CodeFormat="CodeFormat.Html"
+                         Summary="Show HTML">
+                <Component>
+                    <RichTextEditor @bind-Content="@_content"
+                                    ToolbarOptions="@(ToolbarOptions.BasicToolbarOptions with { ToolbarPosition = ToolbarPosition.Bottom })" />
+                </Component>
+            </CodeSnippet>
+        </Component>
+    </CodeSnippet>
+</div>
+
+@code {
+    private const string Code =
+@"<RichTextEditor @bind-Content=""@_content""
+                ToolbarOptions=""@(ToolbarOptions.BasicToolbarOptions with { ToolbarPosition = ToolbarPosition.Bottom })"" />";
+    private string _content = "<b>Toolbar is here \ud83d\udc47</b>";
+}
+
