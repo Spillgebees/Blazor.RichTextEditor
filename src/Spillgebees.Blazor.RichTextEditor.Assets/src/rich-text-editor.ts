@@ -22,8 +22,7 @@ export function bootstrap() {
         getText: getText,
         insertImage: insertImage,
         disposeEditor: disposeEditor,
-        registerQuillEventCallback: registerQuillEventCallback,
-        deregisterQuillEventCallback: deregisterQuillEventCallback
+        registerQuillEventCallback: registerQuillEventCallback
     };
     window.Spillgebees.eventMap = window.Spillgebees.eventMap
         || new Map<Quill, Map<"text-change" | "selection-change", (...args : any[]) => Promise<QuillEvent>>>();
@@ -82,16 +81,20 @@ const createEditor = async (
     }
 };
 
-const getContent = (quillReference: QuillReference): string | undefined => quillReference.__quill?.root.innerHTML;
+const getContent = (quillReference: QuillReference | null): string | undefined => quillReference?.__quill?.root.innerHTML;
 // @ts-ignore
-const setContent = (quillReference: QuillReference, content: string) => quillReference.__quill.setContents(quillReference.__quill.clipboard.convert(content), 'api');
+const setContent = (quillReference: QuillReference | null, content: string) => quillReference?.__quill?.setContents(quillReference.__quill.clipboard.convert(content), 'api');
 
-const getSelection = (quillReference: QuillReference): RangeStatic | null | undefined => quillReference.__quill?.getSelection();
-const setSelection = (quillReference: QuillReference, range: RangeStatic) => quillReference.__quill?.setSelection(range);
+const getSelection = (quillReference: QuillReference | null): RangeStatic | null | undefined => quillReference?.__quill?.getSelection();
+const setSelection = (quillReference: QuillReference | null, range: RangeStatic) => quillReference?.__quill?.setSelection(range);
 
-const getText = (quillReference: QuillReference): string | undefined => quillReference.__quill?.getText();
+const getText = (quillReference: QuillReference | null): string | undefined => quillReference?.__quill?.getText();
 
-const insertImage = (quillReference: QuillReference, imageUrl: string) => {
+const insertImage = (quillReference: QuillReference | null, imageUrl: string) => {
+    if (quillReference === null || quillReference.__quill === null) {
+        return;
+    }
+
     let editorIndex = quillReference.__quill?.getSelection()?.index ?? 0;
     return quillReference.__quill?.updateContents(
         new Delta()
@@ -102,11 +105,27 @@ const insertImage = (quillReference: QuillReference, imageUrl: string) => {
             ));
 };
 
-const setEditorEnabledState = (quillReference: QuillReference, isEditorEnabled: boolean): void => quillReference.__quill?.enable(isEditorEnabled);
+const setEditorEnabledState = (quillReference: QuillReference | null, isEditorEnabled: boolean): void => quillReference?.__quill?.enable(isEditorEnabled);
 
-const disposeEditor = async (quillReference: QuillReference): Promise<void> => {
-    await deregisterQuillEventCallback(quillReference, "text-change");
-    await deregisterQuillEventCallback(quillReference, "selection-change");
+const disposeEditor = (quillReference: QuillReference | null): void => {
+    if (quillReference === null
+        || quillReference.__quill === null
+        || !window.Spillgebees.eventMap.has(quillReference.__quill)) {
+        return;
+    }
+
+    if (window.Spillgebees.eventMap.get(quillReference.__quill)?.has("text-change")) {
+        let textChangeHandler = window.Spillgebees.eventMap.get(quillReference.__quill)!.get("text-change");
+        quillReference.__quill.off("text-change", textChangeHandler as TextChangeHandler);
+    }
+
+    if (window.Spillgebees.eventMap.get(quillReference.__quill)?.has("selection-change")) {
+        let selectionChangeHandler = window.Spillgebees.eventMap.get(quillReference.__quill)!.get("selection-change");
+        quillReference.__quill.off("selection-change", selectionChangeHandler as SelectionChangeHandler);
+    }
+
+    window.Spillgebees.eventMap.delete(quillReference.__quill);
+    quillReference.__quill = null;
 }
 
 const registerQuillEventCallback = async (
@@ -138,33 +157,6 @@ const registerQuillEventCallback = async (
         let debouncedHandler = debounce(handler, debounceIntervalInMilliseconds);
         window.Spillgebees.eventMap.get(quill)?.set(eventName, debouncedHandler);
         quill.on("selection-change", debouncedHandler);
-    }
-    else {
-        throw new Error(`Invalid eventName: ${eventName}`);
-    }
-}
-
-
-const deregisterQuillEventCallback = async (
-    quillReference: QuillReference | null,
-    eventName: "text-change" | "selection-change") => {
-    if (quillReference === null || quillReference.__quill === null || !window.Spillgebees.eventMap.has(quillReference.__quill)) {
-        return;
-    }
-
-    if (!window.Spillgebees.eventMap.has(quillReference.__quill) || !window.Spillgebees.eventMap.get(quillReference.__quill)?.has(eventName)) {
-        return;
-    }
-
-    if (eventName === "text-change") {
-        let handler = window.Spillgebees.eventMap.get(quillReference.__quill)!.get(eventName);
-        window.Spillgebees.eventMap.get(quillReference.__quill)?.delete(eventName);
-        quillReference.__quill.off("text-change", handler as TextChangeHandler);
-    }
-    else if (eventName === "selection-change") {
-        let handler = window.Spillgebees.eventMap.get(quillReference.__quill)!.get(eventName);
-        window.Spillgebees.eventMap.get(quillReference.__quill)?.delete(eventName);
-        quillReference.__quill.off("selection-change", handler as SelectionChangeHandler);
     }
     else {
         throw new Error(`Invalid eventName: ${eventName}`);

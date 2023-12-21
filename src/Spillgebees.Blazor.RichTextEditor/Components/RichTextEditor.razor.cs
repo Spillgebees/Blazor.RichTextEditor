@@ -6,19 +6,16 @@ namespace Spillgebees.Blazor.RichTextEditor.Components;
 
 public partial class RichTextEditor : BaseRichTextEditor
 {
-    [JSInvokable]
-    public override async Task OnContentChangedAsync(TextChangeEvent args)
+    protected override async Task OnContentChangedAction(TextChangeEvent args)
     {
-        await base.OnContentChangedAsync(args);
         await UpdateContentAsync();
         await UpdateTextAsync();
+        await base.OnContentChangedAction(args);
     }
 
-    [JSInvokable]
-    public override async Task OnSelectionChangedAsync(SelectionChangeEvent args)
+    protected override async Task OnSelectionChangedAction(SelectionChangeEvent args)
     {
-        await base.OnSelectionChangedAsync(args);
-        InternalSelection = args.NewRange;
-        await SelectionChanged.InvokeAsync(InternalSelection);
+        await base.OnSelectionChangedAction(args);
+        await UpdateSelectionAsync();
     }
 }
