@@ -106,11 +106,11 @@ internal static class RichTextEditorJs
             quillReference,
             isEditorEnabled);
 
-    internal static ValueTask<object> DisposeEditorAsync(
+    internal static ValueTask DisposeEditorAsync(
         IJSRuntime jsRuntime,
         ILogger logger,
         ElementReference quillReference)
-        => jsRuntime.SafeInvokeAsync<object>(
+        => jsRuntime.SafeInvokeVoidAsync(
             logger,
             $"{JsNamespace}.disposeEditor",
             quillReference);
@@ -125,11 +125,13 @@ internal static class RichTextEditorJs
         {
             return jsRuntime.InvokeVoidAsync(identifier, args);
         }
-        catch (Exception ex)
+        catch (JSDisconnectedException) { }
+        catch (OperationCanceledException)
         {
-            logger.LogWarning(ex, "Error invoking {Identifier}", identifier);
-            return new ValueTask();
+            logger.LogWarning("Invocation of {identifier} was cancelled.", identifier);
         }
+
+        return ValueTask.CompletedTask;
     }
 
     private static ValueTask<T> SafeInvokeAsync<T>(
@@ -142,10 +144,12 @@ internal static class RichTextEditorJs
         {
             return jsRuntime.InvokeAsync<T>(identifier, args);
         }
-        catch (Exception ex)
+        catch (JSDisconnectedException) { }
+        catch (OperationCanceledException)
         {
-            logger.LogWarning(ex, "Error invoking {Identifier}", identifier);
-            return new ValueTask<T>(default(T)!);
+            logger.LogWarning("Invocation of {identifier} was cancelled.", identifier);
         }
+
+        return ValueTask.FromResult(default(T)!);
     }
 }

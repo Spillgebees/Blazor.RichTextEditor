@@ -27,9 +27,8 @@ interface EditorFunctions {
     setSelection(quillReference: QuillReference, range: RangeStatic): void;
     getText(quillReference: QuillReference): string;
     insertImage(quillReference: QuillReference, imageUrl: string): void;
-    disposeEditor(quillReference: QuillReference): Promise<void>;
+    disposeEditor(quillReference: QuillReference): void;
     registerQuillEventCallback(quillReference: QuillReference, eventName: "text-change" | "selection-change", callback: (...args : any[]) => Promise<QuillEvent>): void;
-    deregisterQuillEventCallback(quillReference: QuillReference, eventName: "text-change" | "selection-change", callback: (...args : any[]) => Promise<QuillEvent>): void;
 }
 
 export { Spillgebees, EditorFunctions };

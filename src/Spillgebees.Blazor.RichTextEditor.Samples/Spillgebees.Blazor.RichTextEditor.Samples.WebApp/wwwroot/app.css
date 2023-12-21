@@ -1,4 +1,4 @@
-@import "./_content/Spillgebees.Blazor.RichTextEditor/Spillgebees.Blazor.RichTextEditor.lib.module.css";
+@import "_content/Spillgebees.Blazor.RichTextEditor/Spillgebees.Blazor.RichTextEditor.lib.module.css";
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
