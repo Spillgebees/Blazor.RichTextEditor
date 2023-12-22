@@ -57,7 +57,7 @@ jobs:
           name: artifacts
           if-no-files-found: error
           retention-days: 1
-          path: package/*.nupkg
+          path: package/*.*nupkg
 
       - name: 📦 publish WASM application as with .NET 7.0
         if: inputs.should-publish-gh-page
