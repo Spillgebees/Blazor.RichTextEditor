@@ -51,6 +51,23 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
     [Parameter]
     public EventCallback<Range?> SelectionChanged { get; set; }
 
+    [Parameter]
+    public bool IsEditorEnabled { get; set; } = true;
+
+    [Parameter]
+    public EventCallback<bool> IsEditorEnabledChanged { get; set; }
+
+    /// <summary>
+    /// <para>
+    /// Indicates whether the component has been touched, more specifically if the editor content has changed.
+    /// </para>
+    /// </summary>
+    [Parameter]
+    public bool IsTouched { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> IsTouchedChanged { get; set; }
+
     /// <summary>
     /// <para>
     /// Applies to <see cref="ContentChanged"/>, <see cref="TextChanged"/>, and <see cref="SelectionChanged"/>.
@@ -64,17 +81,6 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
     /// </summary>
     [Parameter]
     public int DebounceIntervalInMilliseconds { get; set; } = 500;
-
-    /// <summary>
-    /// <para>
-    /// Indicates whether the component has been touched, more specifically if the editor content has changed.
-    /// </para>
-    /// </summary>
-    [Parameter]
-    public bool IsTouched { get; set; }
-
-    [Parameter]
-    public EventCallback<bool> IsTouchedChanged { get; set; }
 
     /// <summary>
     /// <para>
@@ -108,9 +114,6 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
     public RenderFragment? ToolbarContent { get; set; }
 
     [Parameter]
-    public bool IsEditorEnabled { get; set; } = true;
-
-    [Parameter]
     public string Placeholder { get; set; } = "Compose an epic...";
 
     [Parameter]
@@ -125,6 +128,7 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
     protected string? InternalContent;
     protected string? InternalText;
     protected Range? InternalSelection;
+    protected bool InternalIsEditorEnabled;
 
     protected string InternalContainerClass => new CssBuilder("rich-text-editor-container")
         .AddClass(ContainerClass)
@@ -263,7 +267,13 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
             || InternalSelection is null)
         {
             InternalSelection = Selection;
-            await SetSelectionAsync(Selection);
+            await SetSelectionAsync(InternalSelection);
+        }
+
+        if (IsEditorEnabled != InternalIsEditorEnabled)
+        {
+            InternalIsEditorEnabled = IsEditorEnabled;
+            await SetIsEditorEnabledAsync(InternalIsEditorEnabled);
         }
     }
 
@@ -304,11 +314,11 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
     protected async Task SetSelectionAsync(Range? range)
         => await RichTextEditorJs.SetSelectionAsync(JsRuntime, Logger.Value, QuillReference, range);
 
-    protected async Task InsertImageAsync(string imageSource)
-        => await RichTextEditorJs.InsertImageAsync(JsRuntime, Logger.Value, QuillReference, imageSource);
-
     protected async Task SetIsEditorEnabledAsync(bool isEditorEnabled)
         => await RichTextEditorJs.SetIsEditorEnabledAsync(JsRuntime, Logger.Value, QuillReference, isEditorEnabled);
+
+    protected async Task InsertImageAsync(string imageSource)
+        => await RichTextEditorJs.InsertImageAsync(JsRuntime, Logger.Value, QuillReference, imageSource);
 
     protected virtual Task OnContentChangedAction(TextChangeEvent args)
     {
