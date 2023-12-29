@@ -263,8 +263,8 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
         }
 
         if (Selection is not null
-            && Selection.Equals(InternalSelection)
-            || InternalSelection is null)
+            && Selection.Length != InternalSelection?.Length
+            && Selection.Index != InternalSelection?.Index)
         {
             InternalSelection = Selection;
             await SetSelectionAsync(InternalSelection);
