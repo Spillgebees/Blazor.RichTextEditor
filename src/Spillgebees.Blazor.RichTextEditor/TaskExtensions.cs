@@ -14,8 +14,8 @@ public static class TaskExtensions
         {
             logger.LogError(e, "An unexpected error occurred");
         }
-
     }
+
     public static async void AndForget(this ValueTask task, ILogger logger)
     {
         try
@@ -28,3 +28,4 @@ public static class TaskExtensions
         }
     }
 }
+
