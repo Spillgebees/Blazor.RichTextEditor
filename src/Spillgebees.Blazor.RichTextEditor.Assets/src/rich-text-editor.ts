@@ -30,6 +30,7 @@ export function bootstrap() {
 
 const createEditor = async (
     dotNetHelper: DotNetObject,
+    invokableDotNetMethodName: string,
     quillContainer: Element,
     toolbar: any,
     isEditorEnabled: boolean,
@@ -79,6 +80,8 @@ const createEditor = async (
             dotNetHelper,
             eventDebounceIntervalInMilliseconds);
     }
+
+    await dotNetHelper.invokeMethodAsync(invokableDotNetMethodName);
 };
 
 const getContent = (quillReference: QuillReference | null): string | undefined => quillReference?.__quill?.root.innerHTML;

@@ -242,6 +242,18 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
     }
 
     [JSInvokable]
+    public void OnEditorInitialized()
+    {
+        if (IsInitialized)
+        {
+            return;
+        }
+
+        _initializationCompletionSource.TrySetResult();
+        IsInitialized = true;
+    }
+
+    [JSInvokable]
     public Task OnContentChangedAsync(TextChangeEvent args)
         => OnContentChangedAction(args);
 
@@ -290,6 +302,7 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
             JsRuntime,
             Logger.Value,
             DotNetObjectReference,
+            nameof(OnEditorInitialized),
             QuillReference,
             ToolbarReference,
             IsEditorEnabled,
@@ -322,17 +335,13 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
 
     protected virtual Task OnContentChangedAction(TextChangeEvent args)
     {
-        if (args.Source is EventSource.User)
+        if (args.Source is not EventSource.User)
         {
-            IsTouched = true;
-            IsTouchedChanged.InvokeAsync(IsTouched).AndForget(Logger.Value);
+            return Task.CompletedTask;
         }
 
-        if (IsInitialized is false)
-        {
-            _initializationCompletionSource.SetResult();
-            IsInitialized = true;
-        }
+        IsTouched = true;
+        IsTouchedChanged.InvokeAsync(IsTouched).AndForget(Logger.Value);
 
         return Task.CompletedTask;
     }
