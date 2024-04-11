@@ -4,8 +4,8 @@
   "source": "src/index.ts",
   "main": "dist/Spillgebees.Blazor.RichTextEditor.lib.module.js",
   "scripts": {
-    "build:dev": "NODE_ENV=development tsx ./build.ts",
-    "build:prod": "NODE_ENV=production tsx ./build.ts",
+    "build:dev": "cross-env NODE_ENV=development tsx ./build.ts",
+    "build:prod": "cross-env NODE_ENV=production tsx ./build.ts",
     "clean": "rimraf ./dist"
   },
   "keywords": [],

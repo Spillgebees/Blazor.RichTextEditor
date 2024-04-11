@@ -123,6 +123,16 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
     public string ContainerClass { get; set; } = string.Empty;
 
     [Parameter]
+    public string ContainerDisabledClass { get; set; } = "rich-text-editor-container-disabled";
+
+    [Parameter]
+    public string EditorContainerClass { get; set; } = string.Empty;
+
+    [Parameter]
+    public string EditorContainerDisabledClass { get; set; } = "rich-text-editor-editor-container-disabled";
+
+
+    [Parameter]
     public QuillDebugLevel DebugLevel { get; set; } = QuillDebugLevel.Error;
 
     protected string? InternalContent;
@@ -130,15 +140,33 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
     protected Range? InternalSelection;
     protected bool InternalIsEditorEnabled;
 
-    protected string InternalContainerClass => new CssBuilder("rich-text-editor-container")
+    protected string InternalContainerClass => new CssBuilder()
+        .AddClass("rich-text-editor-container")
         .AddClass(ContainerClass)
+        .AddClass(ContainerDisabledClass, IsEditorEnabled is false)
+        .Build();
+
+    protected string InternalEditorContainerClass => new CssBuilder()
+        .AddClass("ql-container")
+        .AddClass("ql-snow", Theme is QuillTheme.Snow)
+        .AddClass("ql-bubble", Theme is QuillTheme.Bubble)
+        .AddClass("ql-disabled", IsEditorEnabled is false)
+        .AddClass("rich-text-editor-editor-container")
+        .AddClass(EditorContainerClass, IsEditorEnabled is false)
+        .AddClass(EditorContainerDisabledClass, IsEditorEnabled is false)
         .Build();
 
     protected string InternalToolbarContainerClass => new CssBuilder()
+        .AddClass("ql-toolbar")
+        .AddClass("ql-snow", Theme is QuillTheme.Snow)
+        .AddClass("ql-bubble", Theme is QuillTheme.Bubble)
+        .AddClass("ql-disabled", IsEditorEnabled is false)
         .AddClass("rich-text-editor-toolbar-container")
         .AddClass("rich-text-editor-toolbar-container-top", ToolbarOptions.ToolbarPosition is ToolbarPosition.Top)
         .AddClass("rich-text-editor-toolbar-container-bottom", ToolbarOptions.ToolbarPosition is ToolbarPosition.Bottom)
         .AddClass(ToolbarOptions.ToolbarContainerClass)
+        .AddClass(ToolbarOptions.ToolbarContainerDisabledClass, IsEditorEnabled is false && ToolbarOptions.ToolbarDisabledBehavior is ToolbarDisabledBehavior.Disabled)
+        .AddClass(ToolbarOptions.ToolbarContainerHiddenClass, IsEditorEnabled is false && ToolbarOptions.ToolbarDisabledBehavior is ToolbarDisabledBehavior.Hidden)
         .Build();
 
     protected ElementReference QuillReference;

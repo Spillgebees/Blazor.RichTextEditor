@@ -20,7 +20,10 @@ public record ToolbarOptions(
     string? ToolbarContainerHtmlId = null,
     List<string>? Fonts = null,
     ToolbarPosition ToolbarPosition = ToolbarPosition.Top,
-    string ToolbarContainerClass = "")
+    string ToolbarContainerClass = "",
+    ToolbarDisabledBehavior ToolbarDisabledBehavior = ToolbarDisabledBehavior.Disabled,
+    string ToolbarContainerDisabledClass = "rich-text-editor-toolbar-container-disabled",
+    string ToolbarContainerHiddenClass = "rich-text-editor-toolbar-container-hidden")
 {
     private static readonly List<string> _defaultFonts = new()
     {

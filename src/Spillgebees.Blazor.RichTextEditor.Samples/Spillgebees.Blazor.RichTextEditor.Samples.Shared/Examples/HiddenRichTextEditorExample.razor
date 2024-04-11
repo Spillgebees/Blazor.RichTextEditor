@@ -1,0 +1,25 @@
+﻿<div>
+    <h3>Disabled editor with <code class="hljs">ToolbarDisabledBehavior.Hidden</code></h3>
+    <CodeSnippet Code="@Code">
+        <Component>
+            <CodeSnippet Code="@_content"
+                         CodeFormat="CodeFormat.Html"
+                         Summary="Show HTML">
+                <Component>
+                    <RichTextEditor @bind-Content="@_content"
+                                    IsEditorEnabled="@false"
+                                    ToolbarOptions="ToolbarOptions.BasicToolbarOptions with { ToolbarDisabledBehavior = ToolbarDisabledBehavior.Hidden }"/>
+                </Component>
+            </CodeSnippet>
+        </Component>
+    </CodeSnippet>
+</div>
+
+@code {
+    private const string Code =
+@"<RichTextEditor @bind-Content=""@_content""
+                IsEditorEnabled=""@false""
+                ToolbarOptions=""ToolbarOptions.BasicToolbarOptions with { ToolbarDisabledBehavior = ToolbarDisabledBehavior.Hidden }""/>";
+
+    private string _content = "<b>Hello! \ud83d\udc4b</b>";
+}
