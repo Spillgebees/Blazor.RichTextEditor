@@ -4,8 +4,8 @@
   "source": "src/index.ts",
   "main": "dist/Spillgebees.Blazor.RichTextEditor.lib.module.js",
   "scripts": {
-    "build:dev": "NODE_ENV=development tsx ./build.ts",
-    "build:prod": "NODE_ENV=production tsx ./build.ts",
+    "build:dev": "cross-env NODE_ENV=development tsx ./build.ts",
+    "build:prod": "cross-env NODE_ENV=production tsx ./build.ts",
     "clean": "rimraf ./dist"
   },
   "keywords": [],
@@ -16,6 +16,7 @@
     "@microsoft/dotnet-js-interop": "^8.0.0",
     "@types/node": "^20.10.5",
     "@types/quill": "^2.0.14",
+    "cross-env": "^7.0.3",
     "esbuild": "0.19.5",
     "eslint": "^8.53.0",
     "rimraf": "5.0.5",
