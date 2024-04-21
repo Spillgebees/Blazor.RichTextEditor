@@ -15,7 +15,6 @@
   "devDependencies": {
     "@microsoft/dotnet-js-interop": "^8.0.0",
     "@types/node": "^20.10.5",
-    "@types/quill": "^2.0.14",
     "cross-env": "^7.0.3",
     "esbuild": "0.19.5",
     "eslint": "^8.53.0",
@@ -34,7 +33,8 @@
   },
   "homepage": "https://github.com/Spillgebees/Blazor.RichTextEditor#readme",
   "dependencies": {
-    "quill": "^1.3.7",
+    "parchment": "^3.0.0",
+    "quill": "^2.0.0",
     "quill-blot-resizer": "^1.0.1",
     "quill-delta": "^5.1.0"
   }

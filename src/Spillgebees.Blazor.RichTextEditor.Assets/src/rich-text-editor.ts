@@ -1,4 +1,5 @@
-import Quill, { RangeStatic, SelectionChangeHandler, Sources, TextChangeHandler } from "quill";
+import { StyleAttributor } from "parchment";
+import Quill, { Range, EmitterSource } from "quill";
 import BlotFormatter from "quill-blot-resizer";
 import Delta from "quill-delta";
 
@@ -8,6 +9,8 @@ import DotNetObject = DotNet.DotNetObject;
 import { QuillReference } from "./interfaces/quill-reference";
 import { QuillEvent, SelectionChangedEvent, TextChangedEvent } from "./interfaces/quill-events";
 import { debounce } from "./debouncer";
+import { QuillEventNames } from "./interfaces/spillgebees";
+
 
 export function bootstrap() {
     window.Spillgebees = window.Spillgebees || {};
@@ -25,13 +28,13 @@ export function bootstrap() {
         registerQuillEventCallback: registerQuillEventCallback
     };
     window.Spillgebees.eventMap = window.Spillgebees.eventMap
-        || new Map<Quill, Map<"text-change" | "selection-change", (...args : any[]) => Promise<QuillEvent>>>();
+        || new Map<Quill, Map<(typeof Quill)['events'][keyof typeof Quill.events], (...args : any[]) => Promise<QuillEvent>>>();
 }
 
 const createEditor = async (
     dotNetHelper: DotNetObject,
     invokableDotNetMethodName: string,
-    quillContainer: Element,
+    quillContainer: HTMLElement,
     toolbar: any,
     isEditorEnabled: boolean,
     shouldRegisterEventCallbacks: boolean,
@@ -41,12 +44,12 @@ const createEditor = async (
     fonts: string[] = new Array<string>,
     eventDebounceIntervalInMilliseconds: number = 500): Promise<void> => {
 
-    Quill.register('modules/blotFormatter', BlotFormatter);
+    // Quill.register('modules/blotFormatter', BlotFormatter);
 
     if (fonts.length > 0)
     {
         window.Spillgebees.fonts = [...window.Spillgebees.fonts, ...fonts];
-        let fontAttributor = Quill.import('formats/font');
+        let fontAttributor=  Quill.import('formats/font') as StyleAttributor;
         fontAttributor.whitelist = window.Spillgebees.fonts;
         Quill.register(fontAttributor, true);
     }
@@ -54,7 +57,7 @@ const createEditor = async (
     let quillOptions: any ={
         modules: {
             toolbar: toolbar,
-            blotFormatter: {}
+            // blotFormatter: {}
         },
         placeholder: placeholder,
         readOnly: !isEditorEnabled,
@@ -62,8 +65,8 @@ const createEditor = async (
         debug: debugLevel,
     };
 
-    let quill = new Quill(quillContainer, quillOptions);
-    window.Spillgebees.eventMap.set(quill, new Map<"text-change" | "selection-change", (delta: Delta, oldContents: Delta, source: Sources) => Promise<QuillEvent>>());
+    const quill = new Quill(quillContainer, quillOptions);
+    window.Spillgebees.eventMap.set(quill, new Map<QuillEventNames, (...args : any[]) => Promise<QuillEvent>>());
 
     if (shouldRegisterEventCallbacks)
     {
@@ -88,8 +91,8 @@ const getContent = (quillReference: QuillReference | null): string | undefined =
 // @ts-ignore
 const setContent = (quillReference: QuillReference | null, content: string) => quillReference?.__quill?.setContents(quillReference.__quill.clipboard.convert(content), 'api');
 
-const getSelection = (quillReference: QuillReference | null): RangeStatic | null | undefined => quillReference?.__quill?.getSelection();
-const setSelection = (quillReference: QuillReference | null, range: RangeStatic) => quillReference?.__quill?.setSelection(range);
+const getSelection = (quillReference: QuillReference | null): Range | null | undefined => quillReference?.__quill?.getSelection();
+const setSelection = (quillReference: QuillReference | null, range: Range) => quillReference?.__quill?.setSelection(range);
 
 const getText = (quillReference: QuillReference | null): string | undefined => quillReference?.__quill?.getText();
 
@@ -119,12 +122,12 @@ const disposeEditor = (quillReference: QuillReference | null): void => {
 
     if (window.Spillgebees.eventMap.get(quillReference.__quill)?.has("text-change")) {
         let textChangeHandler = window.Spillgebees.eventMap.get(quillReference.__quill)!.get("text-change");
-        quillReference.__quill.off("text-change", textChangeHandler as TextChangeHandler);
+        quillReference.__quill.off("text-change", textChangeHandler);
     }
 
     if (window.Spillgebees.eventMap.get(quillReference.__quill)?.has("selection-change")) {
         let selectionChangeHandler = window.Spillgebees.eventMap.get(quillReference.__quill)!.get("selection-change");
-        quillReference.__quill.off("selection-change", selectionChangeHandler as SelectionChangeHandler);
+        quillReference.__quill.off("selection-change", selectionChangeHandler);
     }
 
     window.Spillgebees.eventMap.delete(quillReference.__quill);
@@ -133,8 +136,8 @@ const disposeEditor = (quillReference: QuillReference | null): void => {
 
 const registerQuillEventCallback = async (
     quill: Quill,
-    invokableDotNetMethodName:  string,
-    eventName: "text-change" | "selection-change",
+    invokableDotNetMethodName: string,
+    eventName: QuillEventNames,
     dotNetHelper: DotNetObject,
     debounceIntervalInMilliseconds: number) => {
     if (window.Spillgebees.eventMap.has(quill) && window.Spillgebees.eventMap.get(quill)?.has(eventName)) {
@@ -145,7 +148,7 @@ const registerQuillEventCallback = async (
         let handler = async (
             _delta: Delta,
             _oldContents: Delta,
-            source: Sources): Promise<QuillEvent> => await dotNetHelper.invokeMethodAsync(invokableDotNetMethodName, new TextChangedEvent(source));
+            source: EmitterSource): Promise<QuillEvent> => await dotNetHelper.invokeMethodAsync(invokableDotNetMethodName, new TextChangedEvent(source));
         let debouncedHandler = debounce(handler, debounceIntervalInMilliseconds);
 
         window.Spillgebees.eventMap.get(quill)?.set(eventName, debouncedHandler);
@@ -153,9 +156,9 @@ const registerQuillEventCallback = async (
     }
     else if (eventName === "selection-change") {
         let handler = async (
-            range: RangeStatic,
-            oldRange: RangeStatic,
-            source: Sources): Promise<QuillEvent> => await dotNetHelper.invokeMethodAsync(invokableDotNetMethodName, new SelectionChangedEvent(oldRange, range, source));
+            range: Range,
+            oldRange: Range,
+            source: EmitterSource): Promise<QuillEvent> => await dotNetHelper.invokeMethodAsync(invokableDotNetMethodName, new SelectionChangedEvent(oldRange, range, source));
 
         let debouncedHandler = debounce(handler, debounceIntervalInMilliseconds);
         window.Spillgebees.eventMap.get(quill)?.set(eventName, debouncedHandler);
