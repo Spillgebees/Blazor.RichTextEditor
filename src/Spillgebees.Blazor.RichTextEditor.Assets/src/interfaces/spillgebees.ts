@@ -6,7 +6,8 @@ import { QuillReference } from "./quill-reference";
 interface Spillgebees {
     fonts: Array<string>;
     editorFunctions: EditorFunctions;
-    eventMap: Map<Quill, Map<QuillEventNames, (...args : any[]) => Promise<QuillEvent | unknown>>>;
+    eventMap: Map<HTMLElement, Map<QuillEventNames, (...args : any[]) => Promise<QuillEvent | unknown>>>;
+    editors: Map<HTMLElement, Quill>;
 }
 
 interface EditorFunctions {

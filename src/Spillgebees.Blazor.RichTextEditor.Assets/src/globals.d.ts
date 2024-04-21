@@ -4,7 +4,6 @@ declare global {
     // noinspection JSUnusedGlobalSymbols
     interface Window {
         Spillgebees: Spillgebees;
-        Quill: any;
         hasBeforeStartBeenCalled: boolean;
         hasAfterStartedBeenCalled: boolean;
     }
