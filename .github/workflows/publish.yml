@@ -29,8 +29,6 @@ jobs:
 
       - name: 📦 setup .NET
         uses: actions/setup-dotnet@v4
-        with:
-          global-json-file: src/global.json
 
       - name: 🚀 publish nuget packages
         run: dotnet nuget push "*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
