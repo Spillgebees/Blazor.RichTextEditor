@@ -1,11 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <Import Project="../../General.targets" />
 
-  <PropertyGroup>
-    <TargetFrameworks>net8.0</TargetFrameworks>
-  </PropertyGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\Spillgebees.Blazor.RichTextEditor.Samples.Shared\Spillgebees.Blazor.RichTextEditor.Samples.Shared.csproj" />
+    <ProjectReference
+      Include="..\Spillgebees.Blazor.RichTextEditor.Samples.Shared\Spillgebees.Blazor.RichTextEditor.Samples.Shared.csproj" />
   </ItemGroup>
 </Project>
