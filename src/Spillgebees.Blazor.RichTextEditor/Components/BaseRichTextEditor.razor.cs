@@ -9,7 +9,7 @@ namespace Spillgebees.Blazor.RichTextEditor.Components;
 public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposable
 {
     [Inject]
-    protected IJSRuntime JsRuntime { get; set; } = default!;
+    protected IJSRuntime JsRuntime { get; set; } = null!;
 
     [Inject]
     private ILoggerFactory _loggerFactory { get; set; } = null!;
