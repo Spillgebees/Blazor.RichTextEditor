@@ -16,9 +16,9 @@ jobs:
       changed: ${{ steps.filter.outputs.changed }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: 🔎 checking for changes
-        uses: dorny/paths-filter@v2
+        uses: dorny/paths-filter@v3
         id: filter
         with:
           filters: |
@@ -36,10 +36,10 @@ jobs:
     if: ${{ needs.changes.outputs.changed == 'true' }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: 📦 setup node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 19.x
 
