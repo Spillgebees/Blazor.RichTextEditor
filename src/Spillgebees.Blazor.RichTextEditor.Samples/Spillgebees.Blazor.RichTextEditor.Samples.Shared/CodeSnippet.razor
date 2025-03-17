@@ -1,7 +1,4 @@
-﻿@using AngleSharp
-@using AngleSharp.Css
-@using AngleSharp.Html
-@using AngleSharp.Html.Dom
+﻿@using AngleSharp.Html
 @using AngleSharp.Html.Parser
 @using Microsoft.JSInterop
 
@@ -60,9 +57,8 @@
 
     private string _code = string.Empty;
     private ElementReference _codeRef;
-    private HtmlParser _htmlParser = new();
-    private StringWriter _writer = new();
-    private PrettyMarkupFormatter _formatter = new();
+    private readonly HtmlParser _htmlParser = new();
+    private readonly StringWriter _writer = new();
 
     protected override void OnParametersSet()
     {
