@@ -75,7 +75,7 @@ jobs:
 
       - name: 🔧 fix base path for .NET 9.0
         if: inputs.should-publish-gh-page
-        run: sed -i 's/<base href="\/" \/>/<base href="\/Blazor.RichTextEditor\/main\/net8\.0\/" \/>/g' wasm-application/net9.0/wwwroot/index.html
+        run: sed -i 's/<base href="\/" \/>/<base href="\/Blazor.RichTextEditor\/main\/net9\.0\/" \/>/g' wasm-application/net9.0/wwwroot/index.html
 
       - name: 🚀 deploy .NET 8.0 gh page
         if: inputs.should-publish-gh-page
