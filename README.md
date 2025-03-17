@@ -18,4 +18,4 @@ This component is based on a mix of the following repos:
 
 More details in the [documentation](./src/Spillgebees.Blazor.RichTextEditor/README.md).
 
-Live demo: [net7.0](https://spillgebees.github.io/Blazor.RichTextEditor/main/net7.0/), [net8.0](https://spillgebees.github.io/Blazor.RichTextEditor/main/net8.0/)
+Live demo: [net8.0](https://spillgebees.github.io/Blazor.RichTextEditor/main/net8.0/), [net9.0](https://spillgebees.github.io/Blazor.RichTextEditor/main/net9.0/)
