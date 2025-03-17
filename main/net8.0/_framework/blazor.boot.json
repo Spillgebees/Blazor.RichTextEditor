@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "Spillgebees.Blazor.RichTextEditor.Samples.Wasm",
   "resources": {
-    "hash": "sha256-IYeyMk5iULtU0STQZC0honsFm39MTNtK13bQ8jD+G2M=",
+    "hash": "sha256-M54jjxixrVoP5dnVHiMaAmxH0zoprbupgj9pN8of+pg=",
     "jsModuleNative": {
       "dotnet.native.js": "sha256-DTUQS6Jc6BNnS7sYYezFfaUKVmQq0/lanhQuJfygH/k="
     },
@@ -35,9 +35,9 @@
       "Microsoft.JSInterop.wasm": "sha256-dbH0H+8syX30jBl/M551G9AIV0upvN1Wp1Nsk5JucPE=",
       "Microsoft.JSInterop.WebAssembly.wasm": "sha256-GsVw42I3DGzgLTnrD2A9JafVYLHVkyB3Qqe2LyDlYm8=",
       "netstandard.wasm": "sha256-m+RAkNnUSmTgEc4aCN9I1N1TMpKFdGv4gZ07NBRGUQ8=",
-      "Spillgebees.Blazor.RichTextEditor.Samples.Shared.wasm": "sha256-raND2tW7azlyU11QYE+2BwGt7VIbAEgwdXKvdOVO/sg=",
-      "Spillgebees.Blazor.RichTextEditor.Samples.Wasm.wasm": "sha256-h0GqA3rAR6N+O1WLJR2IQeWuqMdUoHAisjo33+P0zW4=",
-      "Spillgebees.Blazor.RichTextEditor.wasm": "sha256-S+pZNdkxbdd+6jIY0yiNCGiO+5/v3Vw1ic1Ns90J8Lg=",
+      "Spillgebees.Blazor.RichTextEditor.Samples.Shared.wasm": "sha256-SGy2Uy9CKHDDR7zJDlFtqttitFRaWg9Nk+OZFJ4n40o=",
+      "Spillgebees.Blazor.RichTextEditor.Samples.Wasm.wasm": "sha256-9SdOCj9y+jggLoJ/ScSI5A/RE5pEnI3z5r8INDXMJwY=",
+      "Spillgebees.Blazor.RichTextEditor.wasm": "sha256-pPl4SCjtJcYyQsbCewa0Du10t1RjTcDZ18hSyKi1lgU=",
       "System.Collections.Concurrent.wasm": "sha256-uosrYCMnWPhnqG3XTSOcA9mbws+iN30SfkUoJrsSu0Y=",
       "System.Collections.NonGeneric.wasm": "sha256-tajPcb5r29mDiRN/bScXHmF+mC95xTAs+x0RrIDXNMs=",
       "System.Collections.Specialized.wasm": "sha256-RL97+aUH3A+6lS+fkIK5PkvMyPxtofxFDBoQQ2Rjvl0=",
