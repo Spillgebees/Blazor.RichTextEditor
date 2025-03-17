@@ -1,21 +1,21 @@
-import { RangeStatic, Sources } from "quill";
+import { Range, EmitterSource } from "quill";
 
 export interface QuillEvent {}
 
 export class TextChangedEvent implements QuillEvent {
-    constructor(source: Sources) {
+    constructor(source: EmitterSource) {
         this.source = source;
     }
-    source: Sources;
+    source: EmitterSource;
 }
 
 export class SelectionChangedEvent implements QuillEvent {
-    constructor(oldRange: RangeStatic, newRange: RangeStatic, source: Sources) {
+    constructor(oldRange: Range, newRange: Range, source: EmitterSource) {
         this.oldRange = oldRange;
         this.newRange = newRange;
         this.source = source;
     }
-    oldRange: RangeStatic;
-    newRange: RangeStatic;
-    source: Sources;
+    oldRange: Range;
+    newRange: Range;
+    source: EmitterSource;
 }

@@ -1,12 +1,12 @@
-import { Quill, RangeStatic } from "quill";
+import Quill, { Range } from "quill";
 import { QuillEvent } from "./quill-events";
 import { DotNet } from "@microsoft/dotnet-js-interop";
-import { QuillReference } from "./quill-reference";
 
 interface Spillgebees {
     fonts: Array<string>;
     editorFunctions: EditorFunctions;
-    eventMap: Map<Quill, Map<"text-change" | "selection-change", (...args: any[])  => Promise<QuillEvent> | QuillEvent>>;
+    eventMap: Map<HTMLElement, Map<QuillEventNames, (...args : any[]) => Promise<QuillEvent | unknown>>>;
+    editors: Map<HTMLElement, Quill>;
 }
 
 interface EditorFunctions {
@@ -20,15 +20,17 @@ interface EditorFunctions {
         debugLevel: string,
         fonts: string[],
         eventDebounceIntervalInMilliseconds: number): Promise<void>;
-    setEditorEnabledState(quillReference: QuillReference, isEditorEnabled: boolean): void;
-    getContent(quillReference: QuillReference): string;
-    setContent(quillReference: QuillReference, content: string): void;
-    getSelection(quillReference: QuillReference): RangeStatic | null;
-    setSelection(quillReference: QuillReference, range: RangeStatic): void;
-    getText(quillReference: QuillReference): string;
-    insertImage(quillReference: QuillReference, imageUrl: string): void;
-    disposeEditor(quillReference: QuillReference): void;
-    registerQuillEventCallback(quillReference: QuillReference, eventName: "text-change" | "selection-change", callback: (...args : any[]) => Promise<QuillEvent>): void;
+    setEditorEnabledState(quillContainer: HTMLElement, isEditorEnabled: boolean): void;
+    getContent(quillContainer: HTMLElement): string;
+    setContent(quillContainer: HTMLElement, content: string): void;
+    getSelection(quillContainer: HTMLElement): Range | null;
+    setSelection(quillContainer: HTMLElement, range: Range): void;
+    getText(quillContainer: HTMLElement): string;
+    insertImage(quillContainer: HTMLElement, imageUrl: string): void;
+    disposeEditor(quillContainer: HTMLElement): void;
+    registerQuillEventCallback(quillContainer: HTMLElement, eventName: QuillEventNames, callback: (...args : any[]) => Promise<QuillEvent>): void;
 }
 
-export { Spillgebees, EditorFunctions };
+type QuillEventNames = (typeof Quill)['events'][keyof typeof Quill.events]
+
+export { Spillgebees, EditorFunctions, QuillEventNames };

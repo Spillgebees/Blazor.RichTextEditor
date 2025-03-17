@@ -36,7 +36,7 @@ You could also just pass CDN links or your custom CSS using the latter.
 
 ### Usage
 
-You can take a look at the demo pages for a few general usage examples: [net7.0](https://spillgebees.github.io/Blazor.RichTextEditor/main/net7.0/), [net8.0](https://spillgebees.github.io/Blazor.RichTextEditor/main/net8.0/)
+You can take a look at the demo pages for a few general usage examples: [net8.0](https://spillgebees.github.io/Blazor.RichTextEditor/main/net8.0/), [net9.0](https://spillgebees.github.io/Blazor.RichTextEditor/main/net9.0/)
 
 This package comes with two components: `RichTextEditor` and `PassiveRichTextEditor`
 

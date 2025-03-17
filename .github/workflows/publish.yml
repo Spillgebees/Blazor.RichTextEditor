@@ -2,7 +2,7 @@ name: Publish nuget package
 
 on:
   release:
-    types: [ published ]
+    types: [published]
 
 jobs:
   build-and-test:
@@ -14,14 +14,14 @@ jobs:
       should-package: true
       should-publish-gh-page: true
       gh-page-destination-directory: ${{ github.event.release.tag_name }}
-  
-  publish: 
+
+  publish:
     name: publish
-    needs: [ build-and-test ]
+    needs: [build-and-test]
     runs-on: ubuntu-latest
-    
+
     steps:
-      - name: 🔃 download artifacts 
+      - name: 🔃 download artifacts
         uses: actions/download-artifact@v4
         with:
           name: artifacts
@@ -29,6 +29,8 @@ jobs:
 
       - name: 📦 setup .NET
         uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: src/global.json
 
       - name: 🚀 publish nuget packages
         run: dotnet nuget push "*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
