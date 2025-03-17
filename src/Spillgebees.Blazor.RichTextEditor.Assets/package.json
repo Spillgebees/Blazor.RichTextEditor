@@ -14,13 +14,13 @@
   "type": "module",
   "devDependencies": {
     "@microsoft/dotnet-js-interop": "^8.0.0",
-    "@types/node": "^20.10.5",
+    "@types/node": "^22.13.10",
     "cross-env": "^7.0.3",
-    "esbuild": "0.19.5",
-    "eslint": "^8.53.0",
-    "rimraf": "5.0.5",
-    "tsx": "^4.7.0",
-    "typescript": "^5.3.3"
+    "esbuild": "^0.25.1",
+    "eslint": "^9.22.0",
+    "rimraf": "^6.0.1",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
   },
   "version": "0.1.0",
   "description": "TypeScript module housing assets related to the Spillgebees.Blazor.RichTextEditor NuGet package.",
@@ -33,9 +33,9 @@
   },
   "homepage": "https://github.com/Spillgebees/Blazor.RichTextEditor#readme",
   "dependencies": {
+    "@enzedonline/quill-blot-formatter2": "^2.3.0",
     "parchment": "^3.0.0",
-    "quill": "^2.0.0",
-    "quill-blot-resizer": "^1.0.1",
+    "quill": "^2.0.3",
     "quill-delta": "^5.1.0"
   }
 }

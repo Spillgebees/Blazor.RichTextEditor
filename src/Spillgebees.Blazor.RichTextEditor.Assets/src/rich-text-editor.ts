@@ -1,6 +1,6 @@
 import { StyleAttributor } from "parchment";
 import Quill, { Range, EmitterSource } from "quill";
-import BlotFormatter from "quill-blot-resizer";
+import BlotFormatter2 from "@enzedonline/quill-blot-formatter2"
 import Delta from "quill-delta";
 
 import { DotNet } from "@microsoft/dotnet-js-interop";
@@ -9,7 +9,6 @@ import DotNetObject = DotNet.DotNetObject;
 import { QuillEvent, SelectionChangedEvent, TextChangedEvent } from "./interfaces/quill-events";
 import { debounce } from "./debouncer";
 import { QuillEventNames } from "./interfaces/spillgebees";
-
 
 export function bootstrap() {
     window.Spillgebees = window.Spillgebees || {};
@@ -44,7 +43,7 @@ const createEditor = async (
     fonts: string[] = new Array<string>,
     eventDebounceIntervalInMilliseconds: number = 500): Promise<void> => {
 
-    // Quill.register('modules/blotFormatter', BlotFormatter);
+    Quill.register('modules/blotFormatter2', BlotFormatter2);
 
     if (fonts.length > 0)
     {
@@ -57,7 +56,11 @@ const createEditor = async (
     let quillOptions: any ={
         modules: {
             toolbar: toolbar,
-            // blotFormatter: {}
+            blotFormatter2: {
+                image: {
+                    allowAltTitleEdit: false,
+                },
+            }
         },
         placeholder: placeholder,
         readOnly: !isEditorEnabled,
