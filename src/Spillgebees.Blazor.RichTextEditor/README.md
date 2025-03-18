@@ -45,6 +45,9 @@ The only difference between these two is that `RichTextEditor` will immediately 
 `RichTextEditor` example:
 
 ```html
+@using Spillgebees.Blazor.RichTextEditor.Components
+@using Spillgebees.Blazor.RichTextEditor.Components.Toolbar
+
 <RichTextEditor @bind-Content="@_content"
                 @bind-Text="@_text"
                 @bind-Selection="@_selection"
@@ -57,6 +60,9 @@ The only difference between these two is that `RichTextEditor` will immediately 
 `PassiveRichTextEditor` example:
 
 ```html
+@using Spillgebees.Blazor.RichTextEditor.Components
+@using Spillgebees.Blazor.RichTextEditor.Components.Toolbar
+
 <PassiveRichTextEditor @bind-Content="@_content"
                        ToolbarOptions="ToolbarOptions.FullToolbarOptions"
                        @ref="@_editorReference" />
@@ -70,6 +76,10 @@ Note that in the previous example the displayed content for the user is instant,
 You can completely customize the toolbar:
 
 ```html
+@using Spillgebees.Blazor.RichTextEditor.Components
+@using Spillgebees.Blazor.RichTextEditor.Components.Toolbar
+@using Spillgebees.Blazor.RichTextEditor.Components.Toolbar.Controls
+
 <RichTextEditor @bind-Content="@_content"
                 ToolbarOptions="@(ToolbarOptions.FullToolbarOptions with { Fonts = new List<string> { "Sans Serif", "RobotoMono" } })">
     <ToolbarContent>
