@@ -1,7 +1,3 @@
-using Microsoft.AspNetCore.Components;
-using Microsoft.Extensions.Logging;
-using Microsoft.JSInterop;
-
 namespace Spillgebees.Blazor.RichTextEditor.Components;
 
 public partial class RichTextEditor : BaseRichTextEditor

@@ -25,12 +25,12 @@ public record ToolbarOptions(
     string ToolbarContainerDisabledClass = "rich-text-editor-toolbar-container-disabled",
     string ToolbarContainerHiddenClass = "rich-text-editor-toolbar-container-hidden")
 {
-    private static readonly List<string> _defaultFonts = new()
-    {
+    private static readonly List<string> _defaultFonts =
+    [
         "",
         "serif",
         "monospace"
-    };
+    ];
 
     public string ToolbarContainerHtmlId { get; init; } = ToolbarContainerHtmlId ?? $"rich-text-editor-toolbar-container-{Guid.NewGuid()}";
     public List<string> Fonts { get; init; } = Fonts ?? _defaultFonts;
