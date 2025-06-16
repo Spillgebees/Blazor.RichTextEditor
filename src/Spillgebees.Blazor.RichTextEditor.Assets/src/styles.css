@@ -16,7 +16,7 @@
     border-top: none;
 }
 
-.ql-toolbar.ql-snow.rich-text-editor-toolbar-container-hidden + .ql-container.ql-snow.ql-disabled.rich-text-editor-editor-container {
+.ql-toolbar.ql-snow.rich-text-editor-toolbar-container-hidden + .ql-container.ql-snow.rich-text-editor-editor-container {
     border-top: 1px solid #ccc;
 }
 
