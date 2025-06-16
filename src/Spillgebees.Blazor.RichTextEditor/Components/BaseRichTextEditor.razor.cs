@@ -84,6 +84,17 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
 
     /// <summary>
     /// <para>
+    /// This replaces default Quill keybindings for better accessibility, notably making the <c>Tab</c> character tab out of the component.
+    /// </para>
+    /// </summary>
+    /// <remarks>
+    /// Can only be set once. Defaults to <c>false</c> for backwards compatibility purposes but may be switched to <c>true</c> in future versions.
+    /// </remarks>
+    [Parameter]
+    public bool UseAccessibleKeybindings { get; set; }
+
+    /// <summary>
+    /// <para>
     /// Uses <see cref="Spillgebees.Blazor.RichTextEditor.Components.Toolbar.ToolbarOptions.BasicToolbarOptions"/> by default.
     /// You can also supply <see cref="ToolbarOptions.FullToolbarOptions"/> to enable all features, or create your own <see cref="ToolbarOptions"/>.
     /// </para>
@@ -341,7 +352,8 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
             theme: Theme.ToString().ToLower(),
             debugLevel: DebugLevel.ToString().ToLower(),
             fonts: ToolbarOptions.Fonts,
-            DebounceIntervalInMilliseconds);
+            DebounceIntervalInMilliseconds,
+            UseAccessibleKeybindings);
 
         InternalContent = Content;
         await SetContentAsync(Content);
