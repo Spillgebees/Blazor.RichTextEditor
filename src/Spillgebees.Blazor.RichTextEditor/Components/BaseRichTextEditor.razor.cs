@@ -166,7 +166,9 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
         .AddClass("rich-text-editor-toolbar-container-bottom", ToolbarOptions.ToolbarPosition is ToolbarPosition.Bottom)
         .AddClass(ToolbarOptions.ToolbarContainerClass)
         .AddClass(ToolbarOptions.ToolbarContainerDisabledClass, IsEditorEnabled is false && ToolbarOptions.ToolbarDisabledBehavior is ToolbarDisabledBehavior.Disabled)
-        .AddClass(ToolbarOptions.ToolbarContainerHiddenClass, IsEditorEnabled is false && ToolbarOptions.ToolbarDisabledBehavior is ToolbarDisabledBehavior.Hidden)
+        .AddClass(ToolbarOptions.ToolbarContainerHiddenClass, IsEditorEnabled is false
+                                                              && ToolbarOptions.ToolbarDisabledBehavior is ToolbarDisabledBehavior.Hidden
+                                                              || ToolbarOptions.HideToolbar)
         .Build();
 
     protected ElementReference QuillReference;

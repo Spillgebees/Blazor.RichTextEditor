@@ -1,0 +1,26 @@
+﻿<div>
+    <h3>Setting the <code class="hljs">ToolbarOptions</code> parameter to <code class="hljs">ToolbarOptions.None</code>,
+        or changing the <code class="hljs">ToolbarOptions.HideToolbar</code> value to <code class="hljs">true</code>
+        completely hides the toolbar.</h3>
+    <CodeSnippet Code="@Code">
+        <Component>
+            <CodeSnippet Code="@_content"
+                         CodeFormat="CodeFormat.Html"
+                         Summary="Show HTML">
+                <Component>
+                    <RichTextEditor @bind-Content="@_content"
+                                    ToolbarOptions="@ToolbarOptions.None" />
+                </Component>
+            </CodeSnippet>
+        </Component>
+    </CodeSnippet>
+</div>
+
+
+@code {
+    private const string Code =
+@"<RichTextEditor @bind-Content=""@_content""
+                ToolbarOptions=""@ToolbarOptions.None"" />";
+
+    private string _content = "<b>Hello from an editor without toolbar! \ud83d\udc4b</b>";
+}

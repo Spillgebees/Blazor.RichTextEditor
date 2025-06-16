@@ -23,7 +23,8 @@ public record ToolbarOptions(
     string ToolbarContainerClass = "",
     ToolbarDisabledBehavior ToolbarDisabledBehavior = ToolbarDisabledBehavior.Disabled,
     string ToolbarContainerDisabledClass = "rich-text-editor-toolbar-container-disabled",
-    string ToolbarContainerHiddenClass = "rich-text-editor-toolbar-container-hidden")
+    string ToolbarContainerHiddenClass = "rich-text-editor-toolbar-container-hidden",
+    bool HideToolbar = false)
 {
     private static readonly List<string> _defaultFonts =
     [
@@ -64,4 +65,26 @@ public record ToolbarOptions(
             ShowMathControls = true,
             ShowCleanFormattingControls = true,
         };
-};
+
+    public static ToolbarOptions None
+        => new()
+        {
+            ShowFontControls = false,
+            ShowSizeControls = false,
+            ShowStyleControls = false,
+            ShowColorControls = false,
+            ShowHeaderControls = false,
+            ShowQuotationControls = false,
+            ShowCodeBlockControls = false,
+            ShowListControls = false,
+            ShowIndentationControls = false,
+            ShowAlignmentControls = false,
+            ShowDirectionControls = false,
+            ShowHypertextLinkControls = false,
+            ShowInsertImageControls = false,
+            ShowEmbedVideoControls = false,
+            ShowMathControls = false,
+            ShowCleanFormattingControls = false,
+            HideToolbar = true
+        };
+}
