@@ -19,7 +19,8 @@ interface EditorFunctions {
         theme: string,
         debugLevel: string,
         fonts: string[],
-        eventDebounceIntervalInMilliseconds: number): Promise<void>;
+        eventDebounceIntervalInMilliseconds: number,
+        useAccessibleKeybindings: boolean): Promise<void>;
     setEditorEnabledState(quillContainer: HTMLElement, isEditorEnabled: boolean): void;
     getContent(quillContainer: HTMLElement): string;
     setContent(quillContainer: HTMLElement, content: string): void;

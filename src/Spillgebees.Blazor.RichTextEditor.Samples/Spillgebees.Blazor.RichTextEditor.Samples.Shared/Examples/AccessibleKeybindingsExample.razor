@@ -1,0 +1,29 @@
+﻿<div>
+    <h3>Setting the <code class="hljs">UseAccessibleKeybindings</code> parameter to <code class="hljs">true</code>
+        overrides some of the Quill default keybindings for better accessibility. Currently this only overrides the
+        default <code class="hljs">Tab</code> behaviour to tab out of the component instead of indenting the current
+        line.</h3>
+    <CodeSnippet Code="@Code">
+        <Component>
+            <CodeSnippet Code="@_content"
+                         CodeFormat="CodeFormat.Html"
+                         Summary="Show HTML">
+                <Component>
+                    <RichTextEditor @bind-Content="@_content"
+                                    UseAccessibleKeybindings="@true"
+                                    ToolbarOptions="@ToolbarOptions.BasicToolbarOptions" />
+                </Component>
+            </CodeSnippet>
+        </Component>
+    </CodeSnippet>
+</div>
+
+
+@code {
+    private const string Code =
+@"<RichTextEditor @bind-Content=""@_content""
+                UseAccessibleKeybindings=""@true""
+                ToolbarOptions=""@ToolbarOptions.BasicToolbarOptions"" />";
+
+    private string _content = "<b>Hello from an accessible editor! \ud83d\udc4b</b>";
+}

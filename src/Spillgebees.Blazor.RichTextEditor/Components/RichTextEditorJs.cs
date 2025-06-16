@@ -21,7 +21,8 @@ internal static class RichTextEditorJs
         string theme,
         string debugLevel,
         List<string>? fonts,
-        int debounceIntervalInMilliseconds = 0)
+        int debounceIntervalInMilliseconds = 0,
+        bool useAccessibleKeybindings = true)
         => jsRuntime.SafeInvokeVoidAsync(
             logger,
             $"{JsNamespace}.createEditor",
@@ -35,7 +36,8 @@ internal static class RichTextEditorJs
             theme,
             debugLevel,
             fonts,
-            debounceIntervalInMilliseconds);
+            debounceIntervalInMilliseconds,
+            useAccessibleKeybindings);
 
     internal static ValueTask<string> GetContentAsync(
         IJSRuntime jsRuntime,

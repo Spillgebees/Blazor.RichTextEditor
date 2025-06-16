@@ -41,7 +41,8 @@ const createEditor = async (
     theme?: string | undefined,
     debugLevel?: string | boolean | undefined,
     fonts: string[] = new Array<string>,
-    eventDebounceIntervalInMilliseconds: number = 500): Promise<void> => {
+    eventDebounceIntervalInMilliseconds: number = 500,
+    useAccessibleKeybindings: boolean = true): Promise<void> => {
 
     Quill.register('modules/blotFormatter2', BlotFormatter2);
 
@@ -53,8 +54,20 @@ const createEditor = async (
         Quill.register(fontAttributor, true);
     }
 
-    let quillOptions: any ={
+    let customKeybindings = {};
+    if (useAccessibleKeybindings)
+    {
+        customKeybindings = {
+            // disables indenting with a tab character in favour of tabbing out of the component for accessibility
+            tab: null
+        };
+    }
+
+    let quillOptions: any = {
         modules: {
+            keyboard: {
+                bindings: customKeybindings
+            },
             toolbar: toolbar,
             blotFormatter2: {
                 image: {
