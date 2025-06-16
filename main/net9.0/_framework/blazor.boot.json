@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "Spillgebees.Blazor.RichTextEditor.Samples.Wasm",
   "resources": {
-    "hash": "sha256-IrusELhFW12NKyyX/Moh2Ml5fBGqL2vIL8M4KbieLQw=",
+    "hash": "sha256-WKFXa/QzCKxxD25++I1619jC0dK7N3bYQsqYUcb2V2Q=",
     "fingerprinting": {
       "AngleSharp.up7648hgwu.wasm": "AngleSharp.wasm",
       "BlazorComponentUtilities.p9kxg9c327.wasm": "BlazorComponentUtilities.wasm",
@@ -20,9 +20,9 @@
       "Microsoft.JSInterop.pspkwbdtt9.wasm": "Microsoft.JSInterop.wasm",
       "Microsoft.JSInterop.WebAssembly.s0bw0921jm.wasm": "Microsoft.JSInterop.WebAssembly.wasm",
       "netstandard.eajhicxbhq.wasm": "netstandard.wasm",
-      "Spillgebees.Blazor.RichTextEditor.Samples.Shared.wdh4soi5hs.wasm": "Spillgebees.Blazor.RichTextEditor.Samples.Shared.wasm",
-      "Spillgebees.Blazor.RichTextEditor.Samples.Wasm.lvj0fyn8wn.wasm": "Spillgebees.Blazor.RichTextEditor.Samples.Wasm.wasm",
-      "Spillgebees.Blazor.RichTextEditor.7vd11z9aye.wasm": "Spillgebees.Blazor.RichTextEditor.wasm",
+      "Spillgebees.Blazor.RichTextEditor.Samples.Shared.y0vpke7ij0.wasm": "Spillgebees.Blazor.RichTextEditor.Samples.Shared.wasm",
+      "Spillgebees.Blazor.RichTextEditor.Samples.Wasm.ynha2mtin3.wasm": "Spillgebees.Blazor.RichTextEditor.Samples.Wasm.wasm",
+      "Spillgebees.Blazor.RichTextEditor.35d74rg2ah.wasm": "Spillgebees.Blazor.RichTextEditor.wasm",
       "System.Collections.Concurrent.0e3oa5vr64.wasm": "System.Collections.Concurrent.wasm",
       "System.Collections.Immutable.88yp90dzef.wasm": "System.Collections.Immutable.wasm",
       "System.Collections.NonGeneric.7lkmvyax1d.wasm": "System.Collections.NonGeneric.wasm",
@@ -93,9 +93,9 @@
       "Microsoft.JSInterop.pspkwbdtt9.wasm": "sha256-mfsZeL2/LhZsP7XPPd74LrZyYV4a2Ysr5qRvaormyms=",
       "Microsoft.JSInterop.WebAssembly.s0bw0921jm.wasm": "sha256-NNwR0xu2wKvvEIZnSUwKht+/0RJ9ziHW01M66VViIkI=",
       "netstandard.eajhicxbhq.wasm": "sha256-5k0w+GMjvHomGa/Yn+3uOZhI8TQt7oXRrfxWT5G7WyM=",
-      "Spillgebees.Blazor.RichTextEditor.Samples.Shared.wdh4soi5hs.wasm": "sha256-BI1XnRMD1QpqRyG91eCzEr8gdl7NV1fETEzQbW7ydrU=",
-      "Spillgebees.Blazor.RichTextEditor.Samples.Wasm.lvj0fyn8wn.wasm": "sha256-X/QcMNPYKUbO2/tDjKIp0K3y3JMQFBNA38IdfU+QwQE=",
-      "Spillgebees.Blazor.RichTextEditor.7vd11z9aye.wasm": "sha256-cxm/gxlhka9Lo8U+NQATrvH73ZinreckqP9tsEMJdB4=",
+      "Spillgebees.Blazor.RichTextEditor.Samples.Shared.y0vpke7ij0.wasm": "sha256-rhr7vsbOzfK/SHNmpiGXEFoDe9Lu+46rrt1hcM7mCU8=",
+      "Spillgebees.Blazor.RichTextEditor.Samples.Wasm.ynha2mtin3.wasm": "sha256-Et5SYcuy+OLEgZ41zzMr8PKkIwVvY4/YEHOgXgU/oPY=",
+      "Spillgebees.Blazor.RichTextEditor.35d74rg2ah.wasm": "sha256-R45GXgMSmkZflwLN9YoCm7Cdise9zrj52wXIOpX+ruY=",
       "System.Collections.Concurrent.0e3oa5vr64.wasm": "sha256-2Kovpb+96SCxzjTlNJi935ZHyQzP//LOnuLc5ea+344=",
       "System.Collections.Immutable.88yp90dzef.wasm": "sha256-eE3WrIdS7pvGFsazJU16zbWwNAYALi4OzzJpBw0OJvc=",
       "System.Collections.NonGeneric.7lkmvyax1d.wasm": "sha256-RccJ3q+1vUDRTnsD0PzXY0Thz04RGQXM7irzVpC6ITE=",
@@ -123,11 +123,11 @@
     },
     "libraryInitializers": {
       "_content/Spillgebees.Blazor.RichTextEditor.Samples.Shared/Spillgebees.Blazor.RichTextEditor.Samples.Shared.qg09hmyejr.lib.module.js": "sha256-mtPaN+L8v9EKl15dLbRJ8IfhQiEn7ipiULgxD1kYfuQ=",
-      "_content/Spillgebees.Blazor.RichTextEditor/Spillgebees.Blazor.RichTextEditor.lib.module.js": "sha256-zLGQpzbUfhUtZAxXMPLW3Ti1KPpW828MxYskn7hn4vQ="
+      "_content/Spillgebees.Blazor.RichTextEditor/Spillgebees.Blazor.RichTextEditor.lib.module.js": "sha256-030bcUB+q9YJcjNH3GQ0+4ipTGpdpkgXIYCyFJZev48="
     },
     "modulesAfterConfigLoaded": {
       "../_content/Spillgebees.Blazor.RichTextEditor.Samples.Shared/Spillgebees.Blazor.RichTextEditor.Samples.Shared.qg09hmyejr.lib.module.js": "sha256-mtPaN+L8v9EKl15dLbRJ8IfhQiEn7ipiULgxD1kYfuQ=",
-      "../_content/Spillgebees.Blazor.RichTextEditor/Spillgebees.Blazor.RichTextEditor.lib.module.js": "sha256-zLGQpzbUfhUtZAxXMPLW3Ti1KPpW828MxYskn7hn4vQ="
+      "../_content/Spillgebees.Blazor.RichTextEditor/Spillgebees.Blazor.RichTextEditor.lib.module.js": "sha256-030bcUB+q9YJcjNH3GQ0+4ipTGpdpkgXIYCyFJZev48="
     }
   },
   "cacheBootResources": true,
