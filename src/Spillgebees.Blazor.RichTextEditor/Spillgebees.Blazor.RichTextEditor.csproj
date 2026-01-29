@@ -8,12 +8,12 @@
     <PackageTags>blazor, blazor-wasm, blazor-server, quill, quilljs, rich-text-editor, wysiwyg</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageIcon>spillgebees_small.png</PackageIcon>
+    <PackageIcon>spillgebees.png</PackageIcon>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\assets\spillgebees_small.png" Pack="true" PackagePath=""/>
+    <None Include="..\..\assets\spillgebees.png" Pack="true" PackagePath=""/>
     <None Include="README.md" Pack="true" PackagePath=""/>
   </ItemGroup>
 

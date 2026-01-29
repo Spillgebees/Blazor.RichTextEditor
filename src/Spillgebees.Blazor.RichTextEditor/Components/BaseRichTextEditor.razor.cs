@@ -188,8 +188,6 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
     protected bool IsInitialized;
     protected bool IsDisposing;
 
-    private TaskCompletionSource _initializationCompletionSource = new();
-
     public virtual async ValueTask DisposeAsync()
     {
         if (IsDisposing)
@@ -200,8 +198,6 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
 
         try
         {
-            // ensure initialization has been completed to avoid DotNetObjectReference disposed exceptions
-            await _initializationCompletionSource.Task;
             await RichTextEditorJs.DisposeEditorAsync(JsRuntime, Logger.Value, QuillReference);
         }
         catch (Exception exception) when (exception is JSDisconnectedException or OperationCanceledException)
@@ -290,7 +286,6 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
             return;
         }
 
-        _initializationCompletionSource.TrySetResult();
         IsInitialized = true;
     }
 
