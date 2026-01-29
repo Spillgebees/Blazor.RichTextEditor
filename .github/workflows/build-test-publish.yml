@@ -77,6 +77,14 @@ jobs:
         if: inputs.should-publish-gh-page
         run: sed -i 's/<base href="\/" \/>/<base href="\/Blazor.RichTextEditor\/main\/net9\.0\/" \/>/g' wasm-application/net9.0/wwwroot/index.html
 
+      - name: 📦 publish WASM application as with .NET 10.0
+        if: inputs.should-publish-gh-page
+        run: dotnet publish src/Spillgebees.Blazor.RichTextEditor.Samples/Spillgebees.Blazor.RichTextEditor.Samples.Wasm/Spillgebees.Blazor.RichTextEditor.Samples.Wasm.csproj --configuration Release --no-build --output wasm-application/net10.0 --framework net10.0
+
+      - name: 🔧 fix base path for .NET 10.0
+        if: inputs.should-publish-gh-page
+        run: sed -i 's/<base href="\/" \/>/<base href="\/Blazor.RichTextEditor\/main\/net10\.0\/" \/>/g' wasm-application/net10.0/wwwroot/index.html
+
       - name: 🚀 deploy .NET 8.0 gh page
         if: inputs.should-publish-gh-page
         uses: peaceiris/actions-gh-pages@v4
@@ -93,4 +101,13 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./wasm-application/net9.0/wwwroot
           destination_dir: ${{ inputs.gh-page-destination-directory }}/net9.0
+          enable_jekyll: false
+
+      - name: 🚀 deploy .NET 10.0 gh page
+        if: inputs.should-publish-gh-page
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./wasm-application/net10.0/wwwroot
+          destination_dir: ${{ inputs.gh-page-destination-directory }}/net10.0
           enable_jekyll: false
