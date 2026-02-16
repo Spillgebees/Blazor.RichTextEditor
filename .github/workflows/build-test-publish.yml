@@ -29,10 +29,10 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - name: 📦 setup .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
         with:
           global-json-file: src/global.json
 
@@ -54,7 +54,7 @@ jobs:
 
       - name: 🔃 upload artifacts
         if: inputs.should-package
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: artifacts
           if-no-files-found: error
@@ -87,7 +87,7 @@ jobs:
 
       - name: 🚀 deploy .NET 8.0 gh page
         if: inputs.should-publish-gh-page
-        uses: peaceiris/actions-gh-pages@v4
+        uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./wasm-application/net8.0/wwwroot
@@ -96,7 +96,7 @@ jobs:
 
       - name: 🚀 deploy .NET 9.0 gh page
         if: inputs.should-publish-gh-page
-        uses: peaceiris/actions-gh-pages@v4
+        uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./wasm-application/net9.0/wwwroot
@@ -105,7 +105,7 @@ jobs:
 
       - name: 🚀 deploy .NET 10.0 gh page
         if: inputs.should-publish-gh-page
-        uses: peaceiris/actions-gh-pages@v4
+        uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./wasm-application/net10.0/wwwroot
