@@ -23,6 +23,7 @@ jobs:
         with:
           filters: |
             changed:
+              - 'src/Spillgebees.Blazor.RichTextEditor.Assets/**'
               - 'src/Spillgebees.Blazor.RichTextEditor.JS.Tests/**'
 
   node-test:
