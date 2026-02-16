@@ -25,8 +25,12 @@ jobs:
           filters: |
             changed:
               - 'src/Spillgebees.Blazor.RichTextEditor/**'
+              - 'src/Spillgebees.Blazor.RichTextEditor.Assets/**'
               - 'src/Spillgebees.Blazor.RichTextEditor.Samples/**'
               - 'src/Spillgebees.Blazor.RichTextEditor.Tests/**'
+              - 'src/Directory.Packages.props'
+              - 'src/General.targets'
+              - 'src/global.json'
 
   build-and-test:
     name: build-and-test
