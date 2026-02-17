@@ -14,7 +14,7 @@
   "type": "module",
   "devDependencies": {
     "@microsoft/dotnet-js-interop": "8.0.0",
-    "@types/node": "22.13.10",
+    "@types/node": "22.19.11",
     "cross-env": "7.0.3",
     "esbuild": "0.25.1",
     "eslint": "9.22.0",
