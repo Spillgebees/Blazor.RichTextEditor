@@ -1,8 +1,5 @@
 # Blazor.RichTextEditor — Project Agent Instructions
 
-This project follows the [global AGENTS.md conventions](~/.config/opencode/AGENTS.md).
-Project-specific deviations and patterns are documented below.
-
 ## Project Overview
 
 **Spillgebees.Blazor.RichTextEditor** is a WYSIWYG Blazor component library powered by [Quill](https://quilljs.com/).
