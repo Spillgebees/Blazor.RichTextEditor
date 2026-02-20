@@ -6,7 +6,10 @@
   "scripts": {
     "build:dev": "cross-env NODE_ENV=development tsx ./build.ts",
     "build:prod": "cross-env NODE_ENV=production tsx ./build.ts",
-    "clean": "rimraf ./dist"
+    "clean": "rimraf ./dist",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "keywords": [],
   "author": "Jason Rebelo Neves (igotinfected)",
@@ -15,12 +18,15 @@
   "devDependencies": {
     "@microsoft/dotnet-js-interop": "8.0.0",
     "@types/node": "22.13.10",
+    "@vitest/coverage-v8": "^4.0.18",
     "cross-env": "7.0.3",
     "esbuild": "0.25.1",
     "eslint": "9.22.0",
+    "jsdom": "^28.1.0",
     "rimraf": "6.0.1",
     "tsx": "4.19.3",
-    "typescript": "5.8.2"
+    "typescript": "5.8.2",
+    "vitest": "^4.0.18"
   },
   "version": "0.1.0",
   "description": "TypeScript module housing assets related to the Spillgebees.Blazor.RichTextEditor NuGet package.",
