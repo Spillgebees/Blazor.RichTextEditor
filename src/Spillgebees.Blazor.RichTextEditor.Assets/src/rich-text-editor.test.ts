@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("quill", () => {
   const MockQuill = vi.fn() as unknown as {
@@ -37,7 +37,7 @@ import { bootstrap } from "./rich-text-editor";
 describe("bootstrap", () => {
   beforeEach(() => {
     // Reset window.Spillgebees before each test
-    delete (window as Record<string, unknown>)["Spillgebees"];
+    delete (window as Record<string, unknown>).Spillgebees;
   });
 
   it("should initialize window.Spillgebees with all expected properties", () => {

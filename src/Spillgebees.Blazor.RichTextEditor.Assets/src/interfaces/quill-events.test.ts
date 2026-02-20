@@ -1,7 +1,8 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 vi.mock("quill", () => {
   return {
+    // biome-ignore lint/complexity/noStaticOnlyClass: mock must mirror Quill's class structure
     default: class MockQuill {
       static events = {
         TEXT_CHANGE: "text-change",
@@ -12,8 +13,8 @@ vi.mock("quill", () => {
   };
 });
 
-import { TextChangedEvent, SelectionChangedEvent } from "./quill-events";
-import type { Range, EmitterSource } from "quill";
+import type { EmitterSource, Range } from "quill";
+import { SelectionChangedEvent, TextChangedEvent } from "./quill-events";
 
 describe("TextChangedEvent", () => {
   it("should store source correctly", () => {

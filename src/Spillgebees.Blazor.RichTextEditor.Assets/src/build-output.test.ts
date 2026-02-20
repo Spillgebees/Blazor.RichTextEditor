@@ -1,22 +1,16 @@
 import { execSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { describe, it, expect, beforeAll } from "vitest";
+import { beforeAll, describe, expect, it } from "vitest";
 
-describe("esbuild output", () => {
-  const distDir = resolve(import.meta.dirname ?? __dirname, "..", "dist");
-  const jsFile = resolve(
-    distDir,
-    "Spillgebees.Blazor.RichTextEditor.lib.module.js",
-  );
-  const cssFile = resolve(
-    distDir,
-    "Spillgebees.Blazor.RichTextEditor.lib.module.css",
-  );
+describe("vite build output", () => {
+  const outputDir = resolve(import.meta.dirname ?? __dirname, "../../Spillgebees.Blazor.RichTextEditor/wwwroot");
+  const jsFile = resolve(outputDir, "Spillgebees.Blazor.RichTextEditor.lib.module.js");
+  const cssFile = resolve(outputDir, "Spillgebees.Blazor.RichTextEditor.lib.module.css");
 
   beforeAll(() => {
     // Run the production build before checking output
-    execSync("npm run build:prod", {
+    execSync("pnpm run build:prod", {
       cwd: resolve(import.meta.dirname ?? __dirname, ".."),
       stdio: "pipe",
     });

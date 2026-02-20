@@ -18,5 +18,4 @@
     <!-- Resolve ambiguity between Bunit.TestContext and TUnit.Core.TestContext for TUnit's source generator -->
     <Using Include="TUnit.Core.TestContext" Alias="TestContext" />
   </ItemGroup>
-
 </Project>

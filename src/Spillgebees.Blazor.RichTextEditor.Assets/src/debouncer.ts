@@ -9,24 +9,28 @@
  * @param {number} debounceIntervalInMilliseconds - The number of milliseconds to wait before calling `func`.
  * @returns {(...args: Parameters<F>) => Promise<R>} A debounced version of `func`.
  */
-export function debounce<F extends (...args: any[]) => Promise<R>, R>(func: F, debounceIntervalInMilliseconds: number): (...args: Parameters<F>) => Promise<R> {
-    let timeout: number | undefined;
+// biome-ignore lint/suspicious/noExplicitAny: `any[]` is required here for the generic constraint to correctly infer Parameters<F> — using `unknown[]` would prevent assignability of concrete function signatures.
+export function debounce<F extends (...args: any[]) => Promise<R>, R>(
+  func: F,
+  debounceIntervalInMilliseconds: number,
+): (...args: Parameters<F>) => Promise<R> {
+  let timeout: number | undefined;
 
-    return function(this: ThisParameterType<F>, ...args: Parameters<F>): Promise<R> {
-        return new Promise<R>((resolve, reject) => {
-            const context = this;
+  return function (this: ThisParameterType<F>, ...args: Parameters<F>): Promise<R> {
+    return new Promise<R>((resolve, reject) => {
+      const context = this;
 
-            const later = () => {
-                timeout = undefined;
-                try {
-                    resolve(func.apply(context, args));
-                } catch (error) {
-                    reject(error);
-                }
-            };
+      const later = () => {
+        timeout = undefined;
+        try {
+          resolve(func.apply(context, args));
+        } catch (error) {
+          reject(error);
+        }
+      };
 
-            clearTimeout(timeout);
-            timeout = window.setTimeout(later, debounceIntervalInMilliseconds);
-        });
-    };
+      clearTimeout(timeout);
+      timeout = window.setTimeout(later, debounceIntervalInMilliseconds);
+    });
+  };
 }

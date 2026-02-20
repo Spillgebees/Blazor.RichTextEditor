@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const { mockBootstrap } = vi.hoisted(() => ({
   mockBootstrap: vi.fn(),
@@ -11,14 +11,14 @@ vi.mock("./rich-text-editor", () => ({
 vi.mock("./styles.css", () => ({}));
 
 import {
-  beforeWebStart,
-  afterWebStarted,
-  beforeWebAssemblyStart,
-  afterWebAssemblyStarted,
-  beforeServerStart,
   afterServerStarted,
-  beforeStart,
   afterStarted,
+  afterWebAssemblyStarted,
+  afterWebStarted,
+  beforeServerStart,
+  beforeStart,
+  beforeWebAssemblyStart,
+  beforeWebStart,
 } from "./index";
 
 describe("Blazor lifecycle hooks", () => {

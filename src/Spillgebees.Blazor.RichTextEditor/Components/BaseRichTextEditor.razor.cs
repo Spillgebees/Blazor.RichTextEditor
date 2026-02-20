@@ -24,7 +24,6 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
     public string Content { get; set; } = string.Empty;
 
     [Parameter]
-
     public EventCallback<string> ContentChanged { get; set; }
 
     /// <summary>
@@ -37,9 +36,7 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
     {
         get => InternalText;
         // ReSharper disable once ValueParameterNotUsed
-        set
-        {
-        }
+        set { }
     }
 
     [Parameter]
@@ -142,7 +139,6 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
     [Parameter]
     public string EditorContainerDisabledClass { get; set; } = "rich-text-editor-editor-container-disabled";
 
-
     [Parameter]
     public QuillDebugLevel DebugLevel { get; set; } = QuillDebugLevel.Error;
 
@@ -151,36 +147,47 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
     protected Range? InternalSelection;
     protected bool InternalIsEditorEnabled;
 
-    protected string InternalContainerClass => new CssBuilder()
-        .AddClass("rich-text-editor-container")
-        .AddClass(ContainerClass)
-        .AddClass(ContainerDisabledClass, IsEditorEnabled is false)
-        .Build();
+    protected string InternalContainerClass =>
+        new CssBuilder()
+            .AddClass("rich-text-editor-container")
+            .AddClass(ContainerClass)
+            .AddClass(ContainerDisabledClass, IsEditorEnabled is false)
+            .Build();
 
-    protected string InternalEditorContainerClass => new CssBuilder()
-        .AddClass("ql-container")
-        .AddClass("ql-snow", Theme is QuillTheme.Snow)
-        .AddClass("ql-bubble", Theme is QuillTheme.Bubble)
-        .AddClass("ql-disabled", IsEditorEnabled is false)
-        .AddClass("rich-text-editor-editor-container")
-        .AddClass(EditorContainerClass, IsEditorEnabled is false)
-        .AddClass(EditorContainerDisabledClass, IsEditorEnabled is false)
-        .Build();
+    protected string InternalEditorContainerClass =>
+        new CssBuilder()
+            .AddClass("ql-container")
+            .AddClass("ql-snow", Theme is QuillTheme.Snow)
+            .AddClass("ql-bubble", Theme is QuillTheme.Bubble)
+            .AddClass("ql-disabled", IsEditorEnabled is false)
+            .AddClass("rich-text-editor-editor-container")
+            .AddClass(EditorContainerClass, IsEditorEnabled is false)
+            .AddClass(EditorContainerDisabledClass, IsEditorEnabled is false)
+            .Build();
 
-    protected string InternalToolbarContainerClass => new CssBuilder()
-        .AddClass("ql-toolbar")
-        .AddClass("ql-snow", Theme is QuillTheme.Snow)
-        .AddClass("ql-bubble", Theme is QuillTheme.Bubble)
-        .AddClass("ql-disabled", IsEditorEnabled is false)
-        .AddClass("rich-text-editor-toolbar-container")
-        .AddClass("rich-text-editor-toolbar-container-top", ToolbarOptions.ToolbarPosition is ToolbarPosition.Top)
-        .AddClass("rich-text-editor-toolbar-container-bottom", ToolbarOptions.ToolbarPosition is ToolbarPosition.Bottom)
-        .AddClass(ToolbarOptions.ToolbarContainerClass)
-        .AddClass(ToolbarOptions.ToolbarContainerDisabledClass, IsEditorEnabled is false && ToolbarOptions.ToolbarDisabledBehavior is ToolbarDisabledBehavior.Disabled)
-        .AddClass(ToolbarOptions.ToolbarContainerHiddenClass, IsEditorEnabled is false
-                                                              && ToolbarOptions.ToolbarDisabledBehavior is ToolbarDisabledBehavior.Hidden
-                                                              || ToolbarOptions.HideToolbar)
-        .Build();
+    protected string InternalToolbarContainerClass =>
+        new CssBuilder()
+            .AddClass("ql-toolbar")
+            .AddClass("ql-snow", Theme is QuillTheme.Snow)
+            .AddClass("ql-bubble", Theme is QuillTheme.Bubble)
+            .AddClass("ql-disabled", IsEditorEnabled is false)
+            .AddClass("rich-text-editor-toolbar-container")
+            .AddClass("rich-text-editor-toolbar-container-top", ToolbarOptions.ToolbarPosition is ToolbarPosition.Top)
+            .AddClass(
+                "rich-text-editor-toolbar-container-bottom",
+                ToolbarOptions.ToolbarPosition is ToolbarPosition.Bottom
+            )
+            .AddClass(ToolbarOptions.ToolbarContainerClass)
+            .AddClass(
+                ToolbarOptions.ToolbarContainerDisabledClass,
+                IsEditorEnabled is false && ToolbarOptions.ToolbarDisabledBehavior is ToolbarDisabledBehavior.Disabled
+            )
+            .AddClass(
+                ToolbarOptions.ToolbarContainerHiddenClass,
+                IsEditorEnabled is false && ToolbarOptions.ToolbarDisabledBehavior is ToolbarDisabledBehavior.Hidden
+                    || ToolbarOptions.HideToolbar
+            )
+            .Build();
 
     protected ElementReference QuillReference;
     protected ElementReference ToolbarReference;
@@ -200,9 +207,7 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
         {
             await RichTextEditorJs.DisposeEditorAsync(JsRuntime, Logger.Value, QuillReference);
         }
-        catch (Exception exception) when (exception is JSDisconnectedException or OperationCanceledException)
-        {
-        }
+        catch (Exception exception) when (exception is JSDisconnectedException or OperationCanceledException) { }
         catch (Exception exception)
         {
             Logger.Value.LogError(exception, "Failed to dispose editor");
@@ -290,12 +295,10 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
     }
 
     [JSInvokable]
-    public Task OnContentChangedAsync(TextChangeEvent args)
-        => OnContentChangedAction(args);
+    public Task OnContentChangedAsync(TextChangeEvent args) => OnContentChangedAction(args);
 
     [JSInvokable]
-    public  Task OnSelectionChangedAsync(SelectionChangeEvent args)
-        => OnSelectionChangedAction(args);
+    public Task OnSelectionChangedAsync(SelectionChangeEvent args) => OnSelectionChangedAction(args);
 
     protected override async Task OnParametersSetAsync()
     {
@@ -310,9 +313,11 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
             await SetContentAsync(InternalContent);
         }
 
-        if (Selection is not null
+        if (
+            Selection is not null
             && Selection.Length != InternalSelection?.Length
-            && Selection.Index != InternalSelection?.Index)
+            && Selection.Index != InternalSelection?.Index
+        )
         {
             InternalSelection = Selection;
             await SetSelectionAsync(InternalSelection);
@@ -325,10 +330,8 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
         }
     }
 
-    protected override Task OnAfterRenderAsync(bool firstRender)
-        => firstRender
-            ? InitializeEditorAsync()
-            : Task.CompletedTask;
+    protected override Task OnAfterRenderAsync(bool firstRender) =>
+        firstRender ? InitializeEditorAsync() : Task.CompletedTask;
 
     protected virtual async Task InitializeEditorAsync()
     {
@@ -348,27 +351,24 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
             debugLevel: DebugLevel.ToString().ToLower(),
             fonts: ToolbarOptions.Fonts,
             DebounceIntervalInMilliseconds,
-            UseAccessibleKeybindings);
+            UseAccessibleKeybindings
+        );
 
         InternalContent = Content;
         await SetContentAsync(Content);
     }
 
-    protected async Task SetContentAsync(string content)
-        => await RichTextEditorJs.SetContentAsync(
-            JsRuntime,
-            Logger.Value,
-            QuillReference,
-            content);
+    protected async Task SetContentAsync(string content) =>
+        await RichTextEditorJs.SetContentAsync(JsRuntime, Logger.Value, QuillReference, content);
 
-    protected async Task SetSelectionAsync(Range? range)
-        => await RichTextEditorJs.SetSelectionAsync(JsRuntime, Logger.Value, QuillReference, range);
+    protected async Task SetSelectionAsync(Range? range) =>
+        await RichTextEditorJs.SetSelectionAsync(JsRuntime, Logger.Value, QuillReference, range);
 
-    protected async Task SetIsEditorEnabledAsync(bool isEditorEnabled)
-        => await RichTextEditorJs.SetIsEditorEnabledAsync(JsRuntime, Logger.Value, QuillReference, isEditorEnabled);
+    protected async Task SetIsEditorEnabledAsync(bool isEditorEnabled) =>
+        await RichTextEditorJs.SetIsEditorEnabledAsync(JsRuntime, Logger.Value, QuillReference, isEditorEnabled);
 
-    protected async Task InsertImageAsync(string imageSource)
-        => await RichTextEditorJs.InsertImageAsync(JsRuntime, Logger.Value, QuillReference, imageSource);
+    protected async Task InsertImageAsync(string imageSource) =>
+        await RichTextEditorJs.InsertImageAsync(JsRuntime, Logger.Value, QuillReference, imageSource);
 
     protected virtual Task OnContentChangedAction(TextChangeEvent args)
     {
@@ -383,6 +383,5 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
         return Task.CompletedTask;
     }
 
-    protected virtual Task OnSelectionChangedAction(SelectionChangeEvent args)
-        => Task.CompletedTask;
+    protected virtual Task OnSelectionChangedAction(SelectionChangeEvent args) => Task.CompletedTask;
 }

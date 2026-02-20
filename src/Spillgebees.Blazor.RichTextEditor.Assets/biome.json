@@ -1,0 +1,76 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.4.2/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": false,
+    "defaultBranch": "main"
+  },
+  "files": {
+    "ignoreUnknown": true,
+    "includes": ["src/**", "test/**", "*.ts", "*.json"]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 120
+  },
+  "javascript": {
+    "formatter": {
+      "semicolons": "always",
+      "quoteStyle": "double",
+      "trailingCommas": "all",
+      "arrowParentheses": "always"
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "correctness": {
+        "recommended": true,
+        "noUnresolvedImports": "off",
+        "useImportExtensions": "off",
+        "noNodejsModules": "off"
+      },
+      "suspicious": {
+        "recommended": true,
+        "noConsole": "on"
+      },
+      "style": {
+        "recommended": true,
+        "noDefaultExport": "off",
+        "noNonNullAssertion": "off",
+        "noProcessEnv": "off",
+        "noMagicNumbers": "off",
+        "useExportsLast": "off",
+        "useFilenamingConvention": "off"
+      },
+      "complexity": {
+        "recommended": true,
+        "noExcessiveLinesPerFunction": "off",
+        "noExcessiveCognitiveComplexity": "off"
+      },
+      "performance": {
+        "recommended": true,
+        "noBarrelFile": "off"
+      },
+      "security": {
+        "recommended": true,
+        "noSecrets": "on"
+      },
+      "a11y": {
+        "recommended": true
+      }
+    }
+  },
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "recommended": true
+      }
+    }
+  }
+}

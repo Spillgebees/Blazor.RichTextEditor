@@ -13,8 +13,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\assets\spillgebees.png" Pack="true" PackagePath=""/>
-    <None Include="README.md" Pack="true" PackagePath=""/>
+    <None Include="..\..\assets\spillgebees.png" Pack="true" PackagePath="" />
+    <None Include="README.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,7 +26,33 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Spillgebees.Blazor.RichTextEditor.Assets\Spillgebees.Blazor.RichTextEditor.Assets.esproj" PrivateAssets="All" />
-  </ItemGroup>
+  <!-- JS/CSS build integration -->
+  <PropertyGroup>
+    <JsProjectDir>$([MSBuild]::NormalizePath($(MSBuildProjectDirectory), '..', 'Spillgebees.Blazor.RichTextEditor.Assets'))</JsProjectDir>
+    <PnpmBuildScript Condition="'$(Configuration)' == 'Debug'">build:dev</PnpmBuildScript>
+    <PnpmBuildScript Condition="'$(Configuration)' != 'Debug'">build:prod</PnpmBuildScript>
+  </PropertyGroup>
+
+  <Target
+    Name="PnpmInstall"
+    BeforeTargets="PnpmBuild"
+    Inputs="$(JsProjectDir)/pnpm-lock.yaml"
+    Outputs="$(JsProjectDir)/node_modules/.pnpm/lock.yaml"
+  >
+    <Exec Command="pnpm install --frozen-lockfile" WorkingDirectory="$(JsProjectDir)" />
+  </Target>
+
+  <Target
+    Name="PnpmBuild"
+    BeforeTargets="DispatchToInnerBuilds;ResolveStaticWebAssets"
+    Condition="'$(DesignTimeBuild)' != 'true'"
+    Inputs="$(JsProjectDir)/src/**/*;$(JsProjectDir)/vite.config.ts;$(JsProjectDir)/package.json;$(JsProjectDir)/pnpm-lock.yaml"
+    Outputs="$(MSBuildProjectDirectory)/wwwroot/Spillgebees.Blazor.RichTextEditor.lib.module.js;$(MSBuildProjectDirectory)/wwwroot/Spillgebees.Blazor.RichTextEditor.lib.module.css"
+  >
+    <Exec Command="pnpm run $(PnpmBuildScript)" WorkingDirectory="$(JsProjectDir)" />
+  </Target>
+
+  <Target Name="PnpmClean" AfterTargets="Clean">
+    <RemoveDir Directories="$(MSBuildProjectDirectory)/wwwroot" />
+  </Target>
 </Project>

@@ -2,7 +2,6 @@
   <Import Project="../../General.targets" />
 
   <ItemGroup>
-    <ProjectReference
-      Include="..\Spillgebees.Blazor.RichTextEditor.Samples.Shared\Spillgebees.Blazor.RichTextEditor.Samples.Shared.csproj" />
+    <ProjectReference Include="..\Spillgebees.Blazor.RichTextEditor.Samples.Shared\Spillgebees.Blazor.RichTextEditor.Samples.Shared.csproj" />
   </ItemGroup>
 </Project>

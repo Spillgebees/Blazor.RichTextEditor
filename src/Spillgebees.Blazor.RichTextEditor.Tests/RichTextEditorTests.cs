@@ -33,8 +33,9 @@ public class RichTextEditorTests : BunitContext
     public void Should_add_custom_css_to_container()
     {
         // act
-        var cut = Render<Components.RichTextEditor>(parameters => parameters
-            .Add(p => p.ContainerClass, "my-custom-class"));
+        var cut = Render<Components.RichTextEditor>(parameters =>
+            parameters.Add(p => p.ContainerClass, "my-custom-class")
+        );
 
         // assert
         var container = cut.Find("div.rich-text-editor-container.my-custom-class");
@@ -53,7 +54,9 @@ public class RichTextEditorTests : BunitContext
 
     [Test]
     [Timeout(5000)]
-    public async Task Should_dispose_editor_correctly_when_js_initialization_has_finished(CancellationToken cancellationToken)
+    public async Task Should_dispose_editor_correctly_when_js_initialization_has_finished(
+        CancellationToken cancellationToken
+    )
     {
         // arrange
         var cut = Render<Components.RichTextEditor>();
@@ -68,7 +71,9 @@ public class RichTextEditorTests : BunitContext
 
     [Test]
     [Timeout(5000)]
-    public async Task Should_dispose_editor_correctly_when_js_initialization_has_not_finished(CancellationToken cancellationToken)
+    public async Task Should_dispose_editor_correctly_when_js_initialization_has_not_finished(
+        CancellationToken cancellationToken
+    )
     {
         // arrange
         var cut = Render<Components.RichTextEditor>();

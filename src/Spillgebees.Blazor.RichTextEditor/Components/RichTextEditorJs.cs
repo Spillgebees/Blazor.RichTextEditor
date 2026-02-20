@@ -22,8 +22,9 @@ internal static class RichTextEditorJs
         string debugLevel,
         List<string>? fonts,
         int debounceIntervalInMilliseconds = 0,
-        bool useAccessibleKeybindings = true)
-        => jsRuntime.SafeInvokeVoidAsync(
+        bool useAccessibleKeybindings = true
+    ) =>
+        jsRuntime.SafeInvokeVoidAsync(
             logger,
             $"{JsNamespace}.createEditor",
             dotNetObjectReference,
@@ -37,93 +38,73 @@ internal static class RichTextEditorJs
             debugLevel,
             fonts,
             debounceIntervalInMilliseconds,
-            useAccessibleKeybindings);
+            useAccessibleKeybindings
+        );
 
     internal static ValueTask<string> GetContentAsync(
         IJSRuntime jsRuntime,
         ILogger logger,
-        ElementReference quillReference)
-        => jsRuntime.SafeInvokeAsync<string>(
-            logger,
-            $"{JsNamespace}.getContent",
-            quillReference);
+        ElementReference quillReference
+    ) => jsRuntime.SafeInvokeAsync<string>(logger, $"{JsNamespace}.getContent", quillReference);
 
     internal static ValueTask SetContentAsync(
         IJSRuntime jsRuntime,
         ILogger logger,
         ElementReference quillReference,
-        string content)
-        => jsRuntime.SafeInvokeVoidAsync(
-            logger,
-            $"{JsNamespace}.setContent",
-            quillReference,
-            content);
+        string content
+    ) => jsRuntime.SafeInvokeVoidAsync(logger, $"{JsNamespace}.setContent", quillReference, content);
 
     internal static ValueTask<Range?> GetSelectionAsync(
         IJSRuntime jsRuntime,
         ILogger logger,
-        ElementReference quillReference)
-        => jsRuntime.SafeInvokeAsync<Range?>(
-            logger,
-            $"{JsNamespace}.getSelection",
-            quillReference);
+        ElementReference quillReference
+    ) => jsRuntime.SafeInvokeAsync<Range?>(logger, $"{JsNamespace}.getSelection", quillReference);
 
     internal static ValueTask SetSelectionAsync(
         IJSRuntime jsRuntime,
         ILogger logger,
         ElementReference quillReference,
-        Range? range)
-        => jsRuntime.SafeInvokeVoidAsync(
-            logger,
-            $"{JsNamespace}.setSelection",
-            quillReference,
-            range);
+        Range? range
+    ) => jsRuntime.SafeInvokeVoidAsync(logger, $"{JsNamespace}.setSelection", quillReference, range);
 
     internal static ValueTask<string> GetTextAsync(
         IJSRuntime jsRuntime,
         ILogger logger,
-        ElementReference quillReference)
-        => jsRuntime.SafeInvokeAsync<string>(
-            logger,
-            $"{JsNamespace}.getText",
-            quillReference);
+        ElementReference quillReference
+    ) => jsRuntime.SafeInvokeAsync<string>(logger, $"{JsNamespace}.getText", quillReference);
 
     internal static ValueTask<object> InsertImageAsync(
         IJSRuntime jsRuntime,
         ILogger logger,
         ElementReference quillReference,
-        string imageSource)
-        => jsRuntime.SafeInvokeAsync<object>(
-            logger,
-            $"{JsNamespace}.insertImage",
-            quillReference,
-            imageSource);
+        string imageSource
+    ) => jsRuntime.SafeInvokeAsync<object>(logger, $"{JsNamespace}.insertImage", quillReference, imageSource);
 
     internal static ValueTask<object> SetIsEditorEnabledAsync(
         IJSRuntime jsRuntime,
         ILogger logger,
         ElementReference quillReference,
-        bool isEditorEnabled)
-        => jsRuntime.SafeInvokeAsync<object>(
+        bool isEditorEnabled
+    ) =>
+        jsRuntime.SafeInvokeAsync<object>(
             logger,
             $"{JsNamespace}.setEditorEnabledState",
             quillReference,
-            isEditorEnabled);
+            isEditorEnabled
+        );
 
     internal static ValueTask DisposeEditorAsync(
         IJSRuntime jsRuntime,
         ILogger logger,
-        ElementReference quillReference)
-        => jsRuntime.SafeInvokeVoidAsync(
-            logger,
-            $"{JsNamespace}.disposeEditor",
-            quillReference);
+        ElementReference quillReference
+    ) => jsRuntime.SafeInvokeVoidAsync(logger, $"{JsNamespace}.disposeEditor", quillReference);
 
     private static ValueTask SafeInvokeVoidAsync(
         this IJSRuntime jsRuntime,
         ILogger logger,
         string identifier,
-        params object?[] args)
+        params object?[] args
+    )
     {
         try
         {
@@ -142,7 +123,8 @@ internal static class RichTextEditorJs
         this IJSRuntime jsRuntime,
         ILogger logger,
         string identifier,
-        params object?[] args)
+        params object?[] args
+    )
     {
         try
         {
