@@ -26,7 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".files", ".files", "{1745BB
 		src\.editorconfig = src\.editorconfig
 		src\Directory.Packages.props = src\Directory.Packages.props
 		src\General.targets = src\General.targets
-		src\global.json = src\global.json
+		global.json = global.json
 	EndProjectSection
 EndProject
 Global
