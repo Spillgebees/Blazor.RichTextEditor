@@ -6,7 +6,7 @@ import Delta from "quill-delta";
 import { debounce } from "./debouncer";
 import type { QuillEvent } from "./interfaces/quill-events";
 import { SelectionChangedEvent, TextChangedEvent } from "./interfaces/quill-events";
-import type { QuillEventNames } from "./interfaces/spillgebees";
+import type { QuillEventNames, QuillEventHandler } from "./interfaces/spillgebees";
 
 export function bootstrap() {
   window.Spillgebees = window.Spillgebees || {};
@@ -24,8 +24,7 @@ export function bootstrap() {
     registerQuillEventCallback: registerQuillEventCallback,
   };
   window.Spillgebees.eventMap =
-    window.Spillgebees.eventMap ||
-    new Map<HTMLElement, Map<QuillEventNames, (...args: unknown[]) => Promise<QuillEvent>>>();
+    window.Spillgebees.eventMap || new Map<HTMLElement, Map<QuillEventNames, QuillEventHandler>>();
   window.Spillgebees.editors = window.Spillgebees.editors || new Map<HTMLElement, Quill>();
 }
 
@@ -46,9 +45,11 @@ const createEditor = async (
   Quill.register("modules/blotFormatter2", BlotFormatter2);
 
   if (fonts.length > 0) {
-    window.Spillgebees.fonts = [...window.Spillgebees.fonts, ...fonts];
+    for (const font of fonts) {
+      window.Spillgebees.fonts.add(font);
+    }
     const fontAttributor = Quill.import("formats/font") as StyleAttributor;
-    fontAttributor.whitelist = window.Spillgebees.fonts;
+    fontAttributor.whitelist = Array.from(window.Spillgebees.fonts);
     Quill.register(fontAttributor, true);
   }
 
@@ -80,10 +81,7 @@ const createEditor = async (
 
   const quill = new Quill(quillContainer, quillOptions);
   window.Spillgebees.editors.set(quillContainer, quill);
-  window.Spillgebees.eventMap.set(
-    quillContainer,
-    new Map<QuillEventNames, (...args: unknown[]) => Promise<QuillEvent>>(),
-  );
+  window.Spillgebees.eventMap.set(quillContainer, new Map<QuillEventNames, QuillEventHandler>());
 
   if (shouldRegisterEventCallbacks) {
     await registerQuillEventCallback(
@@ -182,7 +180,7 @@ const registerQuillEventCallback = async (
   if (eventName === "text-change") {
     const handler = async (_delta: Delta, _oldContents: Delta, source: EmitterSource): Promise<QuillEvent> =>
       await dotNetHelper.invokeMethodAsync(invokableDotNetMethodName, new TextChangedEvent(source));
-    const debouncedHandler = debounce(handler, debounceIntervalInMilliseconds);
+    const debouncedHandler = debounce<typeof handler, QuillEvent>(handler, debounceIntervalInMilliseconds);
 
     window.Spillgebees.eventMap.get(quillContainer)?.set(eventName, debouncedHandler);
     quill.on("text-change", debouncedHandler);
@@ -193,7 +191,7 @@ const registerQuillEventCallback = async (
         new SelectionChangedEvent(oldRange, range, source),
       );
 
-    const debouncedHandler = debounce(handler, debounceIntervalInMilliseconds);
+    const debouncedHandler = debounce<typeof handler, QuillEvent>(handler, debounceIntervalInMilliseconds);
     window.Spillgebees.eventMap.get(quillContainer)?.set(eventName, debouncedHandler);
     quill.on("selection-change", debouncedHandler);
   } else {

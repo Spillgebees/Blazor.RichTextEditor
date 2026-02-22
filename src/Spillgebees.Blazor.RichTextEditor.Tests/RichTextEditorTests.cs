@@ -43,6 +43,32 @@ public class RichTextEditorTests : BunitContext
     }
 
     [Test]
+    public void Should_add_custom_css_to_editor_container_when_editor_is_enabled()
+    {
+        // act
+        var cut = Render<Components.RichTextEditor>(parameters =>
+            parameters.Add(p => p.EditorContainerClass, "my-editor-class").Add(p => p.IsEditorEnabled, true)
+        );
+
+        // assert
+        var editorContainer = cut.Find("div.rich-text-editor-editor-container.my-editor-class");
+        editorContainer.Should().NotBeNull();
+    }
+
+    [Test]
+    public void Should_add_custom_css_to_editor_container_when_editor_is_disabled()
+    {
+        // act
+        var cut = Render<Components.RichTextEditor>(parameters =>
+            parameters.Add(p => p.EditorContainerClass, "my-editor-class").Add(p => p.IsEditorEnabled, false)
+        );
+
+        // assert
+        var editorContainer = cut.Find("div.rich-text-editor-editor-container.my-editor-class");
+        editorContainer.Should().NotBeNull();
+    }
+
+    [Test]
     public void Should_trigger_editor_initialization_after_render()
     {
         // act

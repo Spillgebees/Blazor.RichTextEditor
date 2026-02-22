@@ -161,7 +161,7 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
             .AddClass("ql-bubble", Theme is QuillTheme.Bubble)
             .AddClass("ql-disabled", IsEditorEnabled is false)
             .AddClass("rich-text-editor-editor-container")
-            .AddClass(EditorContainerClass, IsEditorEnabled is false)
+            .AddClass(EditorContainerClass)
             .AddClass(EditorContainerDisabledClass, IsEditorEnabled is false)
             .Build();
 

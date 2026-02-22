@@ -162,12 +162,14 @@ describe.each(buildConfigs)("$name build (parametrized)", (cfg) => {
     expect(res.cssContent).toContain(".rich-text-editor-container-disabled");
   });
 
-  it.skipIf(!cfg.expectMinifiedSmaller)("prod should produce minified JS smaller than dev JS", () => {
-    // arrange
-    const dev = results.get("dev");
-    const prod = results.get("prod");
+  if (cfg.expectMinifiedSmaller) {
+    it("prod should produce minified JS smaller than dev JS", () => {
+      // arrange
+      const dev = results.get("dev");
+      const prod = results.get("prod");
 
-    // assert
-    expect(prod && dev && prod.jsSize < dev.jsSize).toBe(true);
-  });
+      // assert
+      expect(prod && dev && prod.jsSize < dev.jsSize).toBe(true);
+    });
+  }
 });

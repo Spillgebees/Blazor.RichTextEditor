@@ -1,3 +1,4 @@
+import type { DotNet } from "@microsoft/dotnet-js-interop";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("quill", () => {
@@ -32,12 +33,13 @@ vi.mock("@microsoft/dotnet-js-interop", () => ({
   DotNet: {},
 }));
 
+import Quill from "quill";
 import { bootstrap } from "./rich-text-editor";
 
 describe("bootstrap", () => {
   beforeEach(() => {
     // Reset window.Spillgebees before each test
-    delete (window as Record<string, unknown>).Spillgebees;
+    window.Spillgebees = undefined as unknown as typeof window.Spillgebees;
   });
 
   it("should initialize window.Spillgebees with all expected properties", () => {
@@ -106,5 +108,115 @@ describe("bootstrap", () => {
     expect(window.Spillgebees.editors).toBe(originalEditors);
     expect(window.Spillgebees.eventMap).toBe(originalEventMap);
     expect(window.Spillgebees.fonts).toBe(originalFonts);
+  });
+});
+
+describe("createEditor", () => {
+  const mockFontAttributor: { whitelist: string[] } = { whitelist: [] };
+
+  function createMockDotNetHelper(): DotNet.DotNetObject {
+    return {
+      invokeMethodAsync: vi.fn().mockResolvedValue(undefined),
+    } as unknown as DotNet.DotNetObject;
+  }
+
+  beforeEach(() => {
+    window.Spillgebees = undefined as unknown as typeof window.Spillgebees;
+    bootstrap();
+    mockFontAttributor.whitelist = [];
+
+    // Quill.import is vi.fn() from the mock factory — configure its return value
+    const mockImport = Quill.import as unknown as { mockReturnValue: (val: unknown) => void };
+    mockImport.mockReturnValue(mockFontAttributor);
+  });
+
+  it("should keep custom fonts", async () => {
+    // arrange
+    const dotNetHelper = createMockDotNetHelper();
+    const container = document.createElement("div");
+
+    // act
+    await window.Spillgebees.editorFunctions.createEditor(
+      dotNetHelper,
+      "OnEditorInitialized",
+      container,
+      null,
+      true,
+      false,
+      undefined,
+      undefined,
+      undefined,
+      ["Arial", "Verdana"],
+    );
+
+    // assert
+    expect(window.Spillgebees.fonts).toBeInstanceOf(Set);
+    expect(window.Spillgebees.fonts.size).toBe(2);
+    expect(window.Spillgebees.fonts.has("Arial")).toBe(true);
+    expect(window.Spillgebees.fonts.has("Verdana")).toBe(true);
+  });
+
+  it("should deduplicate fonts across multiple createEditor calls", async () => {
+    // arrange
+    const dotNetHelper = createMockDotNetHelper();
+    const container1 = document.createElement("div");
+    const container2 = document.createElement("div");
+
+    // act
+    await window.Spillgebees.editorFunctions.createEditor(
+      dotNetHelper,
+      "OnEditorInitialized",
+      container1,
+      null,
+      true,
+      false,
+      undefined,
+      undefined,
+      undefined,
+      ["Arial", "Verdana"],
+    );
+    await window.Spillgebees.editorFunctions.createEditor(
+      dotNetHelper,
+      "OnEditorInitialized",
+      container2,
+      null,
+      true,
+      false,
+      undefined,
+      undefined,
+      undefined,
+      ["Arial", "Courier"],
+    );
+
+    // assert
+    expect(window.Spillgebees.fonts).toBeInstanceOf(Set);
+    expect(window.Spillgebees.fonts.size).toBe(3);
+    expect(window.Spillgebees.fonts.has("Arial")).toBe(true);
+    expect(window.Spillgebees.fonts.has("Verdana")).toBe(true);
+    expect(window.Spillgebees.fonts.has("Courier")).toBe(true);
+  });
+
+  it("should set fontAttributor.whitelist to an Array derived from the Set", async () => {
+    // arrange
+    const dotNetHelper = createMockDotNetHelper();
+    const container = document.createElement("div");
+
+    // act
+    await window.Spillgebees.editorFunctions.createEditor(
+      dotNetHelper,
+      "OnEditorInitialized",
+      container,
+      null,
+      true,
+      false,
+      undefined,
+      undefined,
+      undefined,
+      ["Arial", "Verdana"],
+    );
+
+    // assert
+    expect(Array.isArray(mockFontAttributor.whitelist)).toBe(true);
+    expect(mockFontAttributor.whitelist).toEqual(["Arial", "Verdana"]);
   });
 });

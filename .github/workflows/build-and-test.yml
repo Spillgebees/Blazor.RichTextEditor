@@ -33,8 +33,11 @@ jobs:
               - 'src/Spillgebees.Blazor.RichTextEditor.Samples/**'
               - 'src/Directory.Packages.props'
               - 'src/General.targets'
+              - 'src/.editorconfig'
               - 'global.json'
               - 'Spillgebees.Blazor.RichTextEditor.slnx'
+              - 'Directory.Solution.targets'
+              - '.config/**'
               - '.github/workflows/**'
             ts:
               - 'src/Spillgebees.Blazor.RichTextEditor.Assets/**'

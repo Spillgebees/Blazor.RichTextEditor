@@ -10,15 +10,15 @@ It supports Blazor Server, WebAssembly, and the unified .NET 8+ web app model.
 ### Solution structure
 
 ```
-Spillgebees.Blazor.RichTextEditor.slnx          # XML solution (root)
-├── src/Spillgebees.Blazor.RichTextEditor/        # Razor Class Library (NuGet package)
-├── src/Spillgebees.Blazor.RichTextEditor.Assets/ # TypeScript/CSS source (Vite + pnpm)
-├── src/Spillgebees.Blazor.RichTextEditor.Tests/  # TUnit + bUnit tests
+Spillgebees.Blazor.RichTextEditor.slnx                    # XML solution (root)
+├── src/Spillgebees.Blazor.RichTextEditor/                # Razor Class Library (NuGet package)
+├── src/Spillgebees.Blazor.RichTextEditor.Assets/         # TypeScript/CSS source (Vite + pnpm)
+├── src/Spillgebees.Blazor.RichTextEditor.Tests/          # TUnit + bUnit tests
 └── src/Spillgebees.Blazor.RichTextEditor.Samples/
-    ├── Samples.Shared/                           # Shared sample components
-    ├── Samples.Server/                           # Blazor Server sample
-    ├── Samples.Wasm/                             # Blazor WASM sample
-    └── Samples.WebApp/                           # .NET 8+ unified web app sample
+    ├── Spillgebees.Blazor.RichTextEditor.Samples.Shared/ # Shared sample components
+    ├── Spillgebees.Blazor.RichTextEditor.Samples.Server/ # Blazor Server sample
+    ├── Spillgebees.Blazor.RichTextEditor.Samples.Wasm/   # Blazor WASM sample
+    └── Spillgebees.Blazor.RichTextEditor.Samples.WebApp/ # .NET 8+ unified web app sample
 ```
 
 ### JS/CSS build pipeline
@@ -46,8 +46,8 @@ ASP.NET Core package versions are pinned per-TFM in `src/Directory.Packages.prop
 
 ## Testing
 
-- **.NET**: TUnit + AwesomeAssertions + bUnit (5 tests)
-- **TypeScript**: Vitest + jsdom (32 tests across 5 files)
+- **.NET**: TUnit + AwesomeAssertions + bUnit
+- **TypeScript**: Vitest + jsdom
 - Run .NET tests: `dotnet test --solution Spillgebees.Blazor.RichTextEditor.slnx`
 - Run TS tests: `pnpm run test` (from `src/Spillgebees.Blazor.RichTextEditor.Assets/`)
 
@@ -55,4 +55,4 @@ ASP.NET Core package versions are pinned per-TFM in `src/Directory.Packages.prop
 
 - **CSharpier**: formats `.cs`, `.csproj`, `.props`, `.targets`, `.slnx`, `.xml`
 - **Husky.Net**: pre-commit hook runs CSharpier on staged files
-- **Biome**: formats + lints TypeScript (configured in `src/.../Assets/biome.json`)
+- **Biome**: formats + lints TypeScript (configured in `src/Spillgebees.Blazor.RichTextEditor.Assets/biome.json`)

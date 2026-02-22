@@ -4,7 +4,8 @@
   <PropertyGroup>
     <Authors>Jason Rebelo Neves (igotinfected)</Authors>
     <Company>Spillgebees</Company>
-    <Description>Spillgebees.Blazor.RichTextEditor is a WYSIWYG Blazor component enabling rich text content editing. It is powered by Quill.</Description>
+    <Description>Spillgebees.Blazor.RichTextEditor is a WYSIWYG Blazor component enabling rich text
+      content editing. It is powered by Quill.</Description>
     <PackageTags>blazor, blazor-wasm, blazor-server, quill, quilljs, rich-text-editor, wysiwyg</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -28,7 +29,8 @@
 
   <!-- JS/CSS build integration -->
   <PropertyGroup>
-    <JsProjectDir>$([MSBuild]::NormalizePath($(MSBuildProjectDirectory), '..', 'Spillgebees.Blazor.RichTextEditor.Assets'))</JsProjectDir>
+    <JsProjectDir>$([MSBuild]::NormalizePath($(MSBuildProjectDirectory), '..',
+      'Spillgebees.Blazor.RichTextEditor.Assets'))</JsProjectDir>
     <PnpmBuildScript Condition="'$(Configuration)' == 'Debug'">build:dev</PnpmBuildScript>
     <PnpmBuildScript Condition="'$(Configuration)' != 'Debug'">build:prod</PnpmBuildScript>
   </PropertyGroup>
@@ -36,7 +38,7 @@
   <Target
     Name="PnpmInstall"
     BeforeTargets="PnpmBuild"
-    Inputs="$(JsProjectDir)/pnpm-lock.yaml"
+    Inputs="$(JsProjectDir)/package.json;$(JsProjectDir)/pnpm-lock.yaml"
     Outputs="$(JsProjectDir)/node_modules/.pnpm/lock.yaml"
   >
     <Exec Command="pnpm install --frozen-lockfile" WorkingDirectory="$(JsProjectDir)" />
