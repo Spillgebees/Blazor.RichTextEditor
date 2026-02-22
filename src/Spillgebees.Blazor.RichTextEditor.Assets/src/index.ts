@@ -1,61 +1,61 @@
 // noinspection JSUnusedGlobalSymbols
 
 import { bootstrap } from "./rich-text-editor";
-import './styles.css';
+import "./styles.css";
 
-export function beforeWebStart(options: any) {
-    if (window.hasBeforeStartBeenCalled) {
-        return;
-    }
+export function beforeWebStart(options: unknown) {
+  if (window.hasBeforeStartBeenCalled) {
+    return;
+  }
 
-    beforeStart(options);
+  beforeStart(options);
 }
 
-export function afterWebStarted(options: any) {
-    if (window.hasAfterStartedBeenCalled) {
-        return;
-    }
+export function afterWebStarted(options: unknown) {
+  if (window.hasAfterStartedBeenCalled) {
+    return;
+  }
 
-    afterStarted(options);
+  afterStarted(options);
 }
 
-export function beforeWebAssemblyStart(options: any) {
-    if (window.hasBeforeStartBeenCalled) {
-        return;
-    }
+export function beforeWebAssemblyStart(options: unknown) {
+  if (window.hasBeforeStartBeenCalled) {
+    return;
+  }
 
-    beforeStart(options);
+  beforeStart(options);
 }
 
-export function afterWebAssemblyStarted(options: any) {
-    if (window.hasAfterStartedBeenCalled) {
-        return
-    }
+export function afterWebAssemblyStarted(options: unknown) {
+  if (window.hasAfterStartedBeenCalled) {
+    return;
+  }
 
-    afterStarted(options);
+  afterStarted(options);
 }
 
-export function beforeServerStart(options: any) {
-    if (window.hasBeforeStartBeenCalled) {
-        return;
-    }
+export function beforeServerStart(options: unknown) {
+  if (window.hasBeforeStartBeenCalled) {
+    return;
+  }
 
-    beforeStart(options);
+  beforeStart(options);
 }
 
-export function afterServerStarted(options: any) {
-    if (window.hasAfterStartedBeenCalled) {
-        return;
-    }
+export function afterServerStarted(options: unknown) {
+  if (window.hasAfterStartedBeenCalled) {
+    return;
+  }
 
-    afterStarted(options);
+  afterStarted(options);
 }
 
-export function beforeStart(_: any) {
-    window.hasBeforeStartBeenCalled = true;
-    bootstrap();
+export function beforeStart(_: unknown) {
+  window.hasBeforeStartBeenCalled = true;
+  bootstrap();
 }
 
-export function afterStarted(_: any) {
-    window.hasAfterStartedBeenCalled = true;
+export function afterStarted(_: unknown) {
+  window.hasAfterStartedBeenCalled = true;
 }

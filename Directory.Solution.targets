@@ -1,0 +1,17 @@
+<Project>
+  <!--
+    Runs at the solution level only (not per-project), avoiding parallel
+    execution issues with dotnet tool restore. See:
+    https://github.com/alirezanet/Husky.Net/issues/155
+
+    Set HUSKY=0 in CI to skip hook installation.
+  -->
+  <Target
+    Name="HuskySetup"
+    BeforeTargets="Restore;CollectPackageReferences"
+    Condition="'$(HUSKY)' != '0' and !Exists('$(MSBuildThisFileDirectory).husky/_/.gitignore')"
+  >
+    <Exec Command="dotnet tool restore" StandardOutputImportance="Low" StandardErrorImportance="High" />
+    <Exec Command="dotnet husky install" StandardOutputImportance="Low" StandardErrorImportance="High" />
+  </Target>
+</Project>

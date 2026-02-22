@@ -751,4 +751,5 @@ fabric.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/csharp,visualstudio,rider,jetbrains
 
-dist
+# Generated JS/CSS build output in the Razor Class Library wwwroot
+src/Spillgebees.Blazor.RichTextEditor/wwwroot/

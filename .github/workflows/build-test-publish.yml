@@ -1,5 +1,7 @@
 name: Build, test, & publish
 
+permissions: {}
+
 on:
   workflow_call:
     inputs:
@@ -11,6 +13,14 @@ on:
         type: boolean
         description: Whether to run the job.
         default: true
+      dotnet-changed:
+        type: boolean
+        description: Whether .NET source files changed.
+        default: true
+      ts-changed:
+        type: boolean
+        description: Whether TypeScript source files changed.
+        default: true
       should-publish-gh-page:
         type: boolean
         description: Whether to publish the WASM application to gh-pages.
@@ -18,7 +28,7 @@ on:
       gh-page-destination-directory:
         type: string
         description: The destination directory for the WASM application.
-        default:
+        default: ""
 
 jobs:
   build-test-publish:
@@ -27,26 +37,50 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    env:
+      HUSKY: 0
 
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 0
+
+      - name: 📦 setup pnpm
+        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4
+        with:
+          package_json_file: src/Spillgebees.Blazor.RichTextEditor.Assets/package.json
+
+      - name: 📦 setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: src/Spillgebees.Blazor.RichTextEditor.Assets/pnpm-lock.yaml
 
       - name: 📦 setup .NET
         uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
         with:
-          global-json-file: src/global.json
-
-      - name: ⚙️ restore workloads
-        run: dotnet workload restore Spillgebees.Blazor.RichTextEditor.sln
+          global-json-file: global.json
 
       - name: 📦 restore packages
-        run: dotnet restore Spillgebees.Blazor.RichTextEditor.sln
+        run: dotnet restore Spillgebees.Blazor.RichTextEditor.slnx
 
       - name: 👷 build project
-        run: dotnet build --configuration Release --no-restore Spillgebees.Blazor.RichTextEditor.sln
+        run: dotnet build --configuration Release --no-restore Spillgebees.Blazor.RichTextEditor.slnx
 
-      - name: ✅ test project
-        run: dotnet test --configuration Release --no-build --verbosity normal Spillgebees.Blazor.RichTextEditor.sln
+      - name: 🔍 lint TypeScript
+        if: inputs.ts-changed
+        run: pnpm run lint
+        working-directory: src/Spillgebees.Blazor.RichTextEditor.Assets
+
+      - name: ✅ test .NET
+        if: inputs.dotnet-changed
+        run: dotnet test --solution Spillgebees.Blazor.RichTextEditor.slnx --configuration Release --no-build
+
+      - name: ✅ test TypeScript
+        if: inputs.ts-changed
+        run: pnpm run test
+        working-directory: src/Spillgebees.Blazor.RichTextEditor.Assets
 
       - name: 📦 package the application
         if: inputs.should-package

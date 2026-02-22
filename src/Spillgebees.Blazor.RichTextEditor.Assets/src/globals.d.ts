@@ -1,10 +1,10 @@
-import { Spillgebees } from "./interfaces/spillgebees";
+import type { Spillgebees } from "./interfaces/spillgebees";
 
 declare global {
-    // noinspection JSUnusedGlobalSymbols
-    interface Window {
-        Spillgebees: Spillgebees;
-        hasBeforeStartBeenCalled: boolean;
-        hasAfterStartedBeenCalled: boolean;
-    }
+  // noinspection JSUnusedGlobalSymbols
+  interface Window {
+    Spillgebees: Spillgebees;
+    hasBeforeStartBeenCalled: boolean;
+    hasAfterStartedBeenCalled: boolean;
+  }
 }

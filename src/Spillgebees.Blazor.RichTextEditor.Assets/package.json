@@ -1,29 +1,15 @@
 {
   "private": true,
   "name": "spillgebees.blazor.richtexteditor.assets",
-  "source": "src/index.ts",
-  "main": "dist/Spillgebees.Blazor.RichTextEditor.lib.module.js",
-  "scripts": {
-    "build:dev": "cross-env NODE_ENV=development tsx ./build.ts",
-    "build:prod": "cross-env NODE_ENV=production tsx ./build.ts",
-    "clean": "rimraf ./dist"
+  "version": "0.1.0",
+  "type": "module",
+  "packageManager": "pnpm@10.30.0",
+  "engines": {
+    "node": ">=20.11.0"
   },
-  "keywords": [],
+  "description": "TypeScript module housing assets related to the Spillgebees.Blazor.RichTextEditor NuGet package.",
   "author": "Jason Rebelo Neves (igotinfected)",
   "license": "MIT",
-  "type": "module",
-  "devDependencies": {
-    "@microsoft/dotnet-js-interop": "8.0.0",
-    "@types/node": "22.13.10",
-    "cross-env": "7.0.3",
-    "esbuild": "0.25.1",
-    "eslint": "9.22.0",
-    "rimraf": "6.0.1",
-    "tsx": "4.19.3",
-    "typescript": "5.8.2"
-  },
-  "version": "0.1.0",
-  "description": "TypeScript module housing assets related to the Spillgebees.Blazor.RichTextEditor NuGet package.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Spillgebees/Blazor.RichTextEditor.git"
@@ -32,10 +18,33 @@
     "url": "https://github.com/Spillgebees/Blazor.RichTextEditor/issues"
   },
   "homepage": "https://github.com/Spillgebees/Blazor.RichTextEditor#readme",
+  "keywords": [],
+  "scripts": {
+    "build:dev": "vite build --mode development",
+    "build:prod": "vite build --mode production",
+    "clean": "rimraf ../Spillgebees.Blazor.RichTextEditor/wwwroot",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
   "dependencies": {
     "@enzedonline/quill-blot-formatter2": "^2.3.0",
     "parchment": "^3.0.0",
     "quill": "^2.0.3",
     "quill-delta": "^5.1.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.4.2",
+    "@microsoft/dotnet-js-interop": "8.0.0",
+    "@types/node": "22.13.10",
+    "@vitest/coverage-v8": "4.0.18",
+    "jsdom": "28.1.0",
+    "rimraf": "6.0.1",
+    "typescript": "5.8.2",
+    "vite": "7.3.1",
+    "vitest": "4.0.18"
   }
 }

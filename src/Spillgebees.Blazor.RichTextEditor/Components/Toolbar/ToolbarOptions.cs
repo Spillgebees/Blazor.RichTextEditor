@@ -24,20 +24,17 @@ public record ToolbarOptions(
     ToolbarDisabledBehavior ToolbarDisabledBehavior = ToolbarDisabledBehavior.Disabled,
     string ToolbarContainerDisabledClass = "rich-text-editor-toolbar-container-disabled",
     string ToolbarContainerHiddenClass = "rich-text-editor-toolbar-container-hidden",
-    bool HideToolbar = false)
+    bool HideToolbar = false
+)
 {
-    private static readonly List<string> _defaultFonts =
-    [
-        "",
-        "serif",
-        "monospace"
-    ];
+    private static readonly List<string> _defaultFonts = ["", "serif", "monospace"];
 
-    public string ToolbarContainerHtmlId { get; init; } = ToolbarContainerHtmlId ?? $"rich-text-editor-toolbar-container-{Guid.NewGuid()}";
+    public string ToolbarContainerHtmlId { get; init; } =
+        ToolbarContainerHtmlId ?? $"rich-text-editor-toolbar-container-{Guid.NewGuid()}";
     public List<string> Fonts { get; init; } = Fonts ?? _defaultFonts;
 
-    public static ToolbarOptions BasicToolbarOptions
-        => new()
+    public static ToolbarOptions BasicToolbarOptions =>
+        new()
         {
             ShowFontControls = true,
             ShowStyleControls = true,
@@ -45,8 +42,8 @@ public record ToolbarOptions(
             ShowHypertextLinkControls = true,
         };
 
-    public static ToolbarOptions FullToolbarOptions
-        => new()
+    public static ToolbarOptions FullToolbarOptions =>
+        new()
         {
             ShowFontControls = true,
             ShowSizeControls = true,
@@ -66,8 +63,8 @@ public record ToolbarOptions(
             ShowCleanFormattingControls = true,
         };
 
-    public static ToolbarOptions None
-        => new()
+    public static ToolbarOptions None =>
+        new()
         {
             ShowFontControls = false,
             ShowSizeControls = false,
@@ -85,6 +82,6 @@ public record ToolbarOptions(
             ShowEmbedVideoControls = false,
             ShowMathControls = false,
             ShowCleanFormattingControls = false,
-            HideToolbar = true
+            HideToolbar = true,
         };
 }

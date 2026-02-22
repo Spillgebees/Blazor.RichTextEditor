@@ -3,16 +3,13 @@
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "lib": [
-      "ESNext",
-      "DOM"
-    ],
+    "lib": ["ESNext", "DOM"],
     "sourceMap": true,
     "esModuleInterop": false,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true,
+    "verbatimModuleSyntax": true,
     "resolveJsonModule": true
   }
 }

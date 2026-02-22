@@ -8,12 +8,8 @@ public class RichTextEditorTests : BunitContext
     private const string DisposeEditorIdentifier = "Spillgebees.editorFunctions.disposeEditor";
     private const string SetContentIdentifier = "Spillgebees.editorFunctions.setContent";
 
-    /// <summary>
-    /// Timeout in milliseconds for tests to prevent hanging.
-    /// </summary>
-    private const int TestTimeoutMs = 5000;
-
-    public RichTextEditorTests()
+    [Before(Test)]
+    public void Setup()
     {
         JSInterop.Mode = JSRuntimeMode.Loose;
 
@@ -22,7 +18,7 @@ public class RichTextEditorTests : BunitContext
         JSInterop.SetupVoid(SetContentIdentifier);
     }
 
-    [Fact(Timeout = TestTimeoutMs)]
+    [Test]
     public void Should_render_editor_container()
     {
         // act
@@ -33,19 +29,46 @@ public class RichTextEditorTests : BunitContext
         container.Should().NotBeNull();
     }
 
-    [Fact(Timeout = TestTimeoutMs)]
+    [Test]
     public void Should_add_custom_css_to_container()
     {
         // act
-        var cut = Render<Components.RichTextEditor>(parameters => parameters
-            .Add(p => p.ContainerClass, "my-custom-class"));
+        var cut = Render<Components.RichTextEditor>(parameters =>
+            parameters.Add(p => p.ContainerClass, "my-custom-class")
+        );
 
         // assert
         var container = cut.Find("div.rich-text-editor-container.my-custom-class");
         container.Should().NotBeNull();
     }
 
-    [Fact(Timeout = TestTimeoutMs)]
+    [Test]
+    public void Should_add_custom_css_to_editor_container_when_editor_is_enabled()
+    {
+        // act
+        var cut = Render<Components.RichTextEditor>(parameters =>
+            parameters.Add(p => p.EditorContainerClass, "my-editor-class").Add(p => p.IsEditorEnabled, true)
+        );
+
+        // assert
+        var editorContainer = cut.Find("div.rich-text-editor-editor-container.my-editor-class");
+        editorContainer.Should().NotBeNull();
+    }
+
+    [Test]
+    public void Should_add_custom_css_to_editor_container_when_editor_is_disabled()
+    {
+        // act
+        var cut = Render<Components.RichTextEditor>(parameters =>
+            parameters.Add(p => p.EditorContainerClass, "my-editor-class").Add(p => p.IsEditorEnabled, false)
+        );
+
+        // assert
+        var editorContainer = cut.Find("div.rich-text-editor-editor-container.my-editor-class");
+        editorContainer.Should().NotBeNull();
+    }
+
+    [Test]
     public void Should_trigger_editor_initialization_after_render()
     {
         // act
@@ -55,14 +78,16 @@ public class RichTextEditorTests : BunitContext
         JSInterop.VerifyInvoke(CreateEditorIdentifier);
     }
 
-    [Fact(Timeout = TestTimeoutMs)]
-    public async Task Should_dispose_editor_correctly_when_js_initialization_has_finished()
+    [Test]
+    [Timeout(5000)]
+    public async Task Should_dispose_editor_correctly_when_js_initialization_has_finished(
+        CancellationToken cancellationToken
+    )
     {
         // arrange
         var cut = Render<Components.RichTextEditor>();
 
         // act
-        // simulate editor initialization completion
         cut.Instance.OnEditorInitialized();
         await cut.Instance.DisposeAsync();
 
@@ -70,8 +95,11 @@ public class RichTextEditorTests : BunitContext
         JSInterop.VerifyInvoke(DisposeEditorIdentifier);
     }
 
-    [Fact(Timeout = TestTimeoutMs)]
-    public async Task Should_dispose_editor_correctly_when_js_initialization_has_not_finished()
+    [Test]
+    [Timeout(5000)]
+    public async Task Should_dispose_editor_correctly_when_js_initialization_has_not_finished(
+        CancellationToken cancellationToken
+    )
     {
         // arrange
         var cut = Render<Components.RichTextEditor>();
