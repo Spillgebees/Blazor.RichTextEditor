@@ -23,10 +23,14 @@ Spillgebees.Blazor.RichTextEditor.slnx                    # XML solution (root)
 
 ### JS/CSS build pipeline
 
-TypeScript source lives in `src/Spillgebees.Blazor.RichTextEditor.Assets/`.
-The main `.csproj` has MSBuild targets (`PnpmInstall`, `PnpmBuild`, `PnpmClean`)
-that invoke `pnpm install` and `vite build`, outputting to
-`src/Spillgebees.Blazor.RichTextEditor/wwwroot/`.
+TypeScript source lives in `src/Spillgebees.Blazor.RichTextEditor.Assets/`, which has its own
+`.csproj` using the `Microsoft.Build.NoTargets` SDK (single-targeted, `netstandard2.0`).
+It owns the MSBuild targets (`PnpmInstall`, `PnpmBuild`, `PnpmClean`) that invoke
+`pnpm install` and `vite build`, outputting to `src/Spillgebees.Blazor.RichTextEditor/wwwroot/`.
+
+The main Razor Class Library references the Assets project via `<ProjectReference>` with
+`ReferenceOutputAssembly="false"` to establish a build-order dependency. This ensures pnpm
+runs exactly once before any of the library's multi-targeted inner builds proceed.
 
 - **Entry**: `src/index.ts` (Blazor JS initializer lifecycle hooks)
 - **Bundler**: Vite (library mode, ES2022, ESM)

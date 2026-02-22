@@ -1,6 +1,7 @@
 <Solution>
   <Folder Name="/src/">
     <Project Path="src/Spillgebees.Blazor.RichTextEditor/Spillgebees.Blazor.RichTextEditor.csproj" />
+    <Project Path="src/Spillgebees.Blazor.RichTextEditor.Assets/Spillgebees.Blazor.RichTextEditor.Assets.csproj" />
     <Project Path="src/Spillgebees.Blazor.RichTextEditor.Tests/Spillgebees.Blazor.RichTextEditor.Tests.csproj" />
   </Folder>
   <Folder Name="/src/Spillgebees.Blazor.RichTextEditor.Samples/">
