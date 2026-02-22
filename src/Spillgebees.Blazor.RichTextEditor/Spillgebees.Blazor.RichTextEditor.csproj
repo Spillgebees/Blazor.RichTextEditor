@@ -46,7 +46,7 @@
 
   <Target
     Name="PnpmBuild"
-    BeforeTargets="DispatchToInnerBuilds;ResolveStaticWebAssets"
+    BeforeTargets="DispatchToInnerBuilds;ResolveStaticWebAssetsInputs"
     Condition="'$(DesignTimeBuild)' != 'true'"
     Inputs="$(JsProjectDir)/src/**/*;$(JsProjectDir)/vite.config.ts;$(JsProjectDir)/package.json;$(JsProjectDir)/pnpm-lock.yaml"
     Outputs="$(MSBuildProjectDirectory)/wwwroot/Spillgebees.Blazor.RichTextEditor.lib.module.js;$(MSBuildProjectDirectory)/wwwroot/Spillgebees.Blazor.RichTextEditor.lib.module.css"
