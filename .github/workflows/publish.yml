@@ -1,5 +1,7 @@
 name: Publish nuget package
 
+permissions: {}
+
 on:
   release:
     types: [published]
