@@ -1,0 +1,19 @@
+name: Workflow security analysis
+
+permissions: {}
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  zizmor:
+    name: zizmor
+    permissions:
+      contents: read
+      actions: read
+      security-events: write
+    uses: Spillgebees/admin/.github/workflows/zizmor.yml@a71d815a53f77f9cabca802b4bd9b69fe2fcd96e # main
