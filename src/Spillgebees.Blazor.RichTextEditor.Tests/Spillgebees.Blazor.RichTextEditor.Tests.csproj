@@ -4,10 +4,8 @@
   <ItemGroup>
     <PackageReference Include="AwesomeAssertions" />
     <PackageReference Include="bunit" />
-    <PackageReference Include="coverlet.collector" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" />
-    <PackageReference Include="xunit.v3" />
-    <PackageReference Include="xunit.runner.visualstudio" PrivateAssets="all" />
+    <PackageReference Include="TUnit.Core" />
+    <PackageReference Include="TUnit.Engine" />
   </ItemGroup>
 
   <ItemGroup>
@@ -16,7 +14,8 @@
 
   <ItemGroup>
     <Using Include="Bunit" />
-    <Using Include="Xunit" />
+    <Using Include="TUnit.Core" />
+    <!-- Resolve ambiguity between Bunit.TestContext and TUnit.Core.TestContext for TUnit's source generator -->
+    <Using Include="TUnit.Core.TestContext" Alias="TestContext" />
   </ItemGroup>
-
 </Project>
