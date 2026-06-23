@@ -1,0 +1,5 @@
+# CSharpier configuration
+# https://csharpier.com/docs/Configuration
+
+printWidth: 120
+endOfLine: auto

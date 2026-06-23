@@ -4,7 +4,8 @@
   <PropertyGroup>
     <Authors>Jason Rebelo Neves (igotinfected)</Authors>
     <Company>Spillgebees</Company>
-    <Description>Spillgebees.Blazor.RichTextEditor is a WYSIWYG Blazor component enabling rich text content editing. It is powered by Quill.</Description>
+    <Description>Spillgebees.Blazor.RichTextEditor is a WYSIWYG Blazor component enabling rich text
+      content editing. It is powered by Quill.</Description>
     <PackageTags>blazor, blazor-wasm, blazor-server, quill, quilljs, rich-text-editor, wysiwyg</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -13,8 +14,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\assets\spillgebees.png" Pack="true" PackagePath=""/>
-    <None Include="README.md" Pack="true" PackagePath=""/>
+    <None Include="..\..\assets\spillgebees.png" Pack="true" PackagePath="" />
+    <None Include="README.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +28,33 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Spillgebees.Blazor.RichTextEditor.Assets\Spillgebees.Blazor.RichTextEditor.Assets.esproj" PrivateAssets="All" />
+    <ProjectReference
+      Include="..\Spillgebees.Blazor.RichTextEditor.Assets\Spillgebees.Blazor.RichTextEditor.Assets.csproj"
+      ReferenceOutputAssembly="false"
+      Private="false"
+    />
   </ItemGroup>
+
+  <!--
+    This target re-evaluates the wwwroot glob at target execution time, after the Assets
+    project has built but before the SDK resolves static web assets.
+  -->
+  <Target
+    Name="IncludeViteBuildOutputs"
+    BeforeTargets="ResolveProjectStaticWebAssets"
+    DependsOnTargets="ResolveProjectReferences"
+  >
+    <ItemGroup>
+      <Content Remove="wwwroot\**" />
+      <Content
+        Include="wwwroot\**"
+        Condition="Exists('$(MSBuildProjectDirectory)\wwwroot')"
+        ExcludeFromSingleFile="true"
+        CopyToPublishDirectory="PreserveNewest"
+        Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)"
+      />
+      <_ContentIncludedByDefault Remove="wwwroot\**" />
+      <_ContentIncludedByDefault Include="wwwroot\**" Condition="Exists('$(MSBuildProjectDirectory)\wwwroot')" />
+    </ItemGroup>
+  </Target>
 </Project>

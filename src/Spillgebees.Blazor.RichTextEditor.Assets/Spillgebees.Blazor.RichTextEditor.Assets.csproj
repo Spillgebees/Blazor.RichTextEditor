@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.Build.NoTargets/3.7.134">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+
+    <ViteOutputDir>$([MSBuild]::NormalizePath($(MSBuildProjectDirectory), '..', 'Spillgebees.Blazor.RichTextEditor', 'wwwroot'))</ViteOutputDir>
+
+    <PnpmBuildScript Condition="'$(Configuration)' == 'Debug'">build:dev</PnpmBuildScript>
+    <PnpmBuildScript Condition="'$(Configuration)' != 'Debug'">build:prod</PnpmBuildScript>
+    <PnpmBuildMarker>$(MSBuildProjectDirectory)/obj/pnpm-build.$(Configuration).marker</PnpmBuildMarker>
+  </PropertyGroup>
+
+  <Target
+    Name="PnpmInstall"
+    BeforeTargets="PnpmBuild"
+    Condition="'$(DesignTimeBuild)' != 'true'"
+    Inputs="$(MSBuildProjectDirectory)/package.json;$(MSBuildProjectDirectory)/pnpm-lock.yaml;$(MSBuildProjectDirectory)/pnpm-workspace.yaml"
+    Outputs="$(MSBuildProjectDirectory)/node_modules/.pnpm/lock.yaml"
+  >
+    <Exec Command="corepack pnpm install --frozen-lockfile" WorkingDirectory="$(MSBuildProjectDirectory)" />
+  </Target>
+
+  <Target
+    Name="PnpmBuild"
+    BeforeTargets="Build"
+    Condition="'$(DesignTimeBuild)' != 'true'"
+    Inputs="$(MSBuildProjectDirectory)/src/**/*;$(MSBuildProjectDirectory)/vite.config.ts;$(MSBuildProjectDirectory)/tsconfig.json;$(MSBuildProjectDirectory)/vitest.config.ts;$(MSBuildProjectDirectory)/package.json;$(MSBuildProjectDirectory)/pnpm-lock.yaml;$(MSBuildProjectDirectory)/pnpm-workspace.yaml"
+    Outputs="$(ViteOutputDir)/Spillgebees.Blazor.RichTextEditor.lib.module.js;$(ViteOutputDir)/Spillgebees.Blazor.RichTextEditor.lib.module.css;$(PnpmBuildMarker)"
+  >
+    <Delete Files="$(MSBuildProjectDirectory)/obj/pnpm-build.Debug.marker;$(MSBuildProjectDirectory)/obj/pnpm-build.Release.marker" />
+    <Exec Command="corepack pnpm run $(PnpmBuildScript)" WorkingDirectory="$(MSBuildProjectDirectory)" />
+    <Touch Files="$(PnpmBuildMarker)" AlwaysCreate="true" />
+  </Target>
+
+  <Target Name="PnpmClean" AfterTargets="Clean">
+    <RemoveDir Directories="$(ViteOutputDir)" />
+  </Target>
+</Project>

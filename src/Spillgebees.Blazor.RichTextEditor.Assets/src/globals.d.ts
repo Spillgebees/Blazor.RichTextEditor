@@ -1,10 +1,12 @@
-import { Spillgebees } from "./interfaces/spillgebees";
+import type { RichTextEditorNamespace } from "./interfaces/rich-text-editor";
 
 declare global {
-    // noinspection JSUnusedGlobalSymbols
-    interface Window {
-        Spillgebees: Spillgebees;
-        hasBeforeStartBeenCalled: boolean;
-        hasAfterStartedBeenCalled: boolean;
-    }
+  // noinspection JSUnusedGlobalSymbols
+  interface Window {
+    Spillgebees: {
+      RichTextEditor: RichTextEditorNamespace;
+    };
+    hasBeforeStartBeenCalledForSpillgebeesRichTextEditor: boolean;
+    hasAfterStartedBeenCalledForSpillgebeesRichTextEditor: boolean;
+  }
 }

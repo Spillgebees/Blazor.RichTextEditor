@@ -8,7 +8,7 @@ This component is based on a mix of the following repos:
 
 ### Registering the component
 
-This component comes with a [JS initializer](https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/startup?view=aspnetcore-8.0#javascript-initializers), as such it is bootstrapped when `Blazor` launches.
+This component comes with a [JS initializer](https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/startup?view=aspnetcore-10.0#javascript-initializers), as such it is bootstrapped when `Blazor` launches.
 
 The only thing you need to do is to add Quill's CSS files for styling.
 
@@ -36,7 +36,7 @@ You could also just pass CDN links or your custom CSS using the latter.
 
 ### Usage
 
-You can take a look at the demo pages for a few general usage examples: [net8.0](https://spillgebees.github.io/Blazor.RichTextEditor/main/net8.0/), [net9.0](https://spillgebees.github.io/Blazor.RichTextEditor/main/net9.0/)
+You can take a look at the demo pages for a few general usage examples: [net10.0](https://spillgebees.github.io/Blazor.RichTextEditor/main/net10.0/)
 
 This package comes with two components: `RichTextEditor` and `PassiveRichTextEditor`
 
