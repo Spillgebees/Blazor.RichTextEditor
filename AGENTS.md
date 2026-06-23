@@ -9,7 +9,7 @@ It supports Blazor Server, WebAssembly, and the unified .NET 8+ web app model.
 
 ### Solution structure
 
-```
+```text
 Spillgebees.Blazor.RichTextEditor.slnx                    # XML solution (root)
 ├── src/Spillgebees.Blazor.RichTextEditor/                # Razor Class Library (NuGet package)
 ├── src/Spillgebees.Blazor.RichTextEditor.Assets/         # TypeScript/CSS source (Vite + pnpm)
@@ -30,7 +30,7 @@ It owns the MSBuild targets (`PnpmInstall`, `PnpmBuild`, `PnpmClean`) that invok
 
 The main Razor Class Library references the Assets project via `<ProjectReference>` with
 `ReferenceOutputAssembly="false"` to establish a build-order dependency. This ensures pnpm
-runs exactly once before any of the library's multi-targeted inner builds proceed.
+runs once before the library's single-target build proceeds.
 
 - **Entry**: `src/index.ts` (Blazor JS initializer lifecycle hooks)
 - **Bundler**: Vite (library mode, ES2022, ESM)
