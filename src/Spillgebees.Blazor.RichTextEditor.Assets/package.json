@@ -32,7 +32,7 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@enzedonline/quill-blot-formatter2": "^2.3.0",
+    "@enzedonline/quill-blot-formatter2": "^3.0.0",
     "parchment": "^3.0.0",
     "quill": "^2.0.3",
     "quill-delta": "^5.1.0"
