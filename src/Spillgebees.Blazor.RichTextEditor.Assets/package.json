@@ -3,7 +3,7 @@
   "name": "spillgebees.blazor.richtexteditor.assets",
   "version": "0.1.0",
   "type": "module",
-  "packageManager": "pnpm@11.9.0",
+  "packageManager": "pnpm@11.17.0",
   "engines": {
     "node": ">=22.13.0"
   },
