@@ -38,7 +38,7 @@
     "quill-delta": "^5.1.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.0",
+    "@biomejs/biome": "2.5.5",
     "@microsoft/dotnet-js-interop": "10.0.0",
     "@types/node": "25.9.4",
     "@vitest/coverage-v8": "4.1.9",
