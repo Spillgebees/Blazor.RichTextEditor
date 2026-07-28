@@ -1,20 +1,20 @@
 <Project>
   <PropertyGroup>
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-
-    <AspNetCoreVersion>10.0.9</AspNetCoreVersion>
+    <AspNetCoreVersion>10.0.10</AspNetCoreVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="AngleSharp" Version="1.5.1" />
-    <PackageVersion Include="AwesomeAssertions" Version="9.4.0" />
+    <PackageVersion Include="AngleSharp" Version="1.6.0" />
+    <PackageVersion Include="AwesomeAssertions" Version="9.5.0" />
     <PackageVersion Include="BlazorComponentUtilities" Version="1.8.0" />
-    <PackageVersion Include="bunit" Version="2.7.2" />
+    <PackageVersion Include="bunit" Version="2.8.6" />
     <PackageVersion Include="DotNet.ReproducibleBuilds" Version="2.0.5" />
     <PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="$(AspNetCoreVersion)" />
     <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="$(AspNetCoreVersion)" />
     <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="$(AspNetCoreVersion)" />
     <PackageVersion Include="MinVer" Version="7.0.0" />
-    <PackageVersion Include="TUnit.Core" Version="1.58.0" />
-    <PackageVersion Include="TUnit.Engine" Version="1.58.0" />
+    <PackageVersion Include="TUnit.Core" Version="1.62.0" />
+    <PackageVersion Include="TUnit.Engine" Version="1.62.0" />
   </ItemGroup>
 </Project>
