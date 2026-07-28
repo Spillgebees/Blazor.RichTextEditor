@@ -40,7 +40,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.5.5",
     "@microsoft/dotnet-js-interop": "10.0.0",
-    "@types/node": "25.9.4",
+    "@types/node": "25.9.5",
     "@vitest/coverage-v8": "4.1.9",
     "jsdom": "29.1.1",
     "rimraf": "6.1.3",
