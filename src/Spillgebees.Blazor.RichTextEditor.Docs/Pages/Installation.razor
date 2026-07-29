@@ -1,0 +1,82 @@
+@page "/installation"
+
+<PageTitle>Installation | Spillgebees.Blazor.RichTextEditor</PageTitle>
+
+<h1>Installation</h1>
+
+<h2>NuGet package</h2>
+
+<p>Add the package to your project:</p>
+
+<CodeBlock Language="bash" Files="@(new Dictionary<string, string>
+           {
+               ["Terminal"] = "dotnet add package Spillgebees.Blazor.RichTextEditor",
+           })" />
+
+<h2>Stylesheet</h2>
+
+<p>
+    Load the bundled stylesheet for the editor and both Quill themes. The reference depends on your
+    application's hosting model:
+</p>
+
+<CodeBlock Language="html" Files="@_stylesheetUsage" />
+
+<p>
+    In Blazor Web Apps and Blazor Server apps, <code>@@Assets["…"]</code> resolves the fingerprinted
+    static asset. Standalone Blazor WebAssembly apps use the plain <code>_content</code> path.
+</p>
+
+<h2>JavaScript module</h2>
+
+<p>
+    No script tag or service registration is required. The package includes Quill and a
+    <a href="https://learn.microsoft.com/aspnet/core/blazor/fundamentals/startup#javascript-initializers"
+       target="_blank" rel="noopener">JS initializer</a> that Blazor loads automatically.
+</p>
+
+<h2>Minimal usage</h2>
+
+<CodeBlock Language="razor" Files="@_minimalUsage" />
+
+<h2>Optional formula support</h2>
+
+<p>
+    The full toolbar includes Quill's formula control. If you expose that control, load KaTeX's CSS and
+    JavaScript in the host page. It isn't required for the rest of the editor.
+</p>
+
+<CodeBlock Language="html" Files="@_katexUsage" />
+
+@code {
+    private static readonly Dictionary<string, string> _stylesheetUsage = new()
+    {
+        ["App.razor (Blazor Web App / Server)"] = """
+            <link rel="stylesheet" href="@Assets["_content/Spillgebees.Blazor.RichTextEditor/Spillgebees.Blazor.RichTextEditor.lib.module.css"]" />
+            """,
+        ["index.html (standalone WebAssembly)"] = """
+            <link rel="stylesheet" href="_content/Spillgebees.Blazor.RichTextEditor/Spillgebees.Blazor.RichTextEditor.lib.module.css" />
+            """,
+    };
+
+    private static readonly Dictionary<string, string> _minimalUsage = new()
+    {
+        ["MyPage.razor"] = """
+            @using Spillgebees.Blazor.RichTextEditor.Components
+
+            <RichTextEditor @bind-Content="_content" />
+
+            @code {
+                private string _content = "<p>Hello from Blazor!</p>";
+            }
+            """,
+    };
+
+    private static readonly Dictionary<string, string> _katexUsage = new()
+    {
+        ["Host page"] = """
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+            <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+            """,
+    };
+}

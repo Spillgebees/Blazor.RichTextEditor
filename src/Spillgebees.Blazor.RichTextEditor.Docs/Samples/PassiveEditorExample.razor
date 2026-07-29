@@ -1,0 +1,19 @@
+<PassiveRichTextEditor @bind-Content="_content"
+                       ToolbarOptions="ToolbarOptions.FullToolbarOptions"
+                       @ref="_editor" />
+
+<div class="editor-sample-actions">
+    <button class="editor-sample-button" @onclick="SynchronizeAsync">Update bound content</button>
+</div>
+
+<div class="editor-sample-status">
+    <strong>Last synchronized HTML</strong>
+    <span>@_content</span>
+</div>
+
+@code {
+    private string _content = "<p>Edit this document, then synchronize it on demand.</p>";
+    private PassiveRichTextEditor? _editor;
+
+    private Task SynchronizeAsync() => _editor?.UpdateContentAsync() ?? Task.CompletedTask;
+}

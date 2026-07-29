@@ -1,97 +1,53 @@
-`Spillgebees.Blazor.RichTextEditor` is a [WYSIWYG](https://en.wikipedia.org/wiki/WYSIWYG) Blazor component enabling rich text content editing. It is powered by [Quill](https://github.com/quilljs/quill).
+`Spillgebees.Blazor.RichTextEditor` is a WYSIWYG Blazor component powered by [Quill](https://quilljs.com/).
 
-This component is based on a mix of the following repos:
+See the [documentation and demos](https://spillgebees.github.io/Blazor.RichTextEditor) for guides, examples, and live components.
 
-- [chrissainty's `Blazored.TextEditor`](https://github.com/Blazored/TextEditor), the original implementation.
-- [vixys' fork of `Blazored.TextEditor`](https://github.com/Vixys/TextEditor), mainly the `OnTextChanged` implementation logic.
-- [somegenericdev's `WYSIWYGTextEditor`](https://github.com/somegenericdev/WYSIWYGTextEditor), mainly the more convenient usage/component structure.
+## Features
 
-### Registering the component
+- Two-way binding for HTML content, plain text, selection, enabled state, and touched state
+- Basic, full, hidden, repositioned, or completely custom toolbars
+- Snow and Bubble themes, custom fonts, accessible keybindings, and configurable event debouncing
+- A passive editor for large documents and embedded content where on-demand synchronization is preferable
 
-This component comes with a [JS initializer](https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/startup?view=aspnetcore-10.0#javascript-initializers), as such it is bootstrapped when `Blazor` launches.
+## Getting started
 
-The only thing you need to do is to add Quill's CSS files for styling.
+Install the package:
 
-This package comes with a `.css` file that includes both Quill themes' CSS files for convenience, so you can either add it as an import to your main CSS file:
+```shell
+dotnet add package Spillgebees.Blazor.RichTextEditor
+```
 
-```css
-/* relative to `wwwroot` */
-@import "../_content/Spillgebees.Blazor.RichTextEditor/Spillgebees.Blazor.RichTextEditor.lib.module.css";
+Load the stylesheet. In a Blazor Web App or Blazor Server app (`App.razor`), use `@Assets` to serve the fingerprinted, cache-busted file:
 
-h1:focus {
-    outline: none;
+```razor
+<link rel="stylesheet" href="@Assets["_content/Spillgebees.Blazor.RichTextEditor/Spillgebees.Blazor.RichTextEditor.lib.module.css"]" />
+```
+
+In a standalone Blazor WebAssembly app (`index.html`), use the plain path:
+
+```html
+<link rel="stylesheet" href="_content/Spillgebees.Blazor.RichTextEditor/Spillgebees.Blazor.RichTextEditor.lib.module.css" />
+```
+
+The JavaScript module and Quill load automatically with a [JS initializer](https://learn.microsoft.com/aspnet/core/blazor/fundamentals/startup#javascript-initializers).
+
+## Quick example
+
+```razor
+@using Spillgebees.Blazor.RichTextEditor.Components
+@using Spillgebees.Blazor.RichTextEditor.Components.Toolbar
+
+<RichTextEditor @bind-Content="_content"
+                ToolbarOptions="ToolbarOptions.FullToolbarOptions"
+                UseAccessibleKeybindings="@true" />
+
+@code {
+    private string _content = "<p><strong>Hello from Blazor!</strong> 👋</p>";
 }
-
-...
 ```
 
-Or include it in the `head` tag directly:
+## Acknowledgements
 
-```html
-<link href="_content/Spillgebees.Blazor.RichTextEditor/Spillgebees.Blazor.RichTextEditor.lib.module.css"
-      rel="stylesheet" />
-```
-
-You could also just pass CDN links or your custom CSS using the latter.
-
-### Usage
-
-You can take a look at the demo pages for a few general usage examples: [net10.0](https://spillgebees.github.io/Blazor.RichTextEditor/main/net10.0/)
-
-This package comes with two components: `RichTextEditor` and `PassiveRichTextEditor`
-
-The only difference between these two is that `RichTextEditor` will immediately react to changes (i.e. by updating its `Content`, `IsTouched`, ... properties), while `PassiveRichTextEditor` requires you to manually request updates through its public interface. The passive version handles larger content better as it doesn't have to deal with receiving new data via JS until you request it.
-
-`RichTextEditor` example:
-
-```html
-@using Spillgebees.Blazor.RichTextEditor.Components
-@using Spillgebees.Blazor.RichTextEditor.Components.Toolbar
-
-<RichTextEditor @bind-Content="@_content"
-                @bind-Text="@_text"
-                @bind-Selection="@_selection"
-                IsTouched="@_isTouched"
-                ToolbarOptions="@ToolbarOptions.FullToolbarOptions"
-                Theme="@QuillTheme.Snow"
-                ... />
-```
-
-`PassiveRichTextEditor` example:
-
-```html
-@using Spillgebees.Blazor.RichTextEditor.Components
-@using Spillgebees.Blazor.RichTextEditor.Components.Toolbar
-
-<PassiveRichTextEditor @bind-Content="@_content"
-                       ToolbarOptions="ToolbarOptions.FullToolbarOptions"
-                       @ref="@_editorReference" />
-<button @onclick="@(() => _editorReference?.UpdateContentAsync() ?? Task.CompletedTask)">
-    Update content
-</button>
-```
-
-Note that in the previous example the displayed content for the user is instant, but the value in `@_content` won't be updated until requested.
-
-You can completely customize the toolbar:
-
-```html
-@using Spillgebees.Blazor.RichTextEditor.Components
-@using Spillgebees.Blazor.RichTextEditor.Components.Toolbar
-@using Spillgebees.Blazor.RichTextEditor.Components.Toolbar.Controls
-
-<RichTextEditor @bind-Content="@_content"
-                ToolbarOptions="@(ToolbarOptions.FullToolbarOptions with { Fonts = new List<string> { "Sans Serif", "RobotoMono" } })">
-    <ToolbarContent>
-        <div style="float: left;">
-            <FontControls />
-            <SizeControls />
-            <ColorControls />
-        </div>
-        <div style="float: right;">
-            <InsertImageControls />
-            <EmbedVideoControls />
-        </div>
-    </ToolbarContent>
-</RichTextEditor>
-```
+The component builds on ideas from [Blazored.TextEditor](https://github.com/Blazored/TextEditor),
+[Vixys/TextEditor](https://github.com/Vixys/TextEditor), and
+[WYSIWYGTextEditor](https://github.com/somegenericdev/WYSIWYGTextEditor).

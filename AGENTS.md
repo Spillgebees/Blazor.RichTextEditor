@@ -14,11 +14,7 @@ Spillgebees.Blazor.RichTextEditor.slnx                    # XML solution (root)
 ├── src/Spillgebees.Blazor.RichTextEditor/                # Razor Class Library (NuGet package)
 ├── src/Spillgebees.Blazor.RichTextEditor.Assets/         # TypeScript/CSS source (Vite + pnpm)
 ├── src/Spillgebees.Blazor.RichTextEditor.Tests/          # TUnit + bUnit tests
-└── src/Spillgebees.Blazor.RichTextEditor.Samples/
-    ├── Spillgebees.Blazor.RichTextEditor.Samples.Shared/ # Shared sample components
-    ├── Spillgebees.Blazor.RichTextEditor.Samples.Server/ # Blazor Server sample
-    ├── Spillgebees.Blazor.RichTextEditor.Samples.Wasm/   # Blazor WASM sample
-    └── Spillgebees.Blazor.RichTextEditor.Samples.WebApp/ # .NET 8+ unified web app sample
+└── src/Spillgebees.Blazor.RichTextEditor.Docs/           # Blazor.Docs.Sdk site and live samples
 ```
 
 ### JS/CSS build pipeline
@@ -47,6 +43,12 @@ The C# side calls into `Spillgebees.RichTextEditor.*` via `IJSRuntime`.
 
 The library targets `net10.0` (configured in `src/General.targets`).
 ASP.NET Core package versions are pinned once in `src/Directory.Packages.props`.
+
+### Documentation
+
+The WebAssembly documentation project uses `Spillgebees.Blazor.Docs.Sdk`. Pages live under
+`Pages/`, live examples under `Samples/`, and public API metadata is generated from the library
+project reference marked with `DocsApi="true"`.
 
 ## Testing
 

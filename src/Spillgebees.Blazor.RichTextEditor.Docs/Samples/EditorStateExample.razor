@@ -1,0 +1,30 @@
+<RichTextEditor @bind-Content="_content"
+                @bind-IsEditorEnabled="_isEditorEnabled"
+                ToolbarOptions="@_toolbarOptions" />
+
+<div class="editor-sample-actions">
+    <button class="editor-sample-button" @onclick="ToggleEditor">
+        @(_isEditorEnabled ? "Disable editor" : "Enable editor")
+    </button>
+    <button class="editor-sample-button" @onclick="ToggleToolbarBehavior">
+        Disabled toolbar: @(_hideToolbar ? "hidden" : "visible")
+    </button>
+</div>
+
+@code {
+    private string _content = "<p>Toggle the editor and its disabled-toolbar behavior.</p>";
+    private bool _isEditorEnabled = true;
+    private bool _hideToolbar;
+
+    private ToolbarOptions _toolbarOptions =>
+        ToolbarOptions.BasicToolbarOptions with
+        {
+            ToolbarDisabledBehavior = _hideToolbar
+                ? ToolbarDisabledBehavior.Hidden
+                : ToolbarDisabledBehavior.Disabled,
+        };
+
+    private void ToggleEditor() => _isEditorEnabled = !_isEditorEnabled;
+
+    private void ToggleToolbarBehavior() => _hideToolbar = !_hideToolbar;
+}

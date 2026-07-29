@@ -1,0 +1,16 @@
+<RichTextEditor @bind-Content="_content"
+                @bind-Text="_text"
+                @bind-IsTouched="_isTouched"
+                DebounceIntervalInMilliseconds="250" />
+
+<div class="editor-sample-status">
+    <span><strong>Touched:</strong> @_isTouched</span>
+    <span><strong>Plain text:</strong> @_text</span>
+    <span><strong>HTML:</strong> @_content</span>
+</div>
+
+@code {
+    private string _content = "<p>Edit this content to see the bound values update.</p>";
+    private string? _text;
+    private bool _isTouched;
+}

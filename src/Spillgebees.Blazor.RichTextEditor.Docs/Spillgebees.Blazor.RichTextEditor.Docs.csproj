@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+  <Import Project="../General.targets" />
+
+  <ItemGroup>
+    <PackageReference Include="Spillgebees.Blazor.Docs.Sdk" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference
+      Include="..\Spillgebees.Blazor.RichTextEditor\Spillgebees.Blazor.RichTextEditor.csproj"
+      DocsApi="true"
+    />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,66 @@
+@page "/guides/toolbars"
+
+<PageTitle>Toolbars | Spillgebees.Blazor.RichTextEditor</PageTitle>
+
+<Breadcrumb Section="guides" PageName="Toolbars" />
+<OnThisPage />
+
+<h1>Toolbars</h1>
+
+<p>
+    Configure the built-in toolbar with <code>ToolbarOptions</code>, or provide
+    <code>ToolbarContent</code> to compose the library's control components yourself.
+</p>
+
+<h2 id="presets">// presets</h2>
+
+<p>
+    The default <code>BasicToolbarOptions</code> includes font, inline style, list, and link controls.
+    <code>FullToolbarOptions</code> enables every built-in control.
+</p>
+
+<ExampleView TComponent="FullToolbarExample">
+    <FullToolbarExample />
+</ExampleView>
+
+<h2 id="custom_content_and_fonts">// custom_content_and_fonts</h2>
+
+<p>
+    Supply <code>ToolbarContent</code> to choose and arrange controls manually. Custom fonts must also appear
+    in <code>ToolbarOptions.Fonts</code>, and your application stylesheet must define the matching
+    <code>ql-font-&lt;name&gt;</code> class.
+</p>
+
+<ExampleView TComponent="CustomToolbarExample">
+    <CustomToolbarExample />
+</ExampleView>
+
+<h2 id="position">// position</h2>
+
+<p>
+    Set <code>ToolbarPosition</code> to <code>Top</code> or <code>Bottom</code>. The default is
+    <code>Top</code>.
+</p>
+
+<ExampleView TComponent="BottomToolbarExample">
+    <BottomToolbarExample />
+</ExampleView>
+
+<h2 id="hide_the_toolbar">// hide_the_toolbar</h2>
+
+<p>
+    Use <code>ToolbarOptions.None</code> when the editor needs no formatting UI. The equivalent custom option
+    is <code>HideToolbar = true</code>.
+</p>
+
+<ExampleView TComponent="NoToolbarExample">
+    <NoToolbarExample />
+</ExampleView>
+
+<h2 id="disabled_behavior">// disabled_behavior</h2>
+
+<p>
+    A disabled editor normally leaves a visibly disabled toolbar in place. Set
+    <code>ToolbarDisabledBehavior.Hidden</code> to hide it while the editor is disabled. The
+    <a href="components/rich-text-editor#enabled_state">enabled-state example</a> demonstrates both behaviors.
+</p>

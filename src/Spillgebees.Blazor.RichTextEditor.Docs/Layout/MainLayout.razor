@@ -1,0 +1,26 @@
+@inherits LayoutComponentBase
+
+<DocSite ProjectName="Spillgebees.Blazor.RichTextEditor"
+         LogoEmoji="✍️"
+         GitHubUrl="https://github.com/Spillgebees/Blazor.RichTextEditor"
+         Navigation="@_navigation">
+    @Body
+</DocSite>
+
+@code {
+    private static readonly NavSection[] _navigation =
+    [
+        new("Getting Started", [
+            new NavPage("Home", ""),
+            new NavPage("Installation", "installation"),
+        ]),
+        new("Guides", [
+            new NavPage("Toolbars", "guides/toolbars"),
+        ]),
+        new("Components", [
+            new NavPage("RichTextEditor", "components/rich-text-editor"),
+            new NavPage("PassiveRichTextEditor", "components/passive-rich-text-editor"),
+        ]),
+        new("API Reference", ApiReferenceNav.Generate<RichTextEditor>()),
+    ];
+}

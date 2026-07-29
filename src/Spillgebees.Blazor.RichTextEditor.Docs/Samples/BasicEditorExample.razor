@@ -1,0 +1,10 @@
+<RichTextEditor @bind-Content="_content" />
+
+<div class="editor-sample-status">
+    <strong>Bound HTML</strong>
+    <span>@_content</span>
+</div>
+
+@code {
+    private string _content = "<p><strong>Hello from Blazor!</strong> 👋</p>";
+}
