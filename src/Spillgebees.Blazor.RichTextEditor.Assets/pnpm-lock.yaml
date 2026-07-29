@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@enzedonline/quill-blot-formatter2':
-        specifier: ^2.3.0
-        version: 2.4.1
+        specifier: ^3.2.0
+        version: 3.2.0
       parchment:
         specifier: ^3.0.0
         version: 3.0.0
@@ -193,8 +193,8 @@ packages:
   '@emnapi/wasi-threads@1.2.2':
     resolution: {integrity: sha512-c95qOXkHdydNKhscBTebqEC1CVAZpyqOfVfBzQ1qgzyl3gfeldUjIggDbIZgDKsHLgnsM+igH7TJ/eAasaVuMA==}
 
-  '@enzedonline/quill-blot-formatter2@2.4.1':
-    resolution: {integrity: sha512-Ytk+ms+6Moi+dTPGiBMlQ5kIb/iZEorvgzTroXffVuKhgH2KIeimq5Tduz6ohNi9M0acTN2Ceqc57JnJx5NbPw==}
+  '@enzedonline/quill-blot-formatter2@3.2.0':
+    resolution: {integrity: sha512-C7tOmFgAYbOPmL70Ah2m8cZc6yMFeypGsfm7V1iI4kS2LnfRX4xKsuX+P2migWpflV1SAnXTa1JbJVPEeXeCEA==}
 
   '@exodus/bytes@1.15.1':
     resolution: {integrity: sha512-S6mL0yNB/Abt9Ei4tq8gDhcczc4S3+vQ4ra7vxnAf+YHC02srtqxKKZghx2Dq6p0e66THKwR6r8N6P95wEty7Q==}
@@ -1094,7 +1094,7 @@ snapshots:
       tslib: 2.8.1
     optional: true
 
-  '@enzedonline/quill-blot-formatter2@2.4.1':
+  '@enzedonline/quill-blot-formatter2@3.2.0':
     dependencies:
       deepmerge: 4.3.1
 
