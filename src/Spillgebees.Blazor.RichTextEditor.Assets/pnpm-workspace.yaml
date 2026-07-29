@@ -1,4 +1,5 @@
 allowBuilds:
+  "@enzedonline/quill-blot-formatter2": false
   "@parcel/watcher": false
   core-js: true
   esbuild: true
