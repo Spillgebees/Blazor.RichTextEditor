@@ -1,0 +1,37 @@
+@page "/components/passive-rich-text-editor"
+
+<PageTitle>PassiveRichTextEditor | Spillgebees.Blazor.RichTextEditor</PageTitle>
+
+<Breadcrumb Section="components" PageName="PassiveRichTextEditor"
+            ApiReferenceUrl="api/BaseRichTextEditor"
+            SourceUrl="https://github.com/Spillgebees/Blazor.RichTextEditor/blob/main/src/Spillgebees.Blazor.RichTextEditor/Components/PassiveRichTextEditor.razor" />
+<OnThisPage />
+
+<h1>PassiveRichTextEditor</h1>
+
+<p>
+    The passive editor renders the same Quill editor without registering change callbacks. Edits remain
+    immediate in the browser, but values are sent to Blazor only when you request them. This avoids repeatedly
+    transferring large documents or embedded images over JS interop, leading to a smoother experience when working
+    with large documents.
+</p>
+
+<h2 id="on_demand_synchronization">// on_demand_synchronization</h2>
+
+<p>
+    Capture a component reference and call <code>UpdateContentAsync</code>, <code>UpdateTextAsync</code>, or
+    <code>UpdateSelectionAsync</code> to refresh bound values. The corresponding <code>Get…Async</code> methods
+    return a value without updating the binding.
+</p>
+
+<ExampleView TComponent="PassiveEditorExample">
+    <PassiveEditorExample />
+</ExampleView>
+
+<h2 id="choosing_an_editor">// choosing_an_editor</h2>
+
+<p>
+    Prefer <code>RichTextEditor</code> for normal forms and reactive validation. Choose
+    <code>PassiveRichTextEditor</code> when the document is large or synchronization should happen only at a
+    save, preview, or validation boundary.
+</p>

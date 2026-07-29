@@ -1,0 +1,9 @@
+<RichTextEditor @bind-Content="_content"
+                ToolbarOptions="@(ToolbarOptions.BasicToolbarOptions with
+                {
+                    ToolbarPosition = ToolbarPosition.Bottom,
+                })" />
+
+@code {
+    private string _content = "<p>The toolbar appears below this editor.</p>";
+}

@@ -1,0 +1,81 @@
+@page "/components/rich-text-editor"
+
+<PageTitle>RichTextEditor | Spillgebees.Blazor.RichTextEditor</PageTitle>
+
+<Breadcrumb Section="components" PageName="RichTextEditor"
+            ApiReferenceUrl="api/RichTextEditor"
+            SourceUrl="https://github.com/Spillgebees/Blazor.RichTextEditor/blob/main/src/Spillgebees.Blazor.RichTextEditor/Components/RichTextEditor.razor.cs" />
+<OnThisPage />
+
+<h1>RichTextEditor</h1>
+
+<p>
+    The reactive editor component. It synchronizes changes from Quill back to Blazor after the configured
+    debounce interval and can bind HTML, plain text, selection, enabled state, and touched state.
+</p>
+
+<h2 id="basic_usage">// basic_usage</h2>
+
+<p>
+    Bind <code>Content</code> to the HTML stored by your application. The basic toolbar is enabled by default.
+</p>
+
+<ExampleView TComponent="BasicEditorExample">
+    <BasicEditorExample />
+</ExampleView>
+
+<h2 id="content_and_events">// content_and_events</h2>
+
+<p>
+    <code>Content</code> contains HTML and is the primary value to persist. <code>Text</code> exposes the
+    plain-text representation. <code>IsTouched</code> becomes true after an editor content change.
+    <code>Selection</code> can also be bound when the current Quill range matters to your application.
+    Content, text, and selection callbacks are throttled in JavaScript; change
+    <code>DebounceIntervalInMilliseconds</code> when the 500 ms default does not suit your form.
+</p>
+
+<ExampleView TComponent="BindingsAndEventsExample">
+    <BindingsAndEventsExample />
+</ExampleView>
+
+<h2 id="themes_and_container_id">// themes_and_container_id</h2>
+
+<p>
+    Choose <code>QuillTheme.Snow</code> for a persistent toolbar or <code>QuillTheme.Bubble</code> for
+    selection-driven formatting. Every editor receives a unique container id, but
+    <code>EditorContainerHtmlId</code> lets you supply a stable one when integration or testing needs it.
+</p>
+
+<ExampleView TComponent="BubbleThemeExample">
+    <BubbleThemeExample />
+</ExampleView>
+
+<h2 id="enabled_state">// enabled_state</h2>
+
+<p>
+    Set or bind <code>IsEditorEnabled</code> to control whether content can be edited. A disabled toolbar
+    remains visible by default. Set <code>ToolbarDisabledBehavior.Hidden</code> when it should disappear.
+</p>
+
+<ExampleView TComponent="EditorStateExample">
+    <EditorStateExample />
+</ExampleView>
+
+<h2 id="accessible_keybindings">// accessible_keybindings</h2>
+
+<p>
+    Quill normally uses Tab to indent the current line. Set <code>UseAccessibleKeybindings</code> to make
+    Tab move focus out of the editor instead, which is usually preferable in forms. This option currently
+    defaults to false for backwards compatibility.
+</p>
+
+<ExampleView TComponent="AccessibleKeybindingsExample">
+    <AccessibleKeybindingsExample />
+</ExampleView>
+
+<h2 id="toolbars">// toolbars</h2>
+
+<p>
+    The toolbar supports presets, custom controls, custom fonts, top or bottom placement, and a no-toolbar
+    mode. See the <a href="guides/toolbars">toolbars guide</a> for live examples.
+</p>

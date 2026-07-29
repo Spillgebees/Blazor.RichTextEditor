@@ -1,0 +1,8 @@
+<RichTextEditor @bind-Content="_content"
+                Placeholder="Select text to format it"
+                Theme="QuillTheme.Bubble"
+                EditorContainerHtmlId="bubble-theme-example" />
+
+@code {
+    private string _content = "<p>Select some of this text to open the Bubble toolbar.</p>";
+}

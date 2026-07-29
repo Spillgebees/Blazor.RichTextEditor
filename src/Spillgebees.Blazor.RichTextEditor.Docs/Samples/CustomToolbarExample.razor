@@ -1,0 +1,21 @@
+<RichTextEditor @bind-Content="_content"
+                ToolbarOptions="@(ToolbarOptions.FullToolbarOptions with
+                {
+                    Fonts = ["Sans Serif", "RobotoMono"],
+                })">
+    <ToolbarContent>
+        <div style="float: left">
+            <FontControls />
+            <SizeControls />
+            <ColorControls />
+        </div>
+        <div style="float: right">
+            <InsertImageControls />
+            <EmbedVideoControls />
+        </div>
+    </ToolbarContent>
+</RichTextEditor>
+
+@code {
+    private string _content = "<p>Choose RobotoMono from the custom font list.</p>";
+}

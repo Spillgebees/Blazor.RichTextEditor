@@ -1,0 +1,9 @@
+<RichTextEditor @bind-Content="_content"
+                UseAccessibleKeybindings
+                ToolbarOptions="ToolbarOptions.BasicToolbarOptions" />
+
+<button class="editor-sample-button">Tab from the editor to focus this button</button>
+
+@code {
+    private string _content = "<p>Place the caret here, then press Tab.</p>";
+}

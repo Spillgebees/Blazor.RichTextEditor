@@ -1,0 +1,25 @@
+@page "/api/{TypeSlug}"
+
+<PageTitle>API Reference | @TypeSlug</PageTitle>
+
+@if (_typeInfo is not null)
+{
+    <ApiDoc TypeInfo="@_typeInfo" />
+}
+else
+{
+    <h1>Type not found</h1>
+    <p>No API documentation is available for <code>@TypeSlug</code>.</p>
+}
+
+@code {
+    [Parameter]
+    public string TypeSlug { get; set; } = "";
+
+    private ApiTypeInfo? _typeInfo;
+
+    protected override void OnParametersSet()
+    {
+        _typeInfo = ApiReferenceNav.FindType<RichTextEditor>(TypeSlug);
+    }
+}

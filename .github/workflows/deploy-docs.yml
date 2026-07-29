@@ -1,0 +1,16 @@
+name: Deploy Docs
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: Spillgebees/Blazor.Docs.Sdk/.github/workflows/deploy-docs.yml@0b10777d7e3f11de74a6040893a6975fdb00ffe3 # main
+    with:
+      docs-project-path: src/Spillgebees.Blazor.RichTextEditor.Docs/Spillgebees.Blazor.RichTextEditor.Docs.csproj
+      base-href: /Blazor.RichTextEditor/

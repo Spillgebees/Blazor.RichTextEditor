@@ -1,21 +1,42 @@
-# Spillgebees.Blazor.RichTextEditor
+<div align="center">
+    <img src="assets/header.png" alt="Spillgebees.Blazor.RichTextEditor showing formatted text in a Quill editor" />
+    <p><em>Rich text editing for Blazor, powered by Quill.</em></p>
+</div>
 
-![Alt text](./assets/header.png)
+[![build & test](https://github.com/Spillgebees/Blazor.RichTextEditor/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/Spillgebees/Blazor.RichTextEditor/actions/workflows/build-and-test.yml)
+[![NuGet](https://img.shields.io/nuget/vpre/Spillgebees.Blazor.RichTextEditor?label=nuget)](https://www.nuget.org/packages/Spillgebees.Blazor.RichTextEditor)
+[![Downloads](https://img.shields.io/nuget/dt/Spillgebees.Blazor.RichTextEditor?label=downloads)](https://www.nuget.org/packages/Spillgebees.Blazor.RichTextEditor)
+[![Docs](https://img.shields.io/badge/docs-live-blue)](https://spillgebees.github.io/Blazor.RichTextEditor)
+[![License](https://img.shields.io/github/license/Spillgebees/Blazor.RichTextEditor)](LICENSE)
 
-<p align="center">
-    <a href="https://www.nuget.org/packages/Spillgebees.Blazor.RichTextEditor"><img alt="Nuget (with prereleases)" src="https://img.shields.io/nuget/vpre/Spillgebees.Blazor.RichTextEditor?logo=nuget&style=for-the-badge"></a>
-    <img alt="GitHub Workflow Status (with branch)" src="https://img.shields.io/github/actions/workflow/status/spillgebees/Blazor.RichTextEditor/build-and-test.yml?branch=main&label=build%20%26%20test&style=for-the-badge" />
-</p>
+`Spillgebees.Blazor.RichTextEditor` is a WYSIWYG Blazor component powered by [Quill](https://quilljs.com/).
 
-`Spillgebees.Blazor.RichTextEditor` is a [WYSIWYG](https://en.wikipedia.org/wiki/WYSIWYG) Blazor component enabling rich text content editing. It is powered by [Quill](https://github.com/quilljs/quill).
+See the [documentation and demos](https://spillgebees.github.io/Blazor.RichTextEditor) for installation guides, examples, and live components.
 
-This component is based on a mix of the following repos:
+## Features
 
-- [chrissainty's `Blazored.TextEditor`](https://github.com/Blazored/TextEditor), the original implementation.
-- [vixys' fork of `Blazored.TextEditor`](https://github.com/Vixys/TextEditor), mainly the `OnTextChanged` implementation logic.
-- [somegenericdev's `WYSIWYGTextEditor`](https://github.com/somegenericdev/WYSIWYGTextEditor), mainly the more convenient usage/component structure.
+- Two-way binding for HTML content, plain text, selection, enabled state, and touched state
+- Basic, full, hidden, repositioned, or completely custom toolbars
+- Snow and Bubble themes, custom fonts, accessible keybindings, and configurable event debouncing
+- A passive editor for large documents and embedded content where on-demand synchronization is preferable
 
+## Quick example
 
-More details in the [documentation](./src/Spillgebees.Blazor.RichTextEditor/README.md).
+```razor
+@using Spillgebees.Blazor.RichTextEditor.Components
+@using Spillgebees.Blazor.RichTextEditor.Components.Toolbar
 
-Live demo: [net10.0](https://spillgebees.github.io/Blazor.RichTextEditor/main/net10.0/)
+<RichTextEditor @bind-Content="_content"
+                ToolbarOptions="ToolbarOptions.FullToolbarOptions"
+                UseAccessibleKeybindings="@true" />
+
+@code {
+    private string _content = "<p><strong>Hello from Blazor!</strong> 👋</p>";
+}
+```
+
+## Acknowledgements
+
+The component builds on ideas from [Blazored.TextEditor](https://github.com/Blazored/TextEditor),
+[Vixys/TextEditor](https://github.com/Vixys/TextEditor), and
+[WYSIWYGTextEditor](https://github.com/somegenericdev/WYSIWYGTextEditor).
