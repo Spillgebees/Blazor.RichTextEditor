@@ -25,8 +25,8 @@ importers:
         specifier: 2.5.7
         version: 2.5.7
       '@microsoft/dotnet-js-interop':
-        specifier: 10.0.0
-        version: 10.0.0
+        specifier: 10.0.11
+        version: 10.0.11
       '@types/node':
         specifier: 25.9.5
         version: 25.9.5
@@ -215,8 +215,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@microsoft/dotnet-js-interop@10.0.0':
-    resolution: {integrity: sha512-cYmqSePCKSs6srwGWz6lOq/UIogKgFw0ZOq0MtQzxRI1G/YiBOhlvM4Nj8DuGBp/1guSlFApIVv85SkXJTMOIQ==}
+  '@microsoft/dotnet-js-interop@10.0.11':
+    resolution: {integrity: sha512-0Ep12vR4n5kIPctxcrtTW8qBS0bupX1VKbeW4i0F6i0zk3wZ6kNR72F2AVsywTHi1NaAucND7gcrGfWPwk8LVw==}
 
   '@napi-rs/wasm-runtime@1.1.6':
     resolution: {integrity: sha512-ZLv/JdUfkvOy9eCnnBaGfiO+XimbjebAeO+MRQqD/B+FR1tnRN0tpKSJHRbE8sFfS6aqsXZ67TQjfwfsxULVbg==}
@@ -1109,7 +1109,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@microsoft/dotnet-js-interop@10.0.0': {}
+  '@microsoft/dotnet-js-interop@10.0.11': {}
 
   '@napi-rs/wasm-runtime@1.1.6(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)':
     dependencies:
