@@ -1,0 +1,5 @@
+# Default owner for everything
+* @igotinfected
+
+# CI/CD workflow files require explicit review
+.github/ @igotinfected
