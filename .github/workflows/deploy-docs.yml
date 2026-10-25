@@ -10,7 +10,7 @@ jobs:
       contents: read
       pages: write
       id-token: write
-    uses: Spillgebees/Blazor.Docs.Sdk/.github/workflows/deploy-docs.yml@9b546327c0a3a35409cf20c465e987732f64e6b6 # main
+    uses: Spillgebees/Blazor.Docs.Sdk/.github/workflows/deploy-docs.yml@735878b1c736680a5cc5291df362b2ff7ba3c54f # main
     with:
       docs-project-path: src/Spillgebees.Blazor.RichTextEditor.Docs/Spillgebees.Blazor.RichTextEditor.Docs.csproj
       base-href: /Blazor.RichTextEditor/
