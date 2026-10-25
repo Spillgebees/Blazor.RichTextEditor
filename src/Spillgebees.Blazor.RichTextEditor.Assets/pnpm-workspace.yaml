@@ -3,3 +3,5 @@ allowBuilds:
   "@parcel/watcher": false
   core-js: true
   esbuild: true
+patchedDependencies:
+  quill@2.0.3: patches/quill@2.0.3.patch
