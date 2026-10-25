@@ -162,6 +162,15 @@ describe.each(buildConfigs)("$name build (parametrized)", (cfg) => {
     expect(res.cssContent).toContain(".rich-text-editor-container-disabled");
   });
 
+  if (cfg.name === "prod") {
+    it("prod should not fingerprint as stock quill 2.0.3", () => {
+      // assert
+      expect(res.jsContent).not.toContain("quill@2.0.3");
+      expect(res.jsContent).not.toMatch(/["']2\.0\.3["']/);
+      expect(res.jsContent).toContain("2.0.3-spillgebees.1");
+    });
+  }
+
   if (cfg.expectMinifiedSmaller) {
     it("prod should produce minified JS smaller than dev JS", () => {
       // arrange
