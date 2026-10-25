@@ -38,6 +38,9 @@
   <!--
     This target re-evaluates the wwwroot glob at target execution time, after the Assets
     project has built but before the SDK resolves static web assets.
+    The evaluated wwwroot items are removed by path, not by glob, because a glob inside a
+    target only matches files still on disk. Files the Vite build just deleted, like the Debug
+    source map, would otherwise stay behind as assets that no longer exist.
   -->
   <Target
     Name="IncludeViteBuildOutputs"
@@ -45,7 +48,13 @@
     DependsOnTargets="ResolveProjectReferences"
   >
     <ItemGroup>
-      <Content Remove="wwwroot\**" />
+      <_EvaluatedWwwrootContent
+        Include="@(Content)"
+        Condition="$([System.String]::Copy('%(Identity)').Replace('\', '/').StartsWith('wwwroot/'))"
+      />
+      <Content Remove="@(_EvaluatedWwwrootContent)" />
+      <_ContentIncludedByDefault Remove="@(_EvaluatedWwwrootContent)" />
+      <_EvaluatedWwwrootContent Remove="@(_EvaluatedWwwrootContent)" />
       <Content
         Include="wwwroot\**"
         Condition="Exists('$(MSBuildProjectDirectory)\wwwroot')"
@@ -53,7 +62,6 @@
         CopyToPublishDirectory="PreserveNewest"
         Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)"
       />
-      <_ContentIncludedByDefault Remove="wwwroot\**" />
       <_ContentIncludedByDefault Include="wwwroot\**" Condition="Exists('$(MSBuildProjectDirectory)\wwwroot')" />
     </ItemGroup>
   </Target>
