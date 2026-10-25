@@ -9,6 +9,11 @@
     <PnpmBuildMarker>$(MSBuildProjectDirectory)/obj/pnpm-build.$(Configuration).marker</PnpmBuildMarker>
   </PropertyGroup>
 
+  <!-- target Inputs don't expand wildcards, so the glob is expanded here instead -->
+  <ItemGroup>
+    <PnpmBuildInput Include="src/**/*;vite.config.ts;tsconfig.json;vitest.config.ts;package.json;pnpm-lock.yaml;pnpm-workspace.yaml" />
+  </ItemGroup>
+
   <Target
     Name="PnpmInstall"
     BeforeTargets="PnpmBuild"
@@ -23,7 +28,7 @@
     Name="PnpmBuild"
     BeforeTargets="Build"
     Condition="'$(DesignTimeBuild)' != 'true'"
-    Inputs="$(MSBuildProjectDirectory)/src/**/*;$(MSBuildProjectDirectory)/vite.config.ts;$(MSBuildProjectDirectory)/tsconfig.json;$(MSBuildProjectDirectory)/vitest.config.ts;$(MSBuildProjectDirectory)/package.json;$(MSBuildProjectDirectory)/pnpm-lock.yaml;$(MSBuildProjectDirectory)/pnpm-workspace.yaml"
+    Inputs="@(PnpmBuildInput)"
     Outputs="$(ViteOutputDir)/Spillgebees.Blazor.RichTextEditor.lib.module.js;$(ViteOutputDir)/Spillgebees.Blazor.RichTextEditor.lib.module.css;$(PnpmBuildMarker)"
   >
     <Delete Files="$(MSBuildProjectDirectory)/obj/pnpm-build.Debug.marker;$(MSBuildProjectDirectory)/obj/pnpm-build.Release.marker" />
