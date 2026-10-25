@@ -18,6 +18,9 @@ export default defineConfig(({ mode }) => {
       target: "es2022",
       rolldownOptions: {
         output: {
+          // library mode skips whitespace minification, which leaves `//#region node_modules/...` comments
+          // naming every bundled package version in the output
+          minify: isProduction,
           assetFileNames: (assetInfo) => {
             if (assetInfo.names?.some((name) => name.endsWith(".css"))) {
               return "Spillgebees.Blazor.RichTextEditor.lib.module.css";

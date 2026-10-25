@@ -162,6 +162,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  quill@2.0.3: 78bec7f3d0dba64d5319cea38007499046e14fb0a594883f601eceb534192502
+
 importers:
 
   .:
@@ -174,7 +177,7 @@ importers:
         version: 3.0.0
       quill:
         specifier: ^2.0.3
-        version: 2.0.3
+        version: 2.0.3(patch_hash=78bec7f3d0dba64d5319cea38007499046e14fb0a594883f601eceb534192502)
       quill-delta:
         specifier: ^5.1.0
         version: 5.1.0
@@ -1546,7 +1549,7 @@ snapshots:
       lodash.clonedeep: 4.5.0
       lodash.isequal: 4.5.0
 
-  quill@2.0.3:
+  quill@2.0.3(patch_hash=78bec7f3d0dba64d5319cea38007499046e14fb0a594883f601eceb534192502):
     dependencies:
       eventemitter3: 5.0.4
       lodash-es: 4.18.1

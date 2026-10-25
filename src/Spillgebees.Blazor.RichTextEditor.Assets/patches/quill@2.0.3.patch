@@ -1,0 +1,79 @@
+diff --git a/core/quill.js b/core/quill.js
+index 1d393720100d35e91036806b150f2414f38b89c1..eed9340243f5117e9d3184a1620bf1dd1910bc9f 100644
+--- a/core/quill.js
++++ b/core/quill.js
+@@ -40,7 +40,7 @@ class Quill {
+   };
+   static events = Emitter.events;
+   static sources = Emitter.sources;
+-  static version = typeof "2.0.3" === 'undefined' ? 'dev' : "2.0.3";
++  static version = "2.0.3-spillgebees.1";
+   static imports = {
+     delta: Delta,
+     parchment: Parchment,
+diff --git a/formats/formula.js b/formats/formula.js
+index 1c1b1a57a3e7e4aabb0ce3aada049d5df556ebcc..feddb0a31a8228d9fa104525d276efa9773d3ce2 100644
+--- a/formats/formula.js
++++ b/formats/formula.js
+@@ -1,4 +1,5 @@
+ import Embed from '../blots/embed.js';
++import { escapeText } from '../blots/text.js';
+ class Formula extends Embed {
+   static blotName = 'formula';
+   static className = 'ql-formula';
+@@ -26,7 +27,7 @@ class Formula extends Embed {
+     const {
+       formula
+     } = this.value();
+-    return `<span>${formula}</span>`;
++    return `<span>${escapeText(formula ?? '')}</span>`;
+   }
+ }
+ export default Formula;
+diff --git a/formats/video.js b/formats/video.js
+index 135a297702b7171d3a25882c2c8afe03a295955d..1e2b25659017d62d73a25931d8df7153a00e8b0b 100644
+--- a/formats/video.js
++++ b/formats/video.js
+@@ -1,5 +1,6 @@
+ import { BlockEmbed } from '../blots/block.js';
+ import Link from './link.js';
++import { escapeText } from '../blots/text.js';
+ const ATTRIBUTES = ['height', 'width'];
+ class Video extends BlockEmbed {
+   static blotName = 'video';
+@@ -41,7 +42,8 @@ class Video extends BlockEmbed {
+     const {
+       video
+     } = this.value();
+-    return `<a href="${video}">${video}</a>`;
++    const href = escapeText(Video.sanitize(video ?? ''));
++    return `<a href="${href}">${href}</a>`;
+   }
+ }
+ export default Video;
+diff --git a/modules/syntax.js b/modules/syntax.js
+index 0577154a5c56024a8e310836cc73f899432a9be6..420be5616522cd086bf7285c3703359891070487 100644
+--- a/modules/syntax.js
++++ b/modules/syntax.js
+@@ -137,7 +137,7 @@ class SyntaxCodeBlockContainer extends CodeBlockContainer {
+   html(index, length) {
+     const [codeBlock] = this.children.find(index);
+     const language = codeBlock ? SyntaxCodeBlock.formats(codeBlock.domNode) : 'plain';
+-    return `<pre data-language="${language}">\n${escapeText(this.code(index, length))}\n</pre>`;
++    return `<pre data-language="${escapeText(language)}">\n${escapeText(this.code(index, length))}\n</pre>`;
+   }
+   optimize(context) {
+     super.optimize(context);
+diff --git a/themes/snow.js b/themes/snow.js
+index 6c51df288bfabf18b485ada10c4bf8630985c6b0..98379a20d178dbfaa96b1af498dca4311ccd1dbd 100644
+--- a/themes/snow.js
++++ b/themes/snow.js
+@@ -48,7 +48,7 @@ class SnowTooltip extends BaseTooltip {
+           // @ts-expect-error Fix me later
+           this.preview.textContent = preview;
+           // @ts-expect-error Fix me later
+-          this.preview.setAttribute('href', preview);
++          this.preview.setAttribute('href', LinkBlot.sanitize(preview));
+           this.show();
+           const bounds = this.quill.getBounds(this.linkRange);
+           if (bounds != null) {
