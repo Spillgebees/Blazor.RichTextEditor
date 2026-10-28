@@ -44,7 +44,7 @@ jobs:
       - name: 📦 setup Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
-          node-version: 24
+          node-version: 26
           cache: pnpm
           cache-dependency-path: src/Spillgebees.Blazor.RichTextEditor.Assets/pnpm-lock.yaml
 
