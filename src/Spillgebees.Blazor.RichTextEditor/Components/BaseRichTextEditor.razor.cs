@@ -27,7 +27,8 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
     public string Content { get; set; } = string.Empty;
 
     /// <summary>
-    /// Raised with the new HTML when the content changes. Only <see cref="RichTextEditor"/> raises it on every edit.
+    /// Raised with the new HTML when the content changes.
+    /// Only <see cref="RichTextEditor"/> raises it on its own, once editing pauses for <see cref="DebounceIntervalInMilliseconds"/>, so intermediate values are skipped.
     /// </summary>
     [Parameter]
     public EventCallback<string> ContentChanged { get; set; }
@@ -46,19 +47,22 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
     }
 
     /// <summary>
-    /// Raised with the new plain text when the content changes. Only <see cref="RichTextEditor"/> raises it on every edit.
+    /// Raised with the new plain text when the content changes.
+    /// Only <see cref="RichTextEditor"/> raises it on its own, once editing pauses for <see cref="DebounceIntervalInMilliseconds"/>, so intermediate values are skipped.
     /// </summary>
     [Parameter]
     public EventCallback<string> TextChanged { get; set; }
 
     /// <summary>
-    /// The current selection, or <c>null</c> when the editor has no focus. Setting it moves the selection in the editor.
+    /// The current selection, or <c>null</c> when the editor has no focus. Changing it after the editor initializes
+    /// moves the selection in the editor; the initial value is not applied.
     /// </summary>
     [Parameter]
     public Range? Selection { get; set; }
 
     /// <summary>
-    /// Raised when the selection changes. Only <see cref="RichTextEditor"/> raises it on every change.
+    /// Raised when the selection changes.
+    /// Only <see cref="RichTextEditor"/> raises it on its own, once editing pauses for <see cref="DebounceIntervalInMilliseconds"/>, so intermediate values are skipped.
     /// </summary>
     [Parameter]
     public EventCallback<Range?> SelectionChanged { get; set; }

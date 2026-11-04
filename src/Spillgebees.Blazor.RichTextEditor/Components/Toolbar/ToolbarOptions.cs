@@ -3,7 +3,8 @@ namespace Spillgebees.Blazor.RichTextEditor.Components.Toolbar;
 /// <summary>
 /// Which controls the built-in toolbar shows, and how the toolbar is placed and styled. Start from
 /// <see cref="BasicToolbarOptions"/>, <see cref="FullToolbarOptions"/> or <see cref="None"/> and change it with a
-/// <c>with</c> expression.
+/// <c>with</c> expression. <see cref="None"/> sets <see cref="HideToolbar"/>, so to add controls to it, also
+/// set <c>HideToolbar = false</c>, or start from <c>new ToolbarOptions()</c> instead.
 /// </summary>
 /// <param name="ShowFontControls">Shows the font picker, filled from <see cref="Fonts"/>.</param>
 /// <param name="ShowSizeControls">Shows the small, normal, large and huge size picker.</param>
@@ -108,7 +109,7 @@ public record ToolbarOptions(
         };
 
     /// <summary>
-    /// No toolbar.
+    /// No toolbar. Sets <see cref="HideToolbar"/>.
     /// </summary>
     public static ToolbarOptions None =>
         new()

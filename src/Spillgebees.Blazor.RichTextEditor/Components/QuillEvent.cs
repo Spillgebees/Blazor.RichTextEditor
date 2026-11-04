@@ -32,7 +32,9 @@ public record Delta(IReadOnlyList<DeltaOperation> Ops, IReadOnlyDictionary<strin
 public record DeltaOperation(object? Insert, object? Retain, object? Delete);
 
 /// <summary>
-/// A selection in the editor, counted in characters of its plain text.
+/// A selection in the editor, counted in Quill document positions. Embeds such as images take up one position
+/// but are left out of <see cref="BaseRichTextEditor.GetTextAsync"/>, so after an embed the positions no longer
+/// match the plain text.
 /// </summary>
 /// <param name="Index">Where the selection starts.</param>
 /// <param name="Length">How many characters are selected. <c>0</c> for a caret.</param>
