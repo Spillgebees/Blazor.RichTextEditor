@@ -16,4 +16,4 @@ jobs:
       contents: read
       actions: read
       security-events: write
-    uses: Spillgebees/admin/.github/workflows/zizmor.yml@89b102758f0304b8b09165bfa10c967fecc22582 # main
+    uses: Spillgebees/admin/.github/workflows/zizmor.yml@7b1eb7ceffb5fc0c506a67aa3da744af478824ca # main
