@@ -2,7 +2,7 @@ namespace Spillgebees.Blazor.RichTextEditor.Components;
 
 /// <summary>
 /// A Quill editor that sends <see cref="BaseRichTextEditor.Content"/>, <see cref="BaseRichTextEditor.Text"/> and
-/// <see cref="BaseRichTextEditor.Selection"/> back to Blazor as they change, once editing pauses for
+/// <see cref="BaseRichTextEditor.Selection"/> back to Blazor as they change, once changes pause for
 /// <see cref="BaseRichTextEditor.DebounceIntervalInMilliseconds"/>.
 /// </summary>
 public partial class RichTextEditor : BaseRichTextEditor

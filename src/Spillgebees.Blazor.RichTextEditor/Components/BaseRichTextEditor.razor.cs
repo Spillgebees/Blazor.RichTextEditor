@@ -54,15 +54,16 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
     public EventCallback<string> TextChanged { get; set; }
 
     /// <summary>
-    /// The current selection, or <c>null</c> when the editor has no focus. Changing it after the editor initializes
-    /// moves the selection in the editor; the initial value is not applied.
+    /// The current selection, or <c>null</c> when the editor has no focus. Changing it to another range after the
+    /// editor initializes moves the selection in the editor. The initial value and changes to <c>null</c> are not
+    /// applied.
     /// </summary>
     [Parameter]
     public Range? Selection { get; set; }
 
     /// <summary>
-    /// Raised when the selection changes.
-    /// Only <see cref="RichTextEditor"/> raises it on its own, once editing pauses for <see cref="DebounceIntervalInMilliseconds"/>, so intermediate values are skipped.
+    /// Raised when the selection changes, with <c>null</c> when the editor loses focus.
+    /// Only <see cref="RichTextEditor"/> raises it on its own, once selection changes pause for <see cref="DebounceIntervalInMilliseconds"/>, so intermediate values are skipped.
     /// </summary>
     [Parameter]
     public EventCallback<Range?> SelectionChanged { get; set; }
