@@ -6,6 +6,9 @@ using Spillgebees.Blazor.RichTextEditor.Components.Toolbar;
 
 namespace Spillgebees.Blazor.RichTextEditor.Components;
 
+/// <summary>
+/// Shared parameters and methods of <see cref="RichTextEditor"/> and <see cref="PassiveRichTextEditor"/>.
+/// </summary>
 public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposable
 {
     [Inject]
@@ -23,6 +26,9 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
     [Parameter]
     public string Content { get; set; } = string.Empty;
 
+    /// <summary>
+    /// Raised with the new HTML when the content changes. Only <see cref="RichTextEditor"/> raises it on every edit.
+    /// </summary>
     [Parameter]
     public EventCallback<string> ContentChanged { get; set; }
 
@@ -39,15 +45,27 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
         set { }
     }
 
+    /// <summary>
+    /// Raised with the new plain text when the content changes. Only <see cref="RichTextEditor"/> raises it on every edit.
+    /// </summary>
     [Parameter]
     public EventCallback<string> TextChanged { get; set; }
 
+    /// <summary>
+    /// The current selection, or <c>null</c> when the editor has no focus. Setting it moves the selection in the editor.
+    /// </summary>
     [Parameter]
     public Range? Selection { get; set; }
 
+    /// <summary>
+    /// Raised when the selection changes. Only <see cref="RichTextEditor"/> raises it on every change.
+    /// </summary>
     [Parameter]
     public EventCallback<Range?> SelectionChanged { get; set; }
 
+    /// <summary>
+    /// Whether the content can be edited. Defaults to <c>true</c>. See <see cref="Spillgebees.Blazor.RichTextEditor.Components.Toolbar.ToolbarOptions.ToolbarDisabledBehavior"/> for what happens to the toolbar.
+    /// </summary>
     [Parameter]
     public bool IsEditorEnabled { get; set; } = true;
 
@@ -107,9 +125,15 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
     [Parameter]
     public ToolbarOptions ToolbarOptions { get; set; } = ToolbarOptions.BasicToolbarOptions;
 
+    /// <summary>
+    /// Markup rendered inside the editor container. It is only visible until the editor initializes, after which <see cref="Content"/> replaces it.
+    /// </summary>
     [Parameter]
     public RenderFragment? EditorContent { get; set; }
 
+    /// <summary>
+    /// The <c>id</c> of the editor container. Defaults to a unique generated id; set it when you need a stable one.
+    /// </summary>
     [Parameter]
     public string EditorContainerHtmlId { get; set; } = $"rich-text-editor-editor-container-{Guid.NewGuid()}";
 
@@ -121,24 +145,45 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
     [Parameter]
     public RenderFragment? ToolbarContent { get; set; }
 
+    /// <summary>
+    /// Text shown while the editor is empty. Can only be set once.
+    /// </summary>
     [Parameter]
     public string Placeholder { get; set; } = "Compose an epic...";
 
+    /// <summary>
+    /// The Quill theme. Can only be set once. Defaults to <see cref="QuillTheme.Snow"/>.
+    /// </summary>
     [Parameter]
     public QuillTheme Theme { get; set; } = QuillTheme.Snow;
 
+    /// <summary>
+    /// Extra CSS classes for the element that wraps the toolbar and the editor.
+    /// </summary>
     [Parameter]
     public string ContainerClass { get; set; } = string.Empty;
 
+    /// <summary>
+    /// CSS class added to the wrapping element while <see cref="IsEditorEnabled"/> is <c>false</c>.
+    /// </summary>
     [Parameter]
     public string ContainerDisabledClass { get; set; } = "rich-text-editor-container-disabled";
 
+    /// <summary>
+    /// Extra CSS classes for the editor container.
+    /// </summary>
     [Parameter]
     public string EditorContainerClass { get; set; } = string.Empty;
 
+    /// <summary>
+    /// CSS class added to the editor container while <see cref="IsEditorEnabled"/> is <c>false</c>.
+    /// </summary>
     [Parameter]
     public string EditorContainerDisabledClass { get; set; } = "rich-text-editor-editor-container-disabled";
 
+    /// <summary>
+    /// The level at which Quill logs to the browser console. Can only be set once. Defaults to <see cref="QuillDebugLevel.Error"/>.
+    /// </summary>
     [Parameter]
     public QuillDebugLevel DebugLevel { get; set; } = QuillDebugLevel.Error;
 
@@ -220,6 +265,9 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
         GC.SuppressFinalize(this);
     }
 
+    /// <summary>
+    /// Reads the current HTML from the editor without updating <see cref="Content"/>. Returns an empty string before the editor initializes.
+    /// </summary>
     public async Task<string> GetContentAsync()
     {
         if (IsInitialized is false || IsDisposing)
@@ -230,6 +278,9 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
         return await RichTextEditorJs.GetContentAsync(JsRuntime, Logger.Value, QuillReference);
     }
 
+    /// <summary>
+    /// Reads the current selection from the editor without updating <see cref="Selection"/>. Returns <c>null</c> before the editor initializes.
+    /// </summary>
     public async Task<Range?> GetSelectionAsync()
     {
         if (IsInitialized is false || IsDisposing)
@@ -240,6 +291,9 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
         return await RichTextEditorJs.GetSelectionAsync(JsRuntime, Logger.Value, QuillReference);
     }
 
+    /// <summary>
+    /// Reads the current plain text from the editor without updating <see cref="Text"/>. Returns an empty string before the editor initializes.
+    /// </summary>
     public async Task<string> GetTextAsync()
     {
         if (IsInitialized is false || IsDisposing)
@@ -250,6 +304,9 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
         return await RichTextEditorJs.GetTextAsync(JsRuntime, Logger.Value, QuillReference);
     }
 
+    /// <summary>
+    /// Reads the current HTML from the editor and raises <see cref="ContentChanged"/> with it.
+    /// </summary>
     public async Task UpdateContentAsync()
     {
         if (IsInitialized is false || IsDisposing)
@@ -261,6 +318,9 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
         ContentChanged.InvokeAsync(InternalContent).AndForget(Logger.Value);
     }
 
+    /// <summary>
+    /// Reads the current plain text from the editor and raises <see cref="TextChanged"/> with it.
+    /// </summary>
     public async Task UpdateTextAsync()
     {
         if (IsInitialized is false || IsDisposing)
@@ -272,6 +332,9 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
         TextChanged.InvokeAsync(InternalText).AndForget(Logger.Value);
     }
 
+    /// <summary>
+    /// Reads the current selection from the editor and raises <see cref="SelectionChanged"/> with it.
+    /// </summary>
     public async Task UpdateSelectionAsync()
     {
         if (IsInitialized is false || IsDisposing)
@@ -283,6 +346,9 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
         SelectionChanged.InvokeAsync(InternalSelection).AndForget(Logger.Value);
     }
 
+    /// <summary>
+    /// Called from JavaScript once Quill is ready. Not meant to be called from your code.
+    /// </summary>
     [JSInvokable]
     public void OnEditorInitialized()
     {
@@ -294,9 +360,15 @@ public abstract partial class BaseRichTextEditor : ComponentBase, IAsyncDisposab
         IsInitialized = true;
     }
 
+    /// <summary>
+    /// Called from JavaScript when the content changes. Not meant to be called from your code.
+    /// </summary>
     [JSInvokable]
     public Task OnContentChangedAsync(TextChangeEvent args) => OnContentChangedAction(args);
 
+    /// <summary>
+    /// Called from JavaScript when the selection changes. Not meant to be called from your code.
+    /// </summary>
     [JSInvokable]
     public Task OnSelectionChangedAsync(SelectionChangeEvent args) => OnSelectionChangedAction(args);
 

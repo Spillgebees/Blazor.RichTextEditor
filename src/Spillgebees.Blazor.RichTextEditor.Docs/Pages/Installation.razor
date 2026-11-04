@@ -4,7 +4,7 @@
 
 <h1>Installation</h1>
 
-<h2>NuGet package</h2>
+<h2 id="nuget_package">NuGet package</h2>
 
 <p>Add the package to your project:</p>
 
@@ -13,7 +13,7 @@
                ["Terminal"] = "dotnet add package Spillgebees.Blazor.RichTextEditor",
            })" />
 
-<h2>Stylesheet</h2>
+<h2 id="stylesheet">Stylesheet</h2>
 
 <p>
     Load the bundled stylesheet for the editor and both Quill themes. The reference depends on your
@@ -27,7 +27,7 @@
     static asset. Standalone Blazor WebAssembly apps use the plain <code>_content</code> path.
 </p>
 
-<h2>JavaScript module</h2>
+<h2 id="javascript_module">JavaScript module</h2>
 
 <p>
     No script tag or service registration is required. The package includes Quill and a
@@ -35,11 +35,11 @@
        target="_blank" rel="noopener">JS initializer</a> that Blazor loads automatically.
 </p>
 
-<h2>Minimal usage</h2>
+<h2 id="minimal_usage">Minimal usage</h2>
 
 <CodeBlock Language="razor" Files="@_minimalUsage" />
 
-<h2>Optional formula support</h2>
+<h2 id="optional_formula_support">Optional formula support</h2>
 
 <p>
     The full toolbar includes Quill's formula control. If you expose that control, load KaTeX's CSS and

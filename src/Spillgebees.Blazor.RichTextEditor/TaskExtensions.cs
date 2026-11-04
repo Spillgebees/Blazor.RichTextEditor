@@ -4,6 +4,9 @@ namespace Spillgebees.Blazor.RichTextEditor;
 
 public static class TaskExtensions
 {
+    /// <summary>
+    /// Runs <paramref name="task"/> without awaiting it and logs any exception instead of throwing it.
+    /// </summary>
     public static async void AndForget(this Task task, ILogger logger)
     {
         try
@@ -16,6 +19,9 @@ public static class TaskExtensions
         }
     }
 
+    /// <summary>
+    /// Runs <paramref name="task"/> without awaiting it and logs any exception instead of throwing it.
+    /// </summary>
     public static async void AndForget(this ValueTask task, ILogger logger)
     {
         try

@@ -17,10 +17,10 @@
             gap: 0.35rem;
             padding: 0.8rem;
             margin-top: 0.75rem;
-            color: var(--color-text-secondary);
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            font-family: var(--font-mono);
+            color: var(--docs-text-2);
+            background: var(--docs-surface-1);
+            border: 1px solid var(--docs-line);
+            font-family: var(--docs-font-mono);
             font-size: 0.8rem;
             overflow-wrap: anywhere;
         }
@@ -34,15 +34,15 @@
 
         .editor-sample-button {
             padding: 0.45rem 0.8rem;
-            color: var(--color-text);
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
+            color: var(--docs-text);
+            background: var(--docs-surface-1);
+            border: 1px solid var(--docs-line);
             cursor: pointer;
             font: inherit;
         }
 
         .editor-sample-button:hover {
-            border-color: var(--color-primary);
+            border-color: var(--docs-accent);
         }
 
         .ql-font-RobotoMono {
@@ -52,7 +52,7 @@
 </head>
 <body>
     <div id="app">
-        <div class="doc-loading">Loading documentation…</div>
+        Loading documentation…
     </div>
     <script defer
             src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
